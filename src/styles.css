@@ -3,6 +3,8 @@
 @import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+@custom-variant dark (&:where(.dark, .dark *));
+
 body {
   font-family: 'Edu NSW ACT Cursive', cursive;
 }

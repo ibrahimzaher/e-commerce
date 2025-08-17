@@ -1,1 +1,154 @@
-<p>navbar works!</p>
+<nav class="bg-gray-50 shadow border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2">
+    <a routerLink="" class="flex items-center mt-2 space-x-3 rtl:space-x-reverse">
+      <span
+        class="self-center text-2xl font-semibold whitespace-nowrap text-slate-900 dark:text-white"
+        >{{ 'E-COMMERCE' | translate }}</span
+      >
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div class="hidden w-full grow ms-5 mt-2 md:flex items-center md:w-auto" id="navbar-default">
+      <ul
+        class="font-medium flex flex-col mt-4 rounded-lg md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <a
+            routerLink="home"
+            routerLinkActive="text-slate-900 bg-gray-200 transition-colors duration-200 font-semibold rounded-lg dark:text-white dark:bg-slate-500"
+            class="block py-2 px-3 dark:text-gray-200 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+            aria-current="page"
+            >{{ 'HOME' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="carts"
+            routerLinkActive="text-slate-900 bg-gray-200 transition-colors duration-200 font-semibold rounded-lg dark:text-white dark:bg-slate-500"
+            class="block py-2 px-3 dark:text-gray-200 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+            aria-current="page"
+            >{{ 'CARTS' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="products"
+            routerLinkActive="text-slate-900 bg-gray-200 transition-colors duration-200 font-semibold rounded-lg dark:text-white dark:bg-slate-500"
+            class="block py-2 px-3 dark:text-gray-200 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+            aria-current="page"
+            >{{ 'PRODUCTS' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="categories"
+            routerLinkActive="text-slate-900 bg-gray-200 transition-colors duration-200 font-semibold rounded-lg dark:text-white dark:bg-slate-500"
+            class="block py-2 px-3 dark:text-gray-200 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+            aria-current="page"
+            >{{ 'CATEGORIES' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="brands"
+            routerLinkActive="text-slate-900 bg-gray-200 transition-colors duration-200 font-semibold rounded-lg dark:text-white dark:bg-slate-500"
+            class="block py-2 px-3 rounded-sm dark:text-gray-200 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+            aria-current="page"
+            >{{ 'BRANDS' | translate }}</a
+          >
+        </li>
+      </ul>
+      <ul
+        class="font-medium flex space-y-2 ms-auto items-center flex-col mt-4 rounded-lg md:flex-row md:space-x-3 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <button
+            class="dark:text-gray-200 text-white bg-gray-500 hover:bg-gray-800 dark:bg-slate-700 px-10 py-2 rounded-lg cursor-pointer dark:hover:text-white dark:hover:bg-gray-300/20 transition-colors duration-200"
+          >
+            {{ 'SIGN OUT' | translate }}
+          </button>
+        </li>
+        <li class="hidden md:block">
+          <i
+            (click)="toggleTheme()"
+            class="fa-solid fa-sun cursor-pointer text-white text-2xl"
+            [class]="{
+            'fa-sun':isDark,
+            'text-white':isDark,
+            'fa-moon':!isDark,
+            'text-black':!isDark,
+          }"
+          ></i>
+        </li>
+        <li class="relative hidden md:block">
+          <!-- Dropdown button -->
+          <button
+            (click)="showMenu = !showMenu"
+            class="inline-flex cursor-pointer items-center px-4 py-2 text-sm font-medium text-gray-900 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+          >
+            🌐 {{ 'LANGUAGE' | translate }}
+            <svg class="w-2.5 h-2.5 ms-3" fill="none" viewBox="0 0 10 6">
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          @if (showMenu) {
+          <div
+            class="z-10 fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="languageDropdownButton"
+            >
+              <li>
+                <button
+                  (click)="changeLang('en')"
+                  class="flex items-center cursor-pointer w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+                >
+                  🇺🇸 <span class="ms-2">{{ 'ENGLISH' | translate }}</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  (click)="changeLang('ar')"
+                  class="flex items-center cursor-pointer w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+                >
+                  🇪🇬 <span class="ms-2">{{ 'ARABIC' | translate }}</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+          }
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
