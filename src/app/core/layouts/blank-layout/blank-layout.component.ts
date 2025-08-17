@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blank-layout',
-  imports: [NavbarComponent, FooterComponent, RouterOutlet],
+  imports: [NavbarComponent, RouterOutlet],
   templateUrl: './blank-layout.component.html',
   styleUrl: './blank-layout.component.css',
 })
