@@ -12,35 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap"
       rel="stylesheet"
     />
-    <script>
-      (function () {
-        // ✅ SSR-safe
-        if (typeof window === 'undefined') return;
-
-        // Get saved preferences
-        const theme = localStorage.getItem('theme');
-        const lang = localStorage.getItem('lang');
-
-        // Set language and direction
-        if (lang === 'ar') {
-          document.documentElement.lang = 'ar';
-          document.documentElement.dir = 'rtl';
-        } else {
-          document.documentElement.lang = 'en';
-          document.documentElement.dir = 'ltr';
-        }
-
-        // Set dark/light theme
-        if (
-          theme === 'dark' ||
-          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      })();
-    </script>
   </head>
   <body>
     <app-root></app-root>
