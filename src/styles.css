@@ -4,7 +4,11 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 @custom-variant dark (&:where(.dark, .dark *));
-
+@layer components {
+  .btn {
+    @apply w-full py-2 px-3 font-semibold rounded-sm text-white transition duration-200 hover:text-green-500 hover:bg-white cursor-pointer;
+  }
+}
 body {
   font-family: 'Edu NSW ACT Cursive', cursive;
 }

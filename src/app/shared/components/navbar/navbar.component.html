@@ -1,1 +1,126 @@
-<p>navbar works!</p>
+<nav class="fixed w-full dark:bg-green-900 bg-green-700 border-slate-500 border-b-2 shadow">
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a routerLink="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <span class="self-center text-2xl -mt-1 font-semibold whitespace-nowrap text-white">{{
+        'E-COMMERCE' | translate
+      }}</span>
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-200 rounded-lg md:hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div
+      class="hidden w-full md:flex md:w-[70%] md:flex-col lg:flex-row justify-between items-center grow md:ms-5"
+      id="navbar-default"
+    >
+      <ul
+        class="font-medium flex flex-col p-2 space-y-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-y-0 md:space-x-2 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <a
+            routerLink="/home"
+            routerLinkActive=" dark:text-green-500 bg-white font-bold   text-green-500 "
+            class="block py-2 px-3 rounded-sm text-gray-50 transition duration-200 hover:text-green-500 hover:bg-white"
+            aria-current="page"
+          >
+            {{ 'HOME' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/cart"
+            routerLinkActive=" dark:text-green-500 bg-white font-bold   text-green-500 "
+            class="block py-2 px-3 rounded-sm text-gray-50 transition duration-200 hover:text-green-500 hover:bg-white"
+            aria-current="page"
+          >
+            {{ 'CART' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/products"
+            routerLinkActive=" dark:text-green-500 bg-white font-bold   text-green-500 "
+            class="block py-2 px-3 rounded-sm text-gray-50 transition duration-200 hover:text-green-500 hover:bg-white"
+            aria-current="page"
+          >
+            {{ 'PRODUCTS' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/categories"
+            routerLinkActive=" dark:text-green-500 bg-white font-bold   text-green-500 "
+            class="block py-2 px-3 rounded-sm text-gray-50 transition duration-200 hover:text-green-500 hover:bg-white"
+            aria-current="page"
+          >
+            {{ 'CATEGORIES' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/brands"
+            routerLinkActive=" dark:text-green-500 bg-white font-bold   text-green-500 "
+            class="block py-2 px-3 rounded-sm text-gray-50 transition duration-200 hover:text-green-500 hover:bg-white"
+            aria-current="page"
+          >
+            {{ 'BRANDS' | translate }}
+          </a>
+        </li>
+      </ul>
+      <ul
+        class="font-medium flex flex-col space-y-4 md:p-0 mt-4 rounded-lg md:flex-row md:items-center md:space-y-0 md:space-x-4 rtl:space-x-reverse md:mt-0"
+      >
+        <li>
+          <button class="btn">{{ 'SIGN OUT' | translate }}</button>
+        </li>
+        @if($isDark | async){
+        <li
+          (click)="setLightMode()"
+          class="rounded-full hidden md:flex size-12 cursor-pointer hover:bg-green-600 transition duration-300 items-center justify-center"
+        >
+          <i class="fas fa-sun text-2xl text-white cursor-pointer"></i>
+        </li>
+        }@else {
+        <li
+          (click)="setDarkMode()"
+          class="rounded-full size-12 hidden md:flex items-center hover:bg-green-600 transition duration-300 cursor-pointer justify-center"
+        >
+          <i class="fas fa-moon text-2xl text-white"></i>
+        </li>
+        }
+        <li class="relative hidden md:flex">
+          <button (click)="toggleLangBox()" class="btn">
+            {{ 'LANGUAGE' | translate }}
+          </button>
+          <div
+            #langBox
+            class="absolute end-1/4 top-full hidden flex-col px-5 py-2 dark:bg-green-800 bg-green-600 rounded-[4px] mt-1"
+          >
+            <button (click)="changeLang('en')" class="btn">{{ 'ENGLISH' | translate }}</button>
+            <button (click)="changeLang('ar')" class="btn">{{ 'ARABIC' | translate }}</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
