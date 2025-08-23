@@ -18,13 +18,6 @@ export interface Product {
   id: string;
 }
 
-interface Category {
-  _id: string;
-  name: string;
-  slug: string;
-  image: string;
-}
-
 interface Subcategory {
   _id: string;
   name: string;

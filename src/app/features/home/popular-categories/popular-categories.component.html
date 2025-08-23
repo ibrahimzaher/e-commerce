@@ -1,1 +1,29 @@
-<p>popular-categories works!</p>
+<section class="py-5">
+  @if (isloading) {
+  <div class="text-center h-[100px] flex justify-center items-center">
+    <span class="fas fa-spin fa-spinner text-5xl text-green-500"></span>
+  </div>
+  } @if (categories.length>0) {
+  <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">Shop Popular Categories</h2>
+  <owl-carousel-o [options]="categoryOption">
+    @for (slide of categories ; track slide._id) {
+    <ng-template carouselSlide [id]="slide._id">
+      <div class="cursor-pointer border border-green-500 bg-green-300 group overflow-hidden">
+        <div class="h-[250px] overflow-hidden">
+          <img
+            [src]="slide.image"
+            [alt]="slide.name"
+            class="h-full group-hover:scale-110 border-b transition duration-200"
+            [title]="slide.name"
+          />
+        </div>
+        <h3 class="text-black text-center mt-2 py-2 font-medium">
+          {{ slide.name }}
+        </h3>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+
+  }
+</section>
