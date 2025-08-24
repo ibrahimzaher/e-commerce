@@ -1,0 +1,11 @@
+::ng-deep .ngx-pagination {
+  width: 100%;
+  text-align: center;
+  padding-top: 30px;
+}
+::ng-deep .ngx-pagination li {
+  background-color: rgb(229, 244, 229) !important;
+}
+::ng-deep .ngx-pagination .current {
+  background-color: green !important;
+}

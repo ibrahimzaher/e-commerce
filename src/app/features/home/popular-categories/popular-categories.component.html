@@ -8,7 +8,9 @@
   <owl-carousel-o [options]="categoryOption">
     @for (slide of categories ; track slide._id) {
     <ng-template carouselSlide [id]="slide._id">
-      <div class="cursor-pointer border border-green-500 bg-green-300 group overflow-hidden">
+      <div
+        class="cursor-pointer shadow-sm rounded-2xl border-4 border-slate-800 dark:border-white dark:bg-black/80 bg-white p-3 group overflow-hidden"
+      >
         <div class="h-[250px] overflow-hidden">
           <img
             [src]="slide.image"
@@ -17,7 +19,7 @@
             [title]="slide.name"
           />
         </div>
-        <h3 class="text-black text-center mt-2 py-2 font-medium">
+        <h3 class="text-black text-center mt-2 py-2 font-medium dark:text-white">
           {{ slide.name }}
         </h3>
       </div>

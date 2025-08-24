@@ -11,4 +11,7 @@ export class ProductsService {
   getProducts(): Observable<any> {
     return this.httpClient.get(environment.baseUrl + `products`);
   }
+  getProductsPagination(pageNumber: number): Observable<any> {
+    return this.httpClient.get(environment.baseUrl + `products?page=${pageNumber}`);
+  }
 }
