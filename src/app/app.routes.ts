@@ -6,12 +6,12 @@ import { RegisterComponent } from './core/auth/register/register.component';
 import { HomeComponent } from './features/home/home.component';
 import { BrandsComponent } from './features/brands/brands.component';
 import { CategoriesComponent } from './features/categories/categories.component';
-import { DetailsComponent } from './features/details/details.component';
+import { ProductDetailsComponent } from './features/product-details/product-details.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { CartComponent } from './features/cart/cart.component';
 import { ProductsComponent } from './features/products/products.component';
-import path from 'path';
 import { NotfoundComponent } from './features/notfound/notfound.component';
+import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
 
 export const routes: Routes = [
   {
@@ -60,8 +60,18 @@ export const routes: Routes = [
         component: CategoriesComponent,
       },
       {
-        path: 'details',
-        component: DetailsComponent,
+        path: 'product/:id',
+        component: ProductDetailsComponent,
+        resolve: {
+          product: productDetailsResolver,
+        },
+      },
+      {
+        path: 'product/:id/:slug',
+        component: ProductDetailsComponent,
+        resolve: {
+          product: productDetailsResolver,
+        },
       },
       {
         path: 'checkout',

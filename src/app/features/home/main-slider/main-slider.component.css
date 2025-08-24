@@ -49,13 +49,3 @@
 .owl-theme .owl-dots .owl-dot:hover span {
   background-color: darkgreen;
 }
-@media (min-width: 1024px) {
-  ::ng-deep .main-slider .owl-carousel .owl-stage-outer {
-    width: 70%;
-  }
-  ::ng-deep .main-slider .owl-theme .owl-nav {
-    width: 70%;
-    left: 15%;
-    right: 15%;
-  }
-}
