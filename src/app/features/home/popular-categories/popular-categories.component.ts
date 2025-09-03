@@ -1,12 +1,12 @@
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Component, inject, OnDestroy } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { finalize, Observable, Subscription } from 'rxjs';
 import { CategoriesService } from '../../../core/services/categories/categories.service';
 
 @Component({
   selector: 'app-popular-categories',
-  imports: [CarouselModule],
+  imports: [CarouselModule, TranslateModule],
   templateUrl: './popular-categories.component.html',
   styleUrl: './popular-categories.component.css',
 })

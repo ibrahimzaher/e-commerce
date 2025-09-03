@@ -15,6 +15,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { AuthService } from './core/auth/services/auth/auth.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const themeService = inject(ThemeService);
       const langService = inject(LangService);
+      const auth = inject(AuthService);
       langService.init();
       themeService.initTheme();
     }),

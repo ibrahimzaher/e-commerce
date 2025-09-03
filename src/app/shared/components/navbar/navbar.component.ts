@@ -1,3 +1,4 @@
+import { AuthService } from './../../../core/auth/services/auth/auth.service';
 import { AsyncPipe } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit {
   constructor(private flowbiteService: FlowbiteService) {}
   private readonly themeService = inject(ThemeService);
   private readonly langService = inject(LangService);
+  private readonly authService = inject(AuthService);
   @ViewChild('langBox') langBox!: ElementRef<HTMLDivElement>;
   $isDark: Observable<boolean> = this.themeService.observable();
   ngOnInit(): void {
@@ -38,5 +40,8 @@ export class NavbarComponent implements OnInit {
   changeLang(language: string) {
     this.toggleLangBox();
     this.langService.changeLang(language);
+  }
+  signOut() {
+    this.authService.signOut();
   }
 }

@@ -1,0 +1,54 @@
+<div class="mb-3">
+  <label
+    [for]="idInput"
+    class="main-label"
+    [class]="{
+              'text-green-500':control?.valid,
+              'text-red-700':control?.invalid && control?.touched,
+            }"
+    >{{ label }}</label
+  >
+  <div class="relative">
+    <input
+      [type]="typeInput || (flag ? 'password' : 'text')"
+      [id]="idInput"
+      class="main-input"
+      [placeholder]="label"
+      [formControl]="control"
+      [class]="{
+              'border-green-500':control?.valid,
+              'border-red-700':control?.invalid && control?.touched,
+            }"
+    />
+    @if (idInput==='password'||idInput==='rePassword') {
+    <span (click)="flag = !flag" class="absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer">
+      @if (flag) {
+      <i class="fas fa-eye text-gray-600"></i>
+      }@else {
+      <i class="fas fa-eye-slash text-gray-600"></i>
+      }
+    </span>
+    }
+  </div>
+  @if (control?.errors && control?.touched) {
+  <ul class="bg-red-100 list-disc list-inside p-2 rounded-sm text-sm mt-1 text-red-700">
+    @if (control?.hasError('required')) {
+    <li>{{ label }} is Required</li>
+    } @else if (control?.hasError('minlength')) {
+    <li>{{ label }} must be at least 3 characters</li>
+    } @else if (control?.hasError('maxlength')) {
+    <li>{{ label }} cannot be more than 20 characters</li>
+    } @else if (control?.hasError('email')) {
+    <li>Please enter a valid email address</li>
+    } @else if (control?.hasError('pattern')) { @if (idInput==='password') {
+    <li>Password must contain: At least 6 characters</li>
+    } @else if (idInput==='phone') {
+    <li>Please enter a valid Egyptian phone number</li>
+    } } @else if (control?.hasError('mismatch')) {
+    <li>Passwords do not match</li>
+    } @else {
+    <li>Format is Incorrect</li>
+    }
+  </ul>
+  }
+</div>

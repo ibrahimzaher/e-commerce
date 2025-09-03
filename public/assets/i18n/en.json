@@ -10,5 +10,9 @@
   "REGISTER":"Register",
   "LANGUAGE": "Language",
   "ENGLISH": "English",
-  "ARABIC": "Arabic"
+  "ARABIC": "Arabic",
+  "ShopPopularCategories":"Shop Popular Categories",
+  "ShopPopularProducts":"Shop Popular Products",
+  "AllProducts":"All Products",
+  "PRODUCTDETAILS":"ProductDetails"
 }

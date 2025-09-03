@@ -10,5 +10,10 @@
   "REGISTER": "تسجيل",
   "LANGUAGE": "اللغة",
   "ENGLISH": "الإنجليزية",
-  "ARABIC": "العربية"
+  "ARABIC": "العربية",
+  "ShopPopularCategories":"تصفح الفئات الشائعة",
+  "ShopPopularProducts":"تصفح المنتجات الشائعة",
+  "AllProducts":"عرض كافة المنتجات",
+  "PRODUCTDETAILS":"تفاصيل المنتج"
+
 }

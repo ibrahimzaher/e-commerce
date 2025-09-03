@@ -4,11 +4,15 @@
     <span class="fas fa-spin fa-spinner text-5xl text-green-500"></span>
   </div>
   } @if (categories.length>0) {
-  <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">Shop Popular Categories</h2>
+  <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">
+    {{ 'ShopPopularCategories' | translate }}
+  </h2>
   <owl-carousel-o [options]="categoryOption">
     @for (slide of categories ; track slide._id) {
     <ng-template carouselSlide [id]="slide._id">
       <div
+        data-aos="fade-out"
+        [attr.data-aos-delay]="$index * 100"
         class="cursor-pointer shadow-sm rounded-2xl border-4 border-slate-800 dark:border-white dark:bg-black/80 bg-white p-3 group overflow-hidden"
       >
         <div class="h-[250px] overflow-hidden">

@@ -1,11 +1,60 @@
-import { Component } from '@angular/core';
+import { AuthService } from './../services/auth/auth.service';
+import { Component, inject } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [ReactiveFormsModule, InputComponent],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  loginForm!: FormGroup;
+  isLoading: boolean = false;
+  errorMsg: string = '';
+  ngOnInit(): void {
+    this.initForm();
+  }
+  initForm() {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.pattern(/^.{6,}$/)]],
+    });
+  }
 
+  login() {
+    if (this.loginForm.valid) {
+      this.isLoading = true;
+      this.errorMsg = '';
+      console.log(this.loginForm.value);
+      this.authService
+        .logIn(this.loginForm.value)
+        .pipe(finalize(() => (this.isLoading = false)))
+        .subscribe({
+          next: (res) => {
+            this.authService.setToken(res.token);
+            this.authService.decodeToken();
+            this.router.navigate(['/home']);
+          },
+          error: (err) => {
+            console.log(err);
+            this.errorMsg = err.error.message;
+          },
+        });
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
 }

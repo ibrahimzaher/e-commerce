@@ -4,10 +4,11 @@ import { ProductsService } from './../../../core/services/products/products.serv
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductComponent } from '../../../shared/components/product/product.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-products',
-  imports: [ProductComponent, NgxPaginationModule],
+  imports: [ProductComponent, NgxPaginationModule, TranslateModule],
   templateUrl: './popular-products.component.html',
   styleUrl: './popular-products.component.css',
 })

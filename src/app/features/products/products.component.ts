@@ -4,10 +4,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
 import { ProductComponent } from '../../shared/components/product/product.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductComponent, NgxPaginationModule],
+  imports: [ProductComponent, NgxPaginationModule, TranslateModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })

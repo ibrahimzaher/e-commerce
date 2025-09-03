@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="bg-gray-100 flex justify-center items-center overflow-hidden p-5 min-h-screen">
+  <div
+    class="w-full grid bg-white/90 shadow-2xl lg:grid-cols-2 lg:w-[70%] gap-10 p-10 border-2 rounded-2xl border-green-500 lg:justify-center lg:items-center mx-auto"
+  >
+    <div class="hidden lg:block lg:h-[80%]">
+      <img
+        src="./images/sign.png"
+        class="w-full h-full rounded-2xl border-2 border-green-500"
+        alt="sign"
+      />
+    </div>
+    <div class="w-full">
+      <h1 class="text-green-500 text-4xl font-bold text-center mb-5">Sign Up</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="signUp()">
+        <app-input
+          [control]="registerForm.get('name')"
+          [idInput]="'name'"
+          [label]="'User Name'"
+          [typeInput]="'text'"
+        ></app-input>
+        <app-input
+          [control]="registerForm.get('email')"
+          [idInput]="'email'"
+          [label]="'User Email'"
+          [typeInput]="'email'"
+        ></app-input>
+        <app-input
+          [control]="registerForm.get('password')"
+          [idInput]="'password'"
+          [label]="'Password'"
+        ></app-input>
+        <app-input
+          [control]="registerForm.get('rePassword')"
+          [idInput]="'rePassword'"
+          [label]="'Re Password'"
+        ></app-input>
+        <app-input
+          [control]="registerForm.get('phone')"
+          [idInput]="'phone'"
+          [label]="'User Phone'"
+          [typeInput]="'tel'"
+        ></app-input>
+        <button class="btn bg-green-500 text-white hover:bg-green-700">
+          Sign Up @if (isLoading) {
+          <span> <i class="fas fa-spin fa-spinner text-white"></i></span>
+          }
+        </button>
+      </form>
+      @if (msgError) {
+      <p class="bg-red-200 text-red-700 w-full rounded-sm p-2 mt-1 text-center">{{ msgError }}</p>
+      }
+    </div>
+  </div>
+</div>

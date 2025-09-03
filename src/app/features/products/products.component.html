@@ -5,7 +5,9 @@
 }
 <section class="py-10">
   @if(products.length > 0){
-  <h1 class="text-green-500 font-semibold text-4xl text-center mb-5">All Products</h1>
+  <h1 class="text-green-500 font-semibold text-4xl text-center mb-5">
+    {{ 'AllProducts' | translate }}
+  </h1>
   <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
     @for (product of products | paginate: { id: 'foo', itemsPerPage: pageSize, currentPage: p,
     totalItems: total }; track product._id) {

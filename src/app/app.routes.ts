@@ -12,6 +12,8 @@ import { CartComponent } from './features/cart/cart.component';
 import { ProductsComponent } from './features/products/products.component';
 import { NotfoundComponent } from './features/notfound/notfound.component';
 import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
+import { authGuard } from './core/guard/auth-guard';
+import { isLoginGuard } from './core/guard/is-login-guard';
 
 export const routes: Routes = [
   {
@@ -22,42 +24,44 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivate: [isLoginGuard],
     children: [
-      {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-      },
       {
         path: 'login',
         component: LoginComponent,
+        title: 'Login ',
       },
       {
         path: 'register',
         component: RegisterComponent,
+        title: 'Register ',
       },
     ],
   },
   {
     path: '',
+    canActivate: [authGuard],
     component: BlankLayoutComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-      },
-      {
         path: 'home',
         component: HomeComponent,
+        title: 'Home ',
       },
       {
         path: 'brands',
         component: BrandsComponent,
+        title: 'Brands ',
       },
       {
         path: 'categories',
         component: CategoriesComponent,
+        title: 'Categories ',
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        title: 'Products ',
       },
       {
         path: 'product/:id',
@@ -65,6 +69,7 @@ export const routes: Routes = [
         resolve: {
           product: productDetailsResolver,
         },
+        title: 'Product Details ',
       },
       {
         path: 'product/:id/:slug',
@@ -72,23 +77,23 @@ export const routes: Routes = [
         resolve: {
           product: productDetailsResolver,
         },
-      },
-      {
-        path: 'checkout',
-        component: CheckoutComponent,
+        title: 'Product Details ',
       },
       {
         path: 'cart',
         component: CartComponent,
+        title: 'Shopping Cart ',
       },
       {
-        path: 'products',
-        component: ProductsComponent,
+        path: 'checkout',
+        component: CheckoutComponent,
+        title: 'Checkout ',
       },
     ],
   },
   {
     path: '**',
     component: NotfoundComponent,
+    title: 'Page Not Found ',
   },
 ];

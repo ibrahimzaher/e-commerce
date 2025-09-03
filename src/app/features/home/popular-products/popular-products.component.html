@@ -4,11 +4,13 @@
     <span class="fas fa-spin fa-spinner text-5xl text-green-500"></span>
   </div>
   } @if (products.length>0) {
-  <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">Shop Popular Products</h2>
+  <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">
+    {{ 'ShopPopularProducts' | translate }}
+  </h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
     @for (product of products.slice(0,12)| paginate: { itemsPerPage: 6, currentPage: p }; track
-    product._id) {
-    <app-product [product]="product" />
+    product._id;) {
+    <app-product [product]="product" data-aos="fade-in" [attr.data-aos-delay]="$index * 100" />
     }
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
