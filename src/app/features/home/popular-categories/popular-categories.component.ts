@@ -14,7 +14,6 @@ export class PopularCategoriesComponent implements OnDestroy {
   private readonly translateService = inject(TranslateService);
   private readonly categoriesService = inject(CategoriesService);
   categories: Category[] = [];
-  isloading: boolean = false;
   lang!: string;
   subscription!: Subscription;
   categoryOption!: OwlOptions;
@@ -28,10 +27,9 @@ export class PopularCategoriesComponent implements OnDestroy {
     });
   }
   getCategories(): void {
-    this.isloading = true;
     this.categoriesService
       .getCategories()
-      .pipe(finalize(() => (this.isloading = false)))
+
       .subscribe({
         next: (res) => {
           this.categories = res.data;

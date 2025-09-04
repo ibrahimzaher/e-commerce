@@ -21,24 +21,20 @@ export class ProductsComponent implements OnInit {
   pageSize: number = 6;
   total: number = 0;
   apiPage: number = 1;
-  isLoading: boolean = false;
 
   ngOnInit(): void {
     this.loadMoreProducts();
   }
 
   loadMoreProducts() {
-    this.isLoading = true;
-    this.ProductsService.getProductsPagination(this.apiPage)
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (res) => {
-          this.products = [...this.products, ...res.data];
-          this.total = this.products.length;
-          this.apiPage++;
-        },
-        error: (err) => console.log(err),
-      });
+    this.ProductsService.getProductsPagination(this.apiPage).subscribe({
+      next: (res) => {
+        this.products = [...this.products, ...res.data];
+        this.total = this.products.length;
+        this.apiPage++;
+      },
+      error: (err) => console.log(err),
+    });
   }
 
   pageChange(pageNumber: number) {

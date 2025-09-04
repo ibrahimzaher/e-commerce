@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   registerForm!: FormGroup;
   isLoading: boolean = false;
-  msgError: string = '';
   subscription: Subscription = new Subscription();
   ngOnInit(): void {
     this.initForm();
@@ -56,7 +55,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.registerForm.valid) {
       this.subscription.unsubscribe();
       this.isLoading = true;
-      this.msgError = '';
       this.subscription = this.authService
         .signUp(this.registerForm.value)
         .pipe(finalize(() => (this.isLoading = false)))
@@ -68,10 +66,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
               console.log(this.authService.decodeToken());
               this.router.navigate(['home'], { replaceUrl: true });
             }
-          },
-          error: (error) => {
-            console.log(error);
-            this.msgError = error.error.message;
           },
         });
     } else {

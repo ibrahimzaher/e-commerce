@@ -1,0 +1,17 @@
+@if (isLoading ||progress>0 ) {
+<mat-progress-bar
+  mode="determinate"
+  [value]="progress"
+  class="custom-progress"
+  color="primary"
+  style="position: absolute; left: 0; right: 0; z-index: 10000; top: 0"
+>
+</mat-progress-bar>
+<ngx-spinner
+  bdColor="rgba(0,0,0,.2)"
+  size="medium"
+  color="green"
+  type="square-jelly-box"
+  [fullScreen]="true"
+></ngx-spinner>
+}

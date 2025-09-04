@@ -19,19 +19,14 @@ export class PopularProductsComponent implements OnInit {
   }
   private readonly productsService = inject(ProductsService);
   products: Product[] = [];
-  isLoading: boolean = false;
   getProdutcs() {
-    this.isLoading = true;
-    this.productsService
-      .getProducts()
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (res) => {
-          this.products = res.data;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    this.productsService.getProducts().subscribe({
+      next: (res) => {
+        this.products = res.data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { Product } from '../../../core/models/product.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product',
@@ -10,10 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProductComponent {
   private readonly router = inject(Router);
-  isLoading = false;
+  private readonly spinner = inject(NgxSpinnerService);
+  ngOnInit(): void {}
   @Input({ required: true }) product: Product = {} as Product;
   navigateToDetails() {
-    this.isLoading = true;
     this.router.navigate(['/product', this.product._id, this.product.slug]);
   }
 }

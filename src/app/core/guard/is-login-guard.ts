@@ -7,14 +7,12 @@ import { isPlatformBrowser } from '@angular/common';
 export const isLoginGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  const token = authService.getToken();
   const platformId = inject(PLATFORM_ID);
   if (!isPlatformBrowser(platformId)) {
     return of(true);
   }
-  if (!token) {
-    return true;
-  }
+  const token = authService.getToken();
+  if (!token) return of(true);
   return authService.verifyToken(token).pipe(
     map((res) => (res.message === 'verified' ? router.parseUrl('/home') : true)),
     catchError(() => {

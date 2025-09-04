@@ -1,15 +1,10 @@
 import { AuthService } from './../services/auth/auth.service';
 import { Component, inject } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +18,7 @@ export class LoginComponent {
   private readonly router = inject(Router);
   loginForm!: FormGroup;
   isLoading: boolean = false;
-  errorMsg: string = '';
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -37,7 +32,6 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      this.errorMsg = '';
       console.log(this.loginForm.value);
       this.authService
         .logIn(this.loginForm.value)
@@ -47,10 +41,6 @@ export class LoginComponent {
             this.authService.setToken(res.token);
             this.authService.decodeToken();
             this.router.navigate(['/home']);
-          },
-          error: (err) => {
-            console.log(err);
-            this.errorMsg = err.error.message;
           },
         });
     } else {

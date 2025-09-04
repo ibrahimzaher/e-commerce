@@ -1,9 +1,5 @@
 <section class="py-5">
-  @if (isLoading) {
-  <div class="text-center h-[100px] flex justify-center items-center">
-    <span class="fas fa-spin fa-spinner text-5xl text-green-500"></span>
-  </div>
-  } @if (products.length>0) {
+  @if (products.length>0) {
   <h2 class="text-4xl text-center text-green-500 font-semibold pb-5">
     {{ 'ShopPopularProducts' | translate }}
   </h2>
