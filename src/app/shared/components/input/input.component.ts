@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -13,4 +13,5 @@ export class InputComponent {
   @Input() typeInput!: string;
   @Input({ required: true }) label!: string;
   flag: boolean = true;
+  @Input() readonly: boolean = false;
 }

@@ -1,11 +1,11 @@
-import { JwtPayload } from './../../../../../../node_modules/jwt-decode/build/esm/index.d';
-import { StorageService } from './../../../services/storage/storage.service';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../../../environments/environment.development';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment.development';
+import { JwtPayload } from './../../../../../../node_modules/jwt-decode/build/esm/index.d';
+import { StorageService } from './../../../services/storage/storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,15 @@ export class AuthService {
   logIn(data: object): Observable<any> {
     return this.httpClient.post(environment.baseUrl + `auth/signin`, data);
   }
-
+  forgetPassword(data: object): Observable<any> {
+    return this.httpClient.post(environment.baseUrl + 'auth/forgotPasswords', data);
+  }
+  resetCode(data: object): Observable<any> {
+    return this.httpClient.post(environment.baseUrl + 'auth/verifyResetCode', data);
+  }
+  resetPassword(data: object): Observable<any> {
+    return this.httpClient.put(environment.baseUrl + 'auth/resetPassword', data);
+  }
   signOut() {
     this.removeToken();
     this.login.next(null);

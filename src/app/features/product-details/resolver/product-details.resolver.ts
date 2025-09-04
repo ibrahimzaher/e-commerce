@@ -2,7 +2,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details/product-details.service';
-import { log } from 'console';
 
 export const productDetailsResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,

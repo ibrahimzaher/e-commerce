@@ -14,6 +14,7 @@ import { NotfoundComponent } from './features/notfound/notfound.component';
 import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
 import { authGuard } from './core/guard/auth-guard';
 import { isLoginGuard } from './core/guard/is-login-guard';
+import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,11 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         title: 'Register ',
+      },
+      {
+        path: 'forget-password',
+        title: 'Forget Password',
+        component: ForgetPasswordComponent,
       },
     ],
   },

@@ -15,6 +15,7 @@
       class="main-input"
       [placeholder]="label"
       [formControl]="control"
+      [readonly]="readonly"
       [class]="{
               'border-green-500':control?.valid,
               'border-red-700':control?.invalid && control?.touched,
