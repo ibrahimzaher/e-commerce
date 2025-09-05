@@ -46,16 +46,7 @@
             {{ 'HOME' | translate }}
           </a>
         </li>
-        <li>
-          <a
-            routerLink="/cart"
-            class="dark:text-white px-5 py-1 hover:bg-green-500 rounded-sm transition duration-200 block font-semibold"
-            routerLinkActive="bg-green-500"
-            aria-current="page"
-          >
-            {{ 'CART' | translate }}
-          </a>
-        </li>
+
         <li>
           <a
             routerLink="/products"
@@ -88,8 +79,38 @@
         </li>
       </ul>
       <ul class="flex flex-row items-center gap-2 justify-center">
-        <li>
-          <button (click)="signOut()" class="btn">{{ 'SIGN OUT' | translate }}</button>
+        <li class="me-2">
+          <button
+            type="button"
+            routerLink="/wishlist"
+            class="relative cursor-pointer inline-flex items-center p-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
+          >
+            <i class="fas fa-bookmark"></i>
+            <span class="sr-only">Wish List</span>
+            @if (count) {
+            <div
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-3 -end-2 dark:border-gray-900"
+            >
+              {{ count }}
+            </div>
+            }
+          </button>
+        </li>
+        <li class="me-2">
+          <button
+            type="button"
+            routerLink="/cart"
+            class="relative cursor-pointer inline-flex items-center p-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
+          >
+            <i class="fas fa-cart-plus"></i>
+            <span class="sr-only"> {{ 'CART' | translate }} </span>
+
+            <div
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-3 -end-2 dark:border-gray-900"
+            >
+              0
+            </div>
+          </button>
         </li>
         @if($isDark | async){
         <li
@@ -117,6 +138,9 @@
             <button (click)="changeLang('en')" class="btn">{{ 'ENGLISH' | translate }}</button>
             <button (click)="changeLang('ar')" class="btn">{{ 'ARABIC' | translate }}</button>
           </div>
+        </li>
+        <li>
+          <button (click)="signOut()" class="btn">{{ 'SIGN OUT' | translate }}</button>
         </li>
       </ul>
     </div>

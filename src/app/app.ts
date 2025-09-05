@@ -1,5 +1,6 @@
+import { WishlistService } from './features/wishlist/servuces/wishlist.service';
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import * as AOS from 'aos';
 import { LoadingComponent } from './shared/components/loading/loading/loading.component';

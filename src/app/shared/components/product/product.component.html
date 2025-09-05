@@ -16,6 +16,13 @@
       </div>
     </div>
   </div>
+  <i
+    (click)="toggleWishlistProduct()"
+    class="fas fa-heart absolute end-4 text-2xl text-gray-400 hover:text-yellow-500"
+    [class]="{
+     'text-yellow-500':productWishList.includes(product._id),
+    }"
+  ></i>
   <button
     class="group-hover/product:translate-y-0 transition duration-300 btn translate-y-[150%] bg-green-400 hover:text-white hover:bg-green-700"
   >

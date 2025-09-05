@@ -15,6 +15,7 @@ import { productDetailsResolver } from './features/product-details/resolver/prod
 import { authGuard } from './core/guard/auth-guard';
 import { isLoginGuard } from './core/guard/is-login-guard';
 import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
+import { WishlistComponent } from './features/wishlist/wishlist.component';
 
 export const routes: Routes = [
   {
@@ -94,6 +95,11 @@ export const routes: Routes = [
         path: 'checkout',
         component: CheckoutComponent,
         title: 'Checkout ',
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+        title: 'Shopping Wish List ',
       },
     ],
   },

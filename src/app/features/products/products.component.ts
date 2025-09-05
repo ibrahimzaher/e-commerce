@@ -16,21 +16,22 @@ export class ProductsComponent implements OnInit {
   private readonly ProductsService = inject(ProductsService);
 
   products: Product[] = [];
-  displayedProducts: Product[] = [];
   p: number = 1;
-  pageSize: number = 6;
-  total: number = 0;
+  pageSize!: number;
+  total!: number;
   apiPage: number = 1;
 
   ngOnInit(): void {
-    this.loadMoreProducts();
+    this.loadMoreProducts(this.apiPage);
   }
 
-  loadMoreProducts() {
-    this.ProductsService.getProductsPagination(this.apiPage).subscribe({
+  loadMoreProducts(pageNumber: number) {
+    this.ProductsService.getProductsPagination(pageNumber).subscribe({
       next: (res) => {
-        this.products = [...this.products, ...res.data];
-        this.total = this.products.length;
+        console.log(res);
+        this.pageSize = res.metadata.limit;
+        this.products = res.data;
+        this.total = res.results;
         this.apiPage++;
       },
       error: (err) => console.log(err),
@@ -39,10 +40,11 @@ export class ProductsComponent implements OnInit {
 
   pageChange(pageNumber: number) {
     this.p = pageNumber;
-
-    const maxLoadedPages = Math.ceil(this.products.length / this.pageSize);
-    if (this.p > maxLoadedPages - 1) {
-      this.loadMoreProducts();
-    }
+    this.loadMoreProducts(pageNumber);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 }
