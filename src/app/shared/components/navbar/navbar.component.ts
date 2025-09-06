@@ -9,6 +9,7 @@ import { FlowbiteService } from '../../../core/services/flowbite/flowbite.servic
 import { LangService } from '../../../core/services/lang/lang.service';
 import { ThemeService } from './../../../core/services/theme/theme.service';
 import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
+import { CartService } from '../../../features/cart/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,18 +22,23 @@ export class NavbarComponent implements OnInit {
   private readonly themeService = inject(ThemeService);
   private readonly langService = inject(LangService);
   private readonly wishlistService = inject(WishlistService);
-  private readonly PLATFORM_ID = inject(PLATFORM_ID);
   private readonly authService = inject(AuthService);
+  private readonly cartService = inject(CartService);
+
   lang$: Observable<string> = this.langService.lang.asObservable();
   count: number | null = null;
   isDark$: Observable<boolean> = this.themeService.observable();
   subscription!: Subscription;
+  countCart: number | undefined = undefined;
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
     });
     this.wishlistService.wishlistIds$.subscribe({
       next: (res) => (this.count = res.length),
+    });
+    this.cartService.cart$.subscribe({
+      next: (res) => (this.countCart = res?.numOfCartItems),
     });
   }
 

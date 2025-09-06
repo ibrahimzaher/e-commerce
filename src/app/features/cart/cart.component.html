@@ -1,1 +1,176 @@
-<p>cart works!</p>
+@if(cartItems.length > 0){
+<section class="bg-surface-default dark:bg-surface-dark my-5 px-4 sm:px-6 lg:px-10">
+  <nav class="flex" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+      <li class="inline-flex items-center">
+        <a
+          routerLink="/home"
+          class="inline-flex text-prose-default hover:text-primary-dark-hover dark:text-prose-dark dark:hover:text-prose-dark-hover items-center text-sm font-medium"
+        >
+          <svg class="w-3 h-3 me-2.5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"
+            />
+          </svg>
+          {{ 'CART.Home' | translate }}
+        </a>
+      </li>
+      <li>
+        <div class="flex items-center">
+          <svg class="rtl:rotate-180 w-3 h-3 mx-1" fill="none" viewBox="0 0 6 10">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <a
+            routerLink="/products"
+            class="ms-1 text-sm font-medium md:ms-2 text-prose-default hover:text-primary-dark-hover dark:text-prose-dark dark:hover:text-prose-dark-hover"
+            >{{ 'CART.Products' | translate }}</a
+          >
+        </div>
+      </li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          <svg class="rtl:rotate-180 w-3 h-3 mx-1" fill="none" viewBox="0 0 6 10">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span
+            class="ms-1 text-sm font-medium md:ms-2 text-primary-dark dark:text-prose-dark dark:hover:text-prose-dark-hover"
+            >{{ 'CART.Cart' | translate }}</span
+          >
+        </div>
+      </li>
+    </ol>
+  </nav>
+
+  <h1
+    class="text-primary-default dark:text-prose-dark text-3xl lg:text-4xl font-semibold my-5 text-center lg:text-left flex justify-between items-center"
+  >
+    <span>{{ 'CART.ShopCart' | translate }}</span>
+    <span> {{ 'CART.Items' | translate }}: {{ cart?.numOfCartItems }}</span>
+  </h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+    <div class="lg:col-span-8 rounded-2xl w-full bg-surface-default dark:bg-surface-dark shadow-lg">
+      <div class="flex flex-col gap-5">
+        @for (product of cart?.data?.products; track product._id) {
+        <div
+          class="grid md:grid-cols-12 gap-5 bg-surface-hover dark:bg-surface-dark-hover rounded-2xl shadow p-4"
+        >
+          <div class="md:col-span-2 flex justify-center items-center">
+            <img
+              [src]="product.product.imageCover"
+              class="w-1/2 h-[250px] md:h-auto md:w-auto rounded-2xl"
+              [alt]="product.product.title"
+            />
+          </div>
+          <div class="md:col-span-10 flex flex-col justify-between">
+            <div
+              class="text-prose-default dark:text-prose-dark flex flex-row justify-between items-start gap-2"
+            >
+              <div>
+                @if (product.product.brand) {
+                <span class="block mb-1">{{ product.product.brand.name }}</span
+                >} @if (product.product.category) {
+                <span class="block mb-1">{{ product.product.category.name }}</span
+                >}
+                <span class="block">{{ product.product.title }}</span>
+              </div>
+              <i
+                (click)="deleteItem(product.product._id)"
+                class="fa fa-trash text-red-400 text-xl cursor-pointer"
+              ></i>
+            </div>
+            <div
+              class="text-prose-default dark:text-prose-dark flex flex-row justify-between items-center mt-3 gap-2"
+            >
+              <span>{{ product.price | currency : 'EGP' }}</span>
+              <div class="flex items-center gap-2">
+                <span class="btn" (click)="updateItem(product.product._id, product.count - 1)">
+                  <i class="fas fa-minus"></i>
+                </span>
+                <span class="p-2">{{ product.count }}</span>
+                <span class="btn" (click)="updateItem(product.product._id, product.count + 1)">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div
+      class="lg:col-span-4 w-full h-fit rounded-2xl bg-surface-default dark:bg-surface-dark shadow-lg p-5 flex flex-col gap-5"
+    >
+      <div class="flex justify-between items-center">
+        <h2 class="text-prose-default dark:text-prose-dark text-2xl font-medium">
+          {{ 'CART.OrderSummary' | translate }}
+        </h2>
+        <button (click)="clearCart()" class="btn w-fit bg-red-400 hover:bg-red-700 text-white">
+          {{ 'CART.ClearCart' | translate }}
+        </button>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-prose-hover dark:text-prose-dark">{{ 'CART.Subtotal' | translate }}</span>
+        <span class="text-prose-default font-medium dark:text-prose-dark-hover">{{
+          cart?.data?.totalCartPrice | currency : 'EGP'
+        }}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-prose-hover dark:text-prose-dark">{{ 'CART.Discount' | translate }}</span>
+        <span class="text-red-700 font-medium">- {{ 0 | currency : 'EGP' }}</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-prose-hover dark:text-prose-dark">{{
+          'CART.DeliveryFee' | translate
+        }}</span>
+        <span class="text-prose-default font-medium dark:text-prose-dark-hover">{{
+          0 | currency : 'EGP'
+        }}</span>
+      </div>
+      <hr class="border-surface-hover dark:border-surface-dark-hover" />
+      <div class="flex justify-between items-center">
+        <span class="text-prose-default dark:text-prose-dark font-medium text-xl sm:text-2xl">{{
+          'CART.Total' | translate
+        }}</span>
+        <span class="text-prose-default font-bold dark:text-prose-dark">{{
+          cart?.data?.totalCartPrice | currency : 'EGP'
+        }}</span>
+      </div>
+      <button
+        class="btn w-full py-3 mt-2 bg-primary-default hover:bg-primary-hover text-white dark:bg-primary-dark dark:hover:bg-primary-dark-hover"
+      >
+        {{ 'CART.GoToCheckout' | translate }}
+      </button>
+    </div>
+  </div>
+</section>
+
+}@else {
+<section class="bg-surface-default dark:bg-surface-dark my-5 px-4 sm:px-6 lg:px-10">
+  <div class="flex flex-col justify-center items-center h-[70vh]">
+    <i class="fas fa-cart-arrow-down fa-9x text-primary-dark dark:text-prose-dark"></i>
+    <span class="text-4xl text-primary-dark dark:text-prose-dark font-semibold my-2">
+      {{ 'CART.YourCartIsEmpty' | translate }}
+    </span>
+    <button
+      routerLink="/products"
+      class="btn w-1/4 mt-5 bg-primary-default hover:bg-primary-hover text-white dark:bg-primary-dark dark:hover:bg-primary-dark-hover"
+    >
+      {{ 'CART.GoToProducts' | translate }}
+    </button>
+  </div>
+</section>
+}

@@ -3,10 +3,11 @@ import { WishlistService } from './servuces/wishlist.service';
 import { Component, inject } from '@angular/core';
 import { ProductComponent } from '../../shared/components/product/product.component';
 import { Observable } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [ProductComponent],
+  imports: [ProductComponent, TranslatePipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
 })

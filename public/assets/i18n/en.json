@@ -14,6 +14,10 @@
    "ShopPopularCategories":"Shop Popular Categories",
   "ShopPopularProducts":"Shop Popular Products"
   },
+  "MyWishliST":"My WishliST",
+  "PRODUCT":{
+"AddToCart":"Add To Cart"
+  },
   "AUTH":{
   "SIGNIN": "Sign In",
   "SIGNUP": "Sign Up",
@@ -52,5 +56,21 @@
     },
     "mismatch": "Passwords do not match",
     "default": "Format is incorrect"
-  }
+  },
+"CART": {
+  "ShopCart": "Shop Cart",
+  "Items": "Items",
+  "OrderSummary": "Order Summary",
+  "ClearCart": "Clear Cart",
+  "Subtotal": "Subtotal",
+  "Discount": "Discount",
+  "DeliveryFee": "Delivery Fee",
+  "Total": "Total",
+  "GoToCheckout": "Go to Checkout",
+  "YourCartIsEmpty": "Your cart is empty",
+  "GoToProducts": "Go to Products",
+  "Home": "Home",
+  "Products": "Products",
+  "Cart": "Cart"
+}
 }

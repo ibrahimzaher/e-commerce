@@ -84,7 +84,7 @@
             }
           </button>
         </li>
-        <li class="me-2">
+        <li class="me-1">
           <button
             type="button"
             routerLink="/cart"
@@ -93,11 +93,11 @@
           >
             <i class="fas fa-cart-arrow-down text-2xl"></i>
             <span class="sr-only">Cart</span>
-            @if (count) {
+            @if (countCart) {
             <div
               class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold rounded-full -top-2 bg-primary-default text-prose-dark dark:bg-surface-default dark:text-prose-default shadow-sm -end-3"
             >
-              {{ count }}
+              {{ countCart }}
             </div>
             }
           </button>

@@ -1,59 +1,75 @@
 {
-"NAVBAR": {
-"E-COMMERCE": "التجارة الإلكترونية",
-"HOME": "الرئيسية",
-"CART": "عربة التسوق",
-"PRODUCTS": "المنتجات",
-"CATEGORIES": "الفئات",
-"BRANDS": "العلامات التجارية",
-"SIGNOUT": "تسجيل الخروج",
-"ENGLISH": "الإنجليزية",
-"ARABIC": "العربية"
-},
-"HOME": {
-"ShopPopularCategories": "تسوق الفئات الأكثر مبيعاً",
-"ShopPopularProducts": "تسوق المنتجات الأكثر مبيعاً"
-},
-"AUTH": {
-"SIGNIN": "تسجيل الدخول",
-"SIGN": "تسجيل",
-"SIGNUP": "إنشاء حساب",
-  "IFYOUDAN'THAVEANACCOUNT":"هل ليس لديك حساب ؟ ",
-  "IFYOUHAVEANACCOUNT":"هل لديك حساب ؟ ",
-
-"REGISTER": "تسجيل حساب",
-"USERNAME": "اسم المستخدم",
-"USEREMAIL": "البريد الإلكتروني",
-  "PHONE":"رقم الموبايل",
-
-"PASSWORD": "كلمة المرور",
-  "NEWPASSWORD":"كلمة المرور الجديدة",
-
-"REPASSWORD": "تأكيد كلمة المرور",
-"FORGETPASSWORD": "نسيت كلمة المرور",
-"RESETPASSWORD": "إعادة تعيين كلمة المرور",
-"RESETCODE": "رمز إعادة التعيين"
-},
-"PHONE":"",
-"LANGUAGE": "اللغة",
-"PRODUCTS": {
-"AllProducts": "جميع المنتجات",
-"PRODUCTDETAILS": "تفاصيل المنتج"
-},
-"PAGINATION": {
-"NEXT": "التالي",
-"PREVIOUS": "السابق"
-},
-"errors": {
+  "NAVBAR": {
+    "E-COMMERCE": "المتجر الإلكتروني",
+    "HOME": "الرئيسية",
+    "CART": "عربة التسوق",
+    "PRODUCTS": "المنتجات",
+    "CATEGORIES": "التصنيفات",
+    "BRANDS": "العلامات التجارية",
+    "SIGNOUT": "تسجيل الخروج",
+    "ENGLISH": "إنجليزي",
+    "ARABIC": "عربي"
+  },
+  "HOME": {
+    "ShopPopularCategories": "تسوق الفئات الشائعة",
+    "ShopPopularProducts": "تسوق المنتجات الشائعة"
+  },
+  "MyWishliST": " المنتجات المفضلة",
+  "PRODUCT": {
+    "AddToCart": "أضف إلى العربة"
+  },
+  "AUTH": {
+    "SIGNIN": "تسجيل الدخول",
+    "SIGNUP": "إنشاء حساب",
+    "SIGN": "تسجيل",
+    "REGISTER": "تسجيل",
+    "USERNAME": "اسم المستخدم",
+    "USEREMAIL": "البريد الإلكتروني",
+    "IFYOUDAN'THAVEANACCOUNT": "إذا لم يكن لديك حساب؟",
+    "IFYOUHAVEANACCOUNT": "إذا كان لديك حساب؟",
+    "PASSWORD": "كلمة المرور",
+    "NEWPASSWORD": "كلمة المرور الجديدة",
+    "PHONE": "رقم الهاتف",
+    "REPASSWORD": "إعادة كلمة المرور",
+    "FORGETPASSWORD": "نسيت كلمة المرور",
+    "RESETPASSWORD": "إعادة تعيين كلمة المرور",
+    "RESETCODE": "رمز إعادة التعيين"
+  },
+  "LANGUAGE": "اللغة",
+  "PRODUCTS": {
+    "AllProducts": "كل المنتجات",
+    "PRODUCTDETAILS": "تفاصيل المنتج"
+  },
+  "PAGINATION": {
+    "NEXT": "التالي",
+    "PREVIOUS": "السابق"
+  },
+  "errors": {
     "required": "لا يمكن ترك هذا الحقل فارغًا",
-    "minlength": " يجب أن يكون على الأقل 3 أحرف",
-    "maxlength": " لا يمكن أن يكون أكثر من 20 حرفًا",
-    "email": "يرجى إدخال بريد إلكتروني صالح",
+    "minlength": "يجب ألا يقل عن 3 أحرف",
+    "maxlength": "يجب ألا يزيد عن 20 حرفًا",
+    "email": "الرجاء إدخال بريد إلكتروني صالح",
     "pattern": {
       "password": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
-      "phone": "يرجى إدخال رقم هاتف مصري صالح"
+      "phone": "الرجاء إدخال رقم هاتف مصري صالح"
     },
     "mismatch": "كلمتا المرور غير متطابقتين",
-    "default": "التنسيق غير صحيح"
-  }
+    "default": "الصيغة غير صحيحة"
+  },
+  "CART": {
+  "ShopCart": "عربة التسوق",
+  "Items": "العناصر",
+  "OrderSummary": "ملخص الطلب",
+  "ClearCart": "إفراغ العربة",
+  "Subtotal": "المجموع الفرعي",
+  "Discount": "الخصم",
+  "DeliveryFee": "رسوم التوصيل",
+  "Total": "الإجمالي",
+  "GoToCheckout": "إتمام الشراء",
+  "YourCartIsEmpty": "عربة التسوق فارغة",
+  "GoToProducts": "الذهاب إلى المنتجات",
+  "Home": "الرئيسية",
+  "Products": "المنتجات",
+  "Cart": "عربة التسوق"
+}
 }
