@@ -1,10 +1,9 @@
-import { Product } from '../../core/models/product.interface';
-import { ProductsService } from './../../core/services/products/products.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { finalize } from 'rxjs';
-import { ProductComponent } from '../../shared/components/product/product.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Product } from '../../core/models/product.interface';
+import { ProductComponent } from '../../shared/components/product/product.component';
+import { ProductsService } from './../../core/services/products/products.service';
 
 @Component({
   selector: 'app-products',

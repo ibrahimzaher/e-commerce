@@ -9,7 +9,7 @@ import { inject, Injectable } from '@angular/core';
 export class LangService {
   private readonly translateService = inject(TranslateService);
   private readonly storageService = inject(StorageService);
-  lang: BehaviorSubject<string> = new BehaviorSubject<string>('en');
+  lang: BehaviorSubject<string> = new BehaviorSubject<string>('');
   observable() {
     return this.lang.asObservable();
   }
@@ -23,8 +23,10 @@ export class LangService {
       this.translateService.setFallbackLang('en');
       if (lang === null) {
         this.translateService.use('en');
+        this.lang.next('en');
       } else {
         this.translateService.use(lang);
+        this.lang.next(lang);
       }
     }
   }

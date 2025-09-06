@@ -12,9 +12,10 @@ import {
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { log } from 'console';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, InputComponent, RouterLink],
+  imports: [ReactiveFormsModule, InputComponent, RouterLink, TranslatePipe],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })

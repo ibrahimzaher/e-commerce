@@ -1,18 +1,56 @@
 {
+  "NAVBAR":{
   "E-COMMERCE":"E-Commerce",
   "HOME":"Home",
   "CART":"Cart",
   "PRODUCTS":"Products",
   "CATEGORIES":"Categories",
   "BRANDS":"Brands",
-  "SIGN OUT":"Sign Out",
-  "SIGN IN":"Sign In",
-  "REGISTER":"Register",
+  "SIGNOUT":"Sign Out",
+  "ENGLISH": "EN",
+  "ARABIC": "AR"
+  },
+  "HOME":{
+   "ShopPopularCategories":"Shop Popular Categories",
+  "ShopPopularProducts":"Shop Popular Products"
+  },
+  "AUTH":{
+  "SIGNIN": "Sign In",
+  "SIGNUP": "Sign Up",
+  "SIGN": "Sign",
+  "REGISTER": "Register",
+  "USERNAME":"User Name",
+  "USEREMAIL":"User Email",
+  "IFYOUDAN'THAVEANACCOUNT":"If you don't have an Account ? ",
+  "IFYOUHAVEANACCOUNT":"If you  have an Account ? ",
+  "PASSWORD":"Password",
+  "NEWPASSWORD":"New Password",
+  "PHONE":"Phone",
+  "REPASSWORD":"Re Password",
+  "FORGETPASSWORD":"Forget Password",
+  "RESETPASSWORD":"Reset Password",
+  "RESETCODE":"Reset Password"
+  },
   "LANGUAGE": "Language",
-  "ENGLISH": "English",
-  "ARABIC": "Arabic",
-  "ShopPopularCategories":"Shop Popular Categories",
-  "ShopPopularProducts":"Shop Popular Products",
-  "AllProducts":"All Products",
-  "PRODUCTDETAILS":"ProductDetails"
+
+  "PRODUCTS":{
+    "AllProducts":"All Products",
+    "PRODUCTDETAILS":"ProductDetails"
+  },
+  "PAGINATION":{
+   "NEXT":"",
+  "PREVIOUS":""
+  },
+    "errors": {
+    "required": "is required",
+    "minlength": "must be at least 3 characters",
+    "maxlength": "cannot be more than 20 characters",
+    "email": "Please enter a valid email address",
+    "pattern": {
+      "password": "Password must contain: At least 6 characters",
+      "phone": "Please enter a valid Egyptian phone number"
+    },
+    "mismatch": "Passwords do not match",
+    "default": "Format is incorrect"
+  }
 }

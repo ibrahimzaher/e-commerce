@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-main-slider',
   imports: [CarouselModule],
   templateUrl: './main-slider.component.html',
-  styleUrls: ['./main-slider.component.css'],
+  styleUrl: './main-slider.component.css',
 })
 export class MainSliderComponent implements OnDestroy {
   private readonly translateService = inject(TranslateService);
@@ -39,8 +39,6 @@ export class MainSliderComponent implements OnDestroy {
       dots: true,
       navSpeed: 700,
       autoplay: true,
-
-      autoplayHoverPause: true,
       autoplayTimeout: 3000,
       lazyLoad: true,
       animateIn: 'fadeIn',

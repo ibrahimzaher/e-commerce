@@ -50,6 +50,7 @@ export class PopularCategoriesComponent implements OnDestroy {
       navSpeed: 700,
       autoplay: true,
       margin: 20,
+      items: 1,
       responsive: {
         0: {
           items: 1,
@@ -64,7 +65,6 @@ export class PopularCategoriesComponent implements OnDestroy {
           items: 6,
         },
       },
-      autoplayHoverPause: true,
       autoplayTimeout: 3000,
       lazyLoad: true,
       animateIn: 'fadeIn',

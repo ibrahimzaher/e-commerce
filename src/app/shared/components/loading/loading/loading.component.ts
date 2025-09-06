@@ -31,12 +31,11 @@ export class LoadingComponent implements OnInit, OnDestroy {
   }
 
   startProgress() {
-    this.stopProgress(); // أوقف أي مؤقت سابق
+    this.stopProgress();
     this.progress = 0;
     this.progressInterval = interval(50).subscribe(() => {
       if (this.progress < 90) {
-        // يزيد تدريجياً حتى 90٪
-        this.progress += Math.random() * 2 + 0.5; // زيادة عشوائية صغيرة → شعور طبيعي
+        this.progress += Math.random() * 2 + 0.5;
       }
     });
   }
@@ -45,8 +44,8 @@ export class LoadingComponent implements OnInit, OnDestroy {
     if (this.progressInterval) {
       this.progressInterval.unsubscribe();
     }
-    this.progress = 100; // عند الانتهاء، اجعلها 100%
-    setTimeout(() => (this.progress = 0), 200); // إعادة التهيئة بعد قليل
+    this.progress = 100;
+    setTimeout(() => (this.progress = 0), 200);
   }
 
   ngOnDestroy(): void {

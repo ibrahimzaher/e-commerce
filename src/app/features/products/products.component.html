@@ -1,15 +1,25 @@
 <section class="py-10">
   @if(products.length > 0){
-  <h1 class="text-green-500 font-semibold text-4xl text-center mb-5">
-    {{ 'AllProducts' | translate }}
+  <h1
+    class="text-primary-default hover:text-primary-dark dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold text-4xl text-center mb-10"
+  >
+    {{ 'PRODUCTS.AllProducts' | translate }}
   </h1>
-  <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+  <div
+    class="grid grid-cols-1 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5"
+  >
     @for (product of products | paginate: { id: 'foo', itemsPerPage: pageSize, currentPage: p,
     totalItems: total }; track product._id) {
     <app-product [product]="product" data-aos="fadeup" [attr.data-aos-delay]="$index * 10" />
     }
   </div>
 
-  <pagination-controls id="foo" (pageChange)="pageChange($event)"> </pagination-controls>
+  <pagination-controls
+    id="foo"
+    nextLabel="{{ 'PAGINATION.NEXT' | translate }}"
+    previousLabel="{{ 'PAGINATION.PREVIOUS' | translate }}"
+    (pageChange)="pageChange($event)"
+  >
+  </pagination-controls>
   }
 </section>

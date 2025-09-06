@@ -3,10 +3,11 @@ import { InputComponent } from '../../../shared/components/input/input.component
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forget-password',
-  imports: [InputComponent, ReactiveFormsModule],
+  imports: [InputComponent, ReactiveFormsModule, TranslatePipe],
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.css',
 })

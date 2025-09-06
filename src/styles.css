@@ -26,21 +26,39 @@
   --color-prose-hover: #374151;
   --color-prose-dark: #f3f4f6;
   --color-prose-dark-hover: #d1d5db;
+  --color-red-700: oklch(0.505 0.213 27.518);
+  --color-red-200: oklch(0.885 0.062 18.334);
+  --color-red-400: oklch(0.704 0.191 22.216);
+  --color-gold: #f59e0b;
 }
 @layer components {
   .btn {
-    @apply w-full py-2 px-3 font-semibold rounded-sm dark:text-white text-black transition duration-200  hover:bg-green-500 cursor-pointer;
+    @apply w-full py-2 px-3 font-semibold rounded-sm  bg-primary-default dark:bg-primary-dark hover:bg-primary-dark-hover dark:hover:bg-primary-dark-hover hover:text-surface-hover dark:hover:text-surface-hover text-surface-default dark:text-surface-default  transition duration-200  cursor-pointer;
   }
   .main-label {
-    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+    @apply block mb-2 text-sm font-semibold text-prose-default dark:text-prose-dark;
   }
   .main-input {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500;
+    @apply bg-surface-default   dark:bg-surface-dark  text-prose-default ring-0 dark:text-prose-dark outline-none border text-sm rounded-lg  block w-full p-2.5;
+  }
+  .link {
+    @apply py-2 px-4  rounded-sm transition duration-200 block font-semibold text-primary-dark dark:text-prose-dark  hover:bg-primary-default hover:text-prose-dark;
+  }
+  .link-active {
+    @apply text-prose-dark bg-primary-default;
   }
 }
+
 body {
   font-family: 'Edu NSW ACT Cursive', cursive;
+  /* font-family: Roboto, sans-serif; */
 }
 
-/* html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+/* html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+} */

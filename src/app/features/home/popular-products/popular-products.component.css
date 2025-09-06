@@ -4,8 +4,9 @@
   padding-top: 30px;
 }
 ::ng-deep .ngx-pagination li {
-  background-color: rgb(229, 244, 229) !important;
+  background-color: rgb(243, 249, 243) !important;
+  font-weight: 500;
 }
 ::ng-deep .ngx-pagination .current {
-  background-color: green !important;
+  background-color: var(--color-primary-default) !important;
 }

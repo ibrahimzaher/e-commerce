@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputComponent, RouterLink],
+  imports: [ReactiveFormsModule, InputComponent, RouterLink, TranslatePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

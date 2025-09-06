@@ -1,65 +1,67 @@
-<div class="bg-gray-100 flex justify-center items-center overflow-hidden p-5 min-h-screen">
-  <div
-    class="w-full grid bg-white/90 shadow-2xl lg:grid-cols-2 lg:w-[70%] gap-10 p-10 border-2 rounded-2xl border-green-500 lg:justify-center lg:items-center mx-auto"
-  >
-    <div class="hidden lg:block lg:h-[80%]">
-      <img
-        src="./images/sign.png"
-        class="w-full h-full rounded-2xl border-2 border-green-500"
-        alt="sign"
-      />
-    </div>
-    <div class="w-full">
-      <h1 class="text-green-500 text-4xl font-bold text-center mb-5">Sign Up</h1>
-      <form [formGroup]="registerForm" (ngSubmit)="signUp()">
-        <app-input
-          [control]="registerForm.get('name')"
-          [idInput]="'name'"
-          [label]="'User Name'"
-          [typeInput]="'text'"
-        ></app-input>
-        <app-input
-          [control]="registerForm.get('email')"
-          [idInput]="'email'"
-          [label]="'User Email'"
-          [typeInput]="'email'"
-        ></app-input>
-        <app-input
-          [control]="registerForm.get('password')"
-          [idInput]="'password'"
-          [label]="'Password'"
-        ></app-input>
-        <app-input
-          [control]="registerForm.get('rePassword')"
-          [idInput]="'rePassword'"
-          [label]="'Re Password'"
-        ></app-input>
-        <app-input
-          [control]="registerForm.get('phone')"
-          [idInput]="'phone'"
-          [label]="'User Phone'"
-          [typeInput]="'tel'"
-        ></app-input>
-        <button class="btn bg-green-500 text-white hover:bg-green-700">
-          Sign Up @if (isLoading) {
-          <span> <i class="fas fa-spin fa-spinner text-white"></i></span>
-          }
-        </button>
+<div
+  class="w-full bg-surface-default dark:bg-surface-dark grid shadow-sm lg:grid-cols-2 lg:w-[70%] gap-10 p-10 rounded-2xl lg:justify-center lg:items-center mx-auto"
+>
+  <div class="hidden lg:block lg:h-[80%]">
+    <img src="./images/sign.png" class="w-full h-full rounded-2xl" alt="sign" />
+  </div>
+  <div class="w-full">
+    <h1 class="text-3xl text-prose-default dark:text-prose-dark font-bold text-center mb-5">
+      {{ 'AUTH.SIGNUP' | translate }}
+    </h1>
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()">
+      <app-input
+        [control]="registerForm.get('name')"
+        [idInput]="'name'"
+        [label]="'AUTH.USERNAME' | translate"
+        [typeInput]="'text'"
+      ></app-input>
+      <app-input
+        [control]="registerForm.get('email')"
+        [idInput]="'email'"
+        [label]="'AUTH.USEREMAIL' | translate"
+        [typeInput]="'email'"
+      ></app-input>
+      <app-input
+        [control]="registerForm.get('password')"
+        [idInput]="'password'"
+        [label]="'AUTH.PASSWORD' | translate"
+      ></app-input>
+      <app-input
+        [control]="registerForm.get('rePassword')"
+        [idInput]="'rePassword'"
+        [label]="'AUTH.REPASSWORD' | translate"
+      ></app-input>
+      <app-input
+        [control]="registerForm.get('phone')"
+        [idInput]="'phone'"
+        [label]="'AUTH.PHONE' | translate"
+        [typeInput]="'tel'"
+      ></app-input>
+      <button class="btn">
+        {{ 'AUTH.SIGN' | translate }} @if (isLoading) {
+        <span> <i class="fas fa-spin fa-spinner"></i></span>
+        }
+      </button>
 
-        <div class="flex justify-between items-center">
-          <span class="mt-6 block text-center"
-            >If You have Account ?
-            <a class="text-green-900 font-bold cursor-pointer p-2" routerLink="/login">
-              Sign In</a
-            ></span
+      <div class="md:flex justify-between items-center">
+        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
+          {{ 'AUTH.IFYOUHAVEANACCOUNT' | translate }}
+          <a
+            class="font-bold cursor-pointer p-2 text-primary-default dark:text-primary-dark"
+            routerLink="/login"
           >
-          <span class="mt-6 block text-center">
-            <a class="text-green-900 font-bold cursor-pointer p-2" routerLink="/forget-password">
-              Forget Password</a
-            ></span
+            {{ 'AUTH.SIGNIN' | translate }}</a
           >
-        </div>
-      </form>
-    </div>
+        </span>
+        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
+          <a
+            class="font-bold cursor-pointer p-2 text-primary-default dark:text-primary-dark"
+            routerLink="/forget-password"
+          >
+            {{ 'AUTH.FORGETPASSWORD' | translate }}</a
+          >
+        </span>
+      </div>
+    </form>
   </div>
 </div>

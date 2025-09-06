@@ -1,19 +1,59 @@
 {
-  "E-COMMERCE": "التجارة الإلكترونية",
-  "HOME": "الرئيسية",
-  "CART": "السلة",
-  "PRODUCTS": "المنتجات",
-  "CATEGORIES": "الأقسام",
-  "BRANDS": "الماركات",
-  "SIGN OUT": "خروج",
-  "SIGN IN": "دخول",
-  "REGISTER": "تسجيل",
-  "LANGUAGE": "اللغة",
-  "ENGLISH": "الإنجليزية",
-  "ARABIC": "العربية",
-  "ShopPopularCategories":"تصفح الفئات الشائعة",
-  "ShopPopularProducts":"تصفح المنتجات الشائعة",
-  "AllProducts":"عرض كافة المنتجات",
-  "PRODUCTDETAILS":"تفاصيل المنتج"
+"NAVBAR": {
+"E-COMMERCE": "التجارة الإلكترونية",
+"HOME": "الرئيسية",
+"CART": "عربة التسوق",
+"PRODUCTS": "المنتجات",
+"CATEGORIES": "الفئات",
+"BRANDS": "العلامات التجارية",
+"SIGNOUT": "تسجيل الخروج",
+"ENGLISH": "الإنجليزية",
+"ARABIC": "العربية"
+},
+"HOME": {
+"ShopPopularCategories": "تسوق الفئات الأكثر مبيعاً",
+"ShopPopularProducts": "تسوق المنتجات الأكثر مبيعاً"
+},
+"AUTH": {
+"SIGNIN": "تسجيل الدخول",
+"SIGN": "تسجيل",
+"SIGNUP": "إنشاء حساب",
+  "IFYOUDAN'THAVEANACCOUNT":"هل ليس لديك حساب ؟ ",
+  "IFYOUHAVEANACCOUNT":"هل لديك حساب ؟ ",
 
+"REGISTER": "تسجيل حساب",
+"USERNAME": "اسم المستخدم",
+"USEREMAIL": "البريد الإلكتروني",
+  "PHONE":"رقم الموبايل",
+
+"PASSWORD": "كلمة المرور",
+  "NEWPASSWORD":"كلمة المرور الجديدة",
+
+"REPASSWORD": "تأكيد كلمة المرور",
+"FORGETPASSWORD": "نسيت كلمة المرور",
+"RESETPASSWORD": "إعادة تعيين كلمة المرور",
+"RESETCODE": "رمز إعادة التعيين"
+},
+"PHONE":"",
+"LANGUAGE": "اللغة",
+"PRODUCTS": {
+"AllProducts": "جميع المنتجات",
+"PRODUCTDETAILS": "تفاصيل المنتج"
+},
+"PAGINATION": {
+"NEXT": "التالي",
+"PREVIOUS": "السابق"
+},
+"errors": {
+    "required": "لا يمكن ترك هذا الحقل فارغًا",
+    "minlength": " يجب أن يكون على الأقل 3 أحرف",
+    "maxlength": " لا يمكن أن يكون أكثر من 20 حرفًا",
+    "email": "يرجى إدخال بريد إلكتروني صالح",
+    "pattern": {
+      "password": "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل",
+      "phone": "يرجى إدخال رقم هاتف مصري صالح"
+    },
+    "mismatch": "كلمتا المرور غير متطابقتين",
+    "default": "التنسيق غير صحيح"
+  }
 }

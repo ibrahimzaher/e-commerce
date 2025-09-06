@@ -1,47 +1,49 @@
-<div class="bg-gray-100 flex justify-center items-center overflow-hidden p-5 min-h-screen">
-  <div
-    class="w-full grid bg-white/90 shadow-2xl lg:grid-cols-2 lg:w-[70%] gap-10 p-10 border-2 rounded-2xl border-green-500 lg:justify-center lg:items-center mx-auto"
-  >
-    <div class="hidden lg:block">
-      <img
-        src="./images/sign.png"
-        class="w-full h-full rounded-2xl border-2 border-green-500"
-        alt="sign"
-      />
-    </div>
-    <div class="w-full">
-      <h1 class="text-green-500 text-4xl font-bold text-center mb-5">LOG IN</h1>
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <app-input
-          [control]="loginForm.get('email')"
-          [idInput]="'email'"
-          [label]="'User Email'"
-          [typeInput]="'email'"
-        ></app-input>
-        <app-input
-          [control]="loginForm.get('password')"
-          [idInput]="'password'"
-          [label]="'Password'"
-        ></app-input>
-        <button (click)="login()" class="btn bg-green-500 text-white hover:bg-green-700">
-          Log In @if (isLoading) {
-          <span> <i class="fas fa-spin fa-spinner text-white"></i></span>
-          }
-        </button>
-        <div class="flex justify-between items-center">
-          <span class="mt-6 block text-center"
-            >If You don't have Account ?
-            <a class="text-green-900 font-bold cursor-pointer p-2" routerLink="/register">
-              SignUp</a
-            ></span
+<div
+  class="w-full bg-surface-default dark:bg-surface-dark grid shadow-sm lg:grid-cols-2 lg:w-[70%] gap-10 p-10 rounded-2xl lg:justify-center lg:items-center mx-auto"
+>
+  <div class="hidden lg:block">
+    <img src="./images/sign.png" class="w-full h-full rounded-2xl border-2" alt="sign" />
+  </div>
+  <div class="w-full">
+    <h1 class="text-3xl text-prose-default dark:text-prose-dark font-bold text-center mb-5">
+      {{ 'AUTH.SIGNIN' | translate }}
+    </h1>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <app-input
+        [control]="loginForm.get('email')"
+        [idInput]="'email'"
+        [label]="'AUTH.USEREMAIL' | translate"
+        [typeInput]="'email'"
+      ></app-input>
+      <app-input
+        [control]="loginForm.get('password')"
+        [idInput]="'password'"
+        [label]="'AUTH.PASSWORD' | translate"
+      ></app-input>
+      <button (click)="login()" class="btn">
+        {{ 'AUTH.SIGN' | translate }} @if (isLoading) {
+        <span> <i class="fas fa-spin fa-spinner"></i></span>
+        }
+      </button>
+      <div class="md:flex justify-between items-center">
+        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
+          {{ "AUTH.IFYOUDAN'THAVEANACCOUNT" | translate }}
+          <a
+            class="font-bold cursor-pointer p-2 text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark"
+            routerLink="/register"
           >
-          <span class="mt-6 block text-center">
-            <a class="text-green-900 font-bold cursor-pointer p-2" routerLink="/forget-password">
-              Forget Password</a
-            ></span
+            {{ 'AUTH.SIGNUP' | translate }}
+          </a>
+        </span>
+        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
+          <a
+            class="font-bold cursor-pointer p-2 text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark"
+            routerLink="/forget-password"
           >
-        </div>
-      </form>
-    </div>
+            {{ 'AUTH.FORGETPASSWORD' | translate }}
+          </a>
+        </span>
+      </div>
+    </form>
   </div>
 </div>

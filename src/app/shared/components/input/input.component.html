@@ -3,8 +3,9 @@
     [for]="idInput"
     class="main-label"
     [class]="{
-              'text-green-500':control?.valid,
+              'text-primary-default':control?.valid,
               'text-red-700':control?.invalid && control?.touched,
+              'dark:text-red-400':control?.invalid && control?.touched,
             }"
     >{{ label }}</label
   >
@@ -17,38 +18,42 @@
       [formControl]="control"
       [readonly]="readonly"
       [class]="{
-              'border-green-500':control?.valid,
+              'border-primary-default':control?.valid,
               'border-red-700':control?.invalid && control?.touched,
+              'dark:border-red-400':control?.invalid && control?.touched,
             }"
+      [dir]="langService.lang.value === 'ar' ? 'rtl' : 'ltr'"
+      [class.text-right]="langService.lang.value === 'ar'"
+      [class.text-left]="langService.lang.value !== 'ar'"
     />
     @if (idInput==='password'||idInput==='rePassword') {
     <span (click)="flag = !flag" class="absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer">
       @if (flag) {
-      <i class="fas fa-eye text-gray-600"></i>
+      <i class="fas fa-eye text-prose-default dark:text-prose-dark"></i>
       }@else {
-      <i class="fas fa-eye-slash text-gray-600"></i>
+      <i class="fas fa-eye-slash text-prose-default dark:text-prose-dark"></i>
       }
     </span>
     }
   </div>
   @if (control?.errors && control?.touched) {
-  <ul class="bg-red-100 list-disc list-inside p-2 rounded-sm text-sm mt-1 text-red-700">
+  <ul class="bg-red-200 list-disc list-inside p-2 rounded-sm text-sm mt-1 text-res">
     @if (control?.hasError('required')) {
-    <li>{{ label }} is Required</li>
+    <li>{{ 'errors.required' | translate }}</li>
     } @else if (control?.hasError('minlength')) {
-    <li>{{ label }} must be at least 3 characters</li>
+    <li>{{ 'errors.minlength' | translate }}</li>
     } @else if (control?.hasError('maxlength')) {
-    <li>{{ label }} cannot be more than 20 characters</li>
+    <li>{{ 'errors.maxlength' | translate }}</li>
     } @else if (control?.hasError('email')) {
-    <li>Please enter a valid email address</li>
+    <li>{{ 'errors.email' | translate }}</li>
     } @else if (control?.hasError('pattern')) { @if (idInput==='password') {
-    <li>Password must contain: At least 6 characters</li>
+    <li>{{ 'errors.pattern.password' | translate }}</li>
     } @else if (idInput==='phone') {
-    <li>Please enter a valid Egyptian phone number</li>
+    <li>{{ 'errors.pattern.phone' | translate }}</li>
     } } @else if (control?.hasError('mismatch')) {
-    <li>Passwords do not match</li>
+    <li>{{ 'errors.mismatch' | translate }}</li>
     } @else {
-    <li>Format is Incorrect</li>
+    <li>{{ 'errors.default' | translate }}</li>
     }
   </ul>
   }

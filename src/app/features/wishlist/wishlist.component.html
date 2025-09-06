@@ -1,17 +1,21 @@
-@if (products.length>0) {
-<section class="w-[90%] mt-5 m-auto py-5">
-  <h1 class="text-4xl text-green-500 text-center mb-10" data-aos="fade-in">My WishliST</h1>
+<section class="py-10">
+  @if (products.length>0) {
+  <h1
+    class="text-4xl text-primary-default hover:text-primary-dark font-semibold dark:text-prose-dark dark:hover:text-prose-dark-hover text-center mb-10"
+    data-aos="fade-in"
+  >
+    My WishliST
+  </h1>
   <div
-    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 justify-center items-center"
+    class="grid grid-cols-1 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5"
   >
     @for (product of products ; track product._id) {
     <app-product
       [product]="product"
-      data-aos="fade-in"
-      [attr.data-aos-delay]="$index * 200"
+      data-aos="fadeup"
+      [attr.data-aos-delay]="$index * 10"
     ></app-product>
     }
   </div>
+  }
 </section>
-
-}

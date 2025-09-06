@@ -17,8 +17,8 @@ html {
     density: 0,
   ));
   @include mat.progress-bar-overrides((
-  active-indicator-color: #068145, // neon green
-  track-color: #7fd7ad,            // dark blue-gray
+  active-indicator-color: var( --color-primary-default),
+  track-color: var(--color-prose-dark),            
 ));
 }
 
@@ -26,8 +26,8 @@ html.dark {
   
 
   @include mat.progress-bar-overrides((
-  active-indicator-color:blue, // neon green
-  track-color: rgb(134, 134, 216),            // dark blue-gray
+   active-indicator-color: var(--color-prose-dark),
+  track-color: var(--color-prose-hover),    
 ));
 
 }

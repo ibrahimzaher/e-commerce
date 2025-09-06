@@ -1,14 +1,16 @@
-<nav class="fixed w-full z-50 dark:bg-black/80 bg-white shadow">
-  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2">
+<nav class="fixed w-full z-50 shadow bg-surface-default dark:bg-surface-dark">
+  <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 px-2">
     <a routerLink="/">
-      <span class="text-2xl font-semibold whitespace-nowrap dark:text-white">{{
-        'E-COMMERCE' | translate
-      }}</span>
+      <span
+        class="text-2xl font-semibold whitespace-nowrap text-primary-default hover:text-primary-dark-hover dark:text-surface-default dark:hover:text-surface-hover"
+      >
+        {{ 'NAVBAR.E-COMMERCE' | translate }}
+      </span>
     </a>
     <button
       data-collapse-toggle="navbar-default"
       type="button"
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-200 rounded-lg lg:hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-200"
+      class="btn w-fit lg:hidden"
       aria-controls="navbar-default"
       aria-expanded="false"
     >
@@ -37,59 +39,45 @@
         class="font-medium flex flex-col p-2 space-y-4 lg:p-0 mt-4 rounded-lg lg:flex-row lg:space-y-0 lg:space-x-2 rtl:space-x-reverse lg:mt-0"
       >
         <li>
-          <a
-            routerLink="/home"
-            class="dark:text-white px-5 py-1 hover:bg-green-500 rounded-sm transition duration-200 block font-semibold"
-            routerLinkActive="bg-green-500"
-            aria-current="page"
-          >
-            {{ 'HOME' | translate }}
+          <a routerLink="/home" class="link" routerLinkActive="link-active" aria-current="page">
+            {{ 'NAVBAR.HOME' | translate }}
           </a>
         </li>
-
         <li>
-          <a
-            routerLink="/products"
-            class="dark:text-white px-5 py-1 hover:bg-green-500 rounded-sm transition duration-200 block font-semibold"
-            routerLinkActive="bg-green-500"
-            aria-current="page"
-          >
-            {{ 'PRODUCTS' | translate }}
+          <a routerLink="/products" class="link" routerLinkActive="link-active" aria-current="page">
+            {{ 'NAVBAR.PRODUCTS' | translate }}
           </a>
         </li>
         <li>
           <a
             routerLink="/categories"
-            class="dark:text-white px-5 py-1 hover:bg-green-500 rounded-sm transition duration-200 block font-semibold"
-            routerLinkActive="bg-green-500 "
+            class="link"
+            routerLinkActive="link-active"
             aria-current="page"
           >
-            {{ 'CATEGORIES' | translate }}
+            {{ 'NAVBAR.CATEGORIES' | translate }}
           </a>
         </li>
         <li>
-          <a
-            routerLink="/brands"
-            class="dark:text-white px-5 py-1 hover:bg-green-500 rounded-sm transition duration-200 block font-semibold"
-            routerLinkActive="bg-green-500"
-            aria-current="page"
-          >
-            {{ 'BRANDS' | translate }}
+          <a routerLink="/brands" class="link" routerLinkActive="link-active" aria-current="page">
+            {{ 'NAVBAR.BRANDS' | translate }}
           </a>
         </li>
       </ul>
+
       <ul class="flex flex-row items-center gap-2 justify-center">
         <li class="me-2">
           <button
             type="button"
             routerLink="/wishlist"
-            class="relative cursor-pointer inline-flex items-center p-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
+            routerLinkActive="link-active"
+            class="relative cursor-pointer link"
           >
-            <i class="fas fa-bookmark"></i>
+            <i class="fas fa-bookmark text-2xl"></i>
             <span class="sr-only">Wish List</span>
             @if (count) {
             <div
-              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-3 -end-2 dark:border-gray-900"
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold rounded-full -top-2 bg-primary-default text-prose-dark dark:bg-surface-default dark:text-prose-default shadow-sm -end-3"
             >
               {{ count }}
             </div>
@@ -100,47 +88,46 @@
           <button
             type="button"
             routerLink="/cart"
-            class="relative cursor-pointer inline-flex items-center p-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
+            routerLinkActive="link-active text-prose-dark"
+            class="relative cursor-pointer link"
           >
-            <i class="fas fa-cart-plus"></i>
-            <span class="sr-only"> {{ 'CART' | translate }} </span>
-
+            <i class="fas fa-cart-arrow-down text-2xl"></i>
+            <span class="sr-only">Cart</span>
+            @if (count) {
             <div
-              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 border-2 border-white rounded-full -top-3 -end-2 dark:border-gray-900"
+              class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold rounded-full -top-2 bg-primary-default text-prose-dark dark:bg-surface-default dark:text-prose-default shadow-sm -end-3"
             >
-              0
+              {{ count }}
             </div>
+            }
           </button>
         </li>
-        @if($isDark | async){
-        <li
-          (click)="setLightMode()"
-          class="rounded-full size-12 flex cursor-pointer hover:bg-green-600 transition duration-300 items-center justify-center"
-        >
-          <i class="fas fa-sun text-2xl text-white cursor-pointer"></i>
+
+        @if(isDark$ | async){
+        <li (click)="setLightMode()" class="link cursor-pointer">
+          <i class="fas fa-sun text-2xl"></i>
         </li>
         }@else {
-        <li
-          (click)="setDarkMode()"
-          class="rounded-full size-12 flex items-center hover:bg-green-600 transition duration-300 cursor-pointer justify-center"
-        >
-          <i class="fas fa-moon text-2xl text-black"></i>
+        <li (click)="setDarkMode()" class="link cursor-pointer">
+          <i class="fas fa-moon text-2xl"></i>
         </li>
         }
-        <li class="relative z-20">
-          <button (click)="toggleLangBox()" class="btn">
-            {{ 'LANGUAGE' | translate }}
+
+        <li class="flex gap-2">
+          @if (lang$ |async; as lang) { @if (lang=='en') {
+          <button (click)="changeLang('ar')" class="btn">
+            {{ 'NAVBAR.ARABIC' | translate }}
           </button>
-          <div
-            #langBox
-            class="absolute end-1/4 top-full hidden flex-col px-5 py-2 dark:bg-green-800 bg-green-600 rounded-[4px] mt-1"
-          >
-            <button (click)="changeLang('en')" class="btn">{{ 'ENGLISH' | translate }}</button>
-            <button (click)="changeLang('ar')" class="btn">{{ 'ARABIC' | translate }}</button>
-          </div>
+          } @else {
+          <button (click)="changeLang('en')" class="btn">
+            {{ 'NAVBAR.ENGLISH' | translate }}
+          </button>
+
+          }}
         </li>
+
         <li>
-          <button (click)="signOut()" class="btn">{{ 'SIGN OUT' | translate }}</button>
+          <button (click)="signOut()" class="btn">{{ 'NAVBAR.SIGNOUT' | translate }}</button>
         </li>
       </ul>
     </div>

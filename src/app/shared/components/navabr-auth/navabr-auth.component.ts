@@ -1,26 +1,25 @@
-import { AuthService } from './../../../core/auth/services/auth/auth.service';
-import { AsyncPipe, isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild, PLATFORM_ID } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '../../../core/auth/services/auth/auth.service';
 import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
 import { LangService } from '../../../core/services/lang/lang.service';
-import { ThemeService } from './../../../core/services/theme/theme.service';
+import { ThemeService } from '../../../core/services/theme/theme.service';
 import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, AsyncPipe, TranslatePipe],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  selector: 'app-navabr-auth',
+  imports: [RouterLink, AsyncPipe, TranslatePipe],
+  templateUrl: './navabr-auth.component.html',
+  styleUrl: './navabr-auth.component.css',
 })
-export class NavbarComponent implements OnInit {
+export class NavabrAuthComponent implements OnInit {
   constructor(private flowbiteService: FlowbiteService) {}
   private readonly themeService = inject(ThemeService);
   private readonly langService = inject(LangService);
-  private readonly wishlistService = inject(WishlistService);
   private readonly PLATFORM_ID = inject(PLATFORM_ID);
   private readonly authService = inject(AuthService);
   lang$: Observable<string> = this.langService.lang.asObservable();
@@ -30,9 +29,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
-    });
-    this.wishlistService.wishlistIds$.subscribe({
-      next: (res) => (this.count = res.length),
     });
   }
 
