@@ -9,7 +9,7 @@ export const toasterInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     tap((event: HttpEvent<any>) => {
       if (['POST', 'PUT', 'DELETE'].includes(req.method) && event instanceof HttpResponse) {
-        const message = event.body?.message || 'Operation successful!';
+        const message = event.body?.message || event.body.status || 'Operation successful!';
         console.log(event);
 
         toastr.success(message, 'Success');

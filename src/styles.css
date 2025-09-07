@@ -15,21 +15,32 @@
   --color-secondary-dark: #0e7490;
   --color-secondary-dark-hover: #0891b2;
 
-  /* For Background */
   --color-surface-default: #ffffff;
   --color-surface-hover: #f9fafb;
   --color-surface-dark: #111827;
   --color-surface-dark-hover: #1f2937;
 
-  /* For Text Content */
   --color-prose-default: #1f2937;
   --color-prose-hover: #374151;
   --color-prose-dark: #f3f4f6;
   --color-prose-dark-hover: #d1d5db;
-  --color-red-700: oklch(0.505 0.213 27.518);
-  --color-red-200: oklch(0.885 0.062 18.334);
-  --color-red-400: oklch(0.704 0.191 22.216);
+
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-400: #f87171;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
   --color-gold: #f59e0b;
+  --color-green-100: #d1fae5;
+  --color-green-200: #a7f3d0;
+  --color-green-800: #065f46;
+  --color-green-900: #064e3b;
+
+  --color-yellow-100: #fef3c7;
+  --color-yellow-200: #fde68a;
+  --color-yellow-800: #78350f;
+  --color-yellow-900: #78350f;
 }
 @layer components {
   .btn {

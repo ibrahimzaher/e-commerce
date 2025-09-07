@@ -5,11 +5,19 @@
   >
     {{ 'PRODUCTS.AllProducts' | translate }}
   </h1>
+  <div class="w-[80%] mx-auto">
+    <app-input
+      [control]="searchControl"
+      [idInput]="'search'"
+      [label]="'Search by name'"
+      [typeInput]="'search'"
+    ></app-input>
+  </div>
   <div
     class="grid grid-cols-1 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5"
   >
-    @for (product of products | paginate: { id: 'foo', itemsPerPage: pageSize, currentPage: p,
-    totalItems: total }; track product._id) {
+    @for (product of products|search:searchControl.value| paginate: { id: 'foo', itemsPerPage:
+    pageSize, currentPage: p, totalItems: total }; track product._id ) {
     <app-product [product]="product" data-aos="fadeup" [attr.data-aos-delay]="$index * 10" />
     }
   </div>

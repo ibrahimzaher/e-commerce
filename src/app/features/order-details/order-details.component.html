@@ -1,0 +1,154 @@
+<section
+  class="max-w-6xl mx-auto bg-surface-default dark:bg-surface-dark p-6 rounded-2xl shadow my-10"
+>
+  <h1
+    class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary-default dark:text-prose-dark"
+  >
+    {{ 'orderDetails' | translate }}
+  </h1>
+
+  <div
+    class="mb-6 p-5 bg-surface-hover dark:bg-surface-dark-hover rounded-lg shadow-sm text-prose-default dark:text-prose-dark"
+  >
+    <h2 class="font-semibold text-lg mb-2">{{ 'userInformation' | translate }}</h2>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'name' | translate }}:</strong> {{ order.user.name }}
+    </p>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'email' | translate }}:</strong> {{ order.user.email }}
+    </p>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order.user.phone }}
+    </p>
+  </div>
+
+  <div
+    class="mb-6 p-5 bg-surface-hover dark:bg-surface-dark-hover rounded-lg shadow-sm text-prose-default dark:text-prose-dark"
+  >
+    <h2 class="font-semibold text-lg mb-2">{{ 'shippingAddress' | translate }}</h2>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'city' | translate }}:</strong> {{ order.shippingAddress.city }}
+    </p>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order.shippingAddress.phone }}
+    </p>
+    <p class="mb-2">
+      <strong class="me-2">{{ 'details' | translate }}:</strong> {{ order.shippingAddress.details }}
+    </p>
+  </div>
+
+  <div
+    class="mb-6 p-5 bg-surface-hover dark:bg-surface-dark-hover rounded-lg shadow-sm flex flex-col md:flex-row gap-4"
+  >
+    <div>
+      <p>
+        <strong class="text-prose-default me-2 dark:text-prose-dark"
+          >{{ 'paymentMethod' | translate }}:</strong
+        >
+        <span
+          class="px-3 py-1 rounded-full text-xs font-semibold"
+          [ngClass]="{
+            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200':
+              order.paymentMethodType === 'cash',
+            'bg-primary-default text-white dark:bg-primary-dark': order.paymentMethodType === 'card'
+          }"
+        >
+          {{ order.paymentMethodType === 'cash' ? ('cash' | translate) : ('card' | translate) }}
+        </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <strong class="text-prose-default me-2 dark:text-prose-dark"
+          >{{ 'paymentStatus' | translate }}:</strong
+        >
+        <span
+          class="px-3 py-1 rounded-full text-xs font-semibold"
+          [ngClass]="{
+            'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200': !order.isPaid,
+            'bg-primary-default text-white dark:bg-primary-dark': order.isPaid
+          }"
+        >
+          {{ order.isPaid ? ('paid' | translate) : ('unpaid' | translate) }}
+        </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <strong class="text-prose-default me-2 dark:text-prose-dark"
+          >{{ 'deliveryStatus' | translate }}:</strong
+        >
+        <span
+          class="px-3 py-1 rounded-full text-xs font-semibold"
+          [ngClass]="{
+            'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':
+              !order.isDelivered,
+            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': order.isDelivered
+          }"
+        >
+          {{ order.isDelivered ? ('delivered' | translate) : ('pending' | translate) }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="font-semibold text-lg mb-4 text-prose-default dark:text-prose-dark">
+      {{ 'products' | translate }}
+    </h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      @for(item of order.cartItems;track $index){
+      <div
+        class="flex gap-4 p-4 rounded-lg shadow-sm items-center bg-surface-hover dark:bg-surface-dark-hover text-prose-default dark:text-prose-dark"
+      >
+        <img
+          [src]="item.product.imageCover"
+          alt="{{ item.product.title }}"
+          class="w-24 h-24 object-cover rounded-lg"
+        />
+        <div class="flex flex-col">
+          <h3 class="font-medium text-lg">{{ item.product.title }}</h3>
+          <p class="my-1">
+            <strong class="me-2">{{ 'quantity' | translate }}:</strong> {{ item.count }}
+          </p>
+          <p class="my-1">
+            <strong class="me-2">{{ 'price' | translate }}:</strong>
+            {{ item.price | currency : 'EGP' }}
+          </p>
+          <p class="my-1">
+            <strong class="me-2">{{ 'category' | translate }}:</strong>
+            {{ item.product.category.name }}
+          </p>
+          <p class="my-1">
+            <strong class="me-2">{{ 'brand' | translate }}:</strong>
+            {{ item.product.brand.name }}
+          </p>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div
+    class="p-5 rounded-lg shadow-sm bg-surface-hover dark:bg-surface-dark-hover text-prose-default dark:text-prose-dark"
+  >
+    <h2 class="font-semibold text-lg mb-2">{{ 'orderSummary' | translate }}</h2>
+    <p class="my-2">
+      <strong class="me-2">{{ 'shippingPrice' | translate }}:</strong>
+      {{ order.shippingPrice | currency : 'EGP' }}
+    </p>
+    <p class="my-2">
+      <strong class="me-2">{{ 'tax' | translate }}:</strong> {{ order.taxPrice | currency : 'EGP' }}
+    </p>
+    <p class="my-2">
+      <strong class="me-2">{{ 'total' | translate }}:</strong>
+      {{ order.totalOrderPrice | currency : 'EGP' }}
+    </p>
+    <p class="my-2">
+      <strong class="me-2">{{ 'orderDate' | translate }}:</strong>
+      {{ order.createdAt | date : 'medium' }}
+    </p>
+  </div>
+</section>

@@ -4,16 +4,26 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Product } from '../../core/models/product.interface';
 import { ProductComponent } from '../../shared/components/product/product.component';
 import { ProductsService } from './../../core/services/products/products.service';
+import { InputComponent } from '../../shared/components/input/input.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SearchPipe } from '../../shared/pipes/search-pipe';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductComponent, NgxPaginationModule, TranslateModule],
+  imports: [
+    NgxPaginationModule,
+    TranslateModule,
+    InputComponent,
+    ReactiveFormsModule,
+    SearchPipe,
+    ProductComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
   private readonly ProductsService = inject(ProductsService);
-
+  searchControl!: FormControl;
   products: Product[] = [];
   p: number = 1;
   pageSize!: number;
@@ -21,6 +31,7 @@ export class ProductsComponent implements OnInit {
   apiPage: number = 1;
 
   ngOnInit(): void {
+    this.searchControl = new FormControl('');
     this.loadMoreProducts(this.apiPage);
   }
 

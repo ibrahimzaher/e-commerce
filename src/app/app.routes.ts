@@ -16,6 +16,9 @@ import { authGuard } from './core/guard/auth-guard';
 import { isLoginGuard } from './core/guard/is-login-guard';
 import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
 import { WishlistComponent } from './features/wishlist/wishlist.component';
+import { OrdersComponent } from './features/orders/orders.component';
+import { OrderDetailsComponent } from './features/order-details/order-details.component';
+import { orderdetailsGuard } from './core/guard/orderdetails-guard';
 
 export const routes: Routes = [
   {
@@ -92,7 +95,7 @@ export const routes: Routes = [
         title: 'Shopping Cart ',
       },
       {
-        path: 'checkout',
+        path: 'checkout/:cart_id',
         component: CheckoutComponent,
         title: 'Checkout ',
       },
@@ -100,6 +103,17 @@ export const routes: Routes = [
         path: 'wishlist',
         component: WishlistComponent,
         title: 'Shopping Wish List ',
+      },
+      {
+        path: 'allorders',
+        component: OrdersComponent,
+        title: 'Shopping Orders ',
+      },
+      {
+        path: 'orderdetails/:id',
+        component: OrderDetailsComponent,
+        title: 'Shopping Orders ',
+        canActivate: [orderdetailsGuard],
       },
     ],
   },

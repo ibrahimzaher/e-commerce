@@ -1,0 +1,183 @@
+<section class="bg-surface-default dark:bg-surface-dark p-5 shadow my-10 rounded-2xl">
+  <h1 class="text-primary-default dark:text-prose-dark font-bold text-center text-4xl mt-5 mb-10">
+    {{ 'MY_ORDERS' | translate }}
+  </h1>
+
+  @if (orders.length > 0 && isData) {
+
+  <div class="grid gap-4 sm:grid-cols-1 lg:hidden">
+    @for (order of orders; track order._id) {
+    <div
+      class="bg-white dark:bg-prose-default rounded-xl shadow-md p-5 flex flex-col space-y-3 border border-prose-dark dark:border-prose-default"
+    >
+      <div class="flex justify-between">
+        <span class="font-bold text-prose-default dark:text-prose-dark"
+          >{{ 'ORDER_ID' | translate }}:</span
+        >
+        <span class="text-prose-default dark:text-prose-dark">{{ order._id }}</span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-prose-default dark:text-prose-dark"
+          >{{ 'DELIVERY_STATUS' | translate }}:</span
+        >
+        <span
+          class="px-2 py-1 text-xs font-semibold rounded-full text-prose-dark dark:text-prose-default"
+          [class]="{ 'bg-green-500': order.isDelivered, 'bg-yellow-500': !order.isDelivered }"
+        >
+          {{ order.isDelivered ? ('DELIVERED' | translate) : ('PENDING' | translate) }}
+        </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-prose-default dark:text-prose-dark"
+          >{{ 'PAYMENT_STATUS' | translate }}:</span
+        >
+        <span
+          class="px-2 py-1 text-xs font-semibold rounded-full text-prose-dark dark:text-prose-default"
+          [class]="{ 'bg-green-500': order.isPaid, 'bg-red-500': !order.isPaid }"
+        >
+          {{ order.isPaid ? ('PAID' | translate) : ('UNPAID' | translate) }}
+        </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-prose-default dark:text-prose-dark"
+          >{{ 'PAYMENT_METHOD' | translate }}:</span
+        >
+        <span
+          class="px-2 py-1 text-xs font-semibold rounded-full text-prose-dark dark:text-prose-default"
+          [class]="{
+            'bg-green-500': order.paymentMethodType==`cash`,
+            'bg-red-500': order.paymentMethodType==`card`,
+          }"
+        >
+          {{ order.paymentMethodType === 'cash' ? ('CASH' | translate) : ('CARD' | translate) }}
+        </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-gray-700 dark:text-gray-200"
+          >{{ 'ITEMS_COUNT' | translate }}:</span
+        >
+        <span class="text-gray-700 dark:text-gray-200">{{ order.cartItems.length }}</span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-gray-700 dark:text-gray-200">{{ 'TOTAL' | translate }}:</span>
+        <span class="text-gray-700 dark:text-gray-200">{{
+          order.totalOrderPrice | currency : 'EGP'
+        }}</span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="font-bold text-gray-700 dark:text-gray-200"
+          >{{ 'ORDER_DATE' | translate }}:</span
+        >
+        <span class="text-gray-700 dark:text-gray-200">{{
+          order.createdAt | date : 'medium'
+        }}</span>
+      </div>
+
+      <div class="flex justify-end">
+        <button class="btn" [routerLink]="['/orderdetails', order._id]">
+          {{ 'VIEW_DETAILS' | translate }}
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="hidden lg:block">
+    <table
+      class="min-w-full text-sm text-left rtl:text-right border border-prose-dark dark:border-prose-default rounded-xl shadow-md"
+    >
+      <thead
+        class="text-xs uppercase bg-surface-default dark:bg-prose-default text-primary-default dark:text-prose-dark text-center border-b border-prose-dark dark:border-prose-dark"
+      >
+        <tr>
+          <th class="px-6 py-4 font-bold">{{ 'ORDER_ID' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'DELIVERY_STATUS' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'PAYMENT_STATUS' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'PAYMENT_METHOD' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'ITEMS_COUNT' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'TOTAL' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'ORDER_DATE' | translate }}</th>
+          <th class="px-6 py-4 font-bold">{{ 'ACTIONS' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (order of orders; track order._id) {
+        <tr
+          class="odd:bg-surface-default text-center even:bg-surface-hover dark:odd:bg-surface-dark-hover dark:even:bg-surface-dark-hover/50 border-b border-prose-dark dark:border-prose-default"
+        >
+          <td class="px-6 py-4 font-medium text-prose-default dark:text-prose-dark">
+            {{ order._id }}
+          </td>
+
+          <td class="px-6 py-4">
+            <span
+              class="px-2 py-1 text-xs font-semibold rounded-full"
+              [ngClass]="{
+                'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200':
+                  order.isDelivered,
+                'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':
+                  !order.isDelivered
+              }"
+            >
+              {{ order.isDelivered ? ('DELIVERED' | translate) : ('PENDING' | translate) }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4">
+            <span
+              class="px-2 py-1 text-xs font-semibold rounded-full"
+              [ngClass]="{
+                'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': order.isPaid,
+                'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200': !order.isPaid
+              }"
+            >
+              {{ order.isPaid ? ('PAID' | translate) : ('UNPAID' | translate) }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4">
+            <span
+              class="px-2 py-1 text-xs font-semibold rounded-full"
+              [ngClass]="{
+                'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200':
+                  order.paymentMethodType == 'cash',
+                'bg-primary-default text-white dark:bg-primary-dark':
+                  order.paymentMethodType == 'card'
+              }"
+            >
+              {{ order.paymentMethodType === 'cash' ? ('CASH' | translate) : ('CARD' | translate) }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4 text-prose-default dark:text-prose-dark">
+            {{ order.cartItems.length }}
+          </td>
+          <td class="px-6 py-4 text-prose-default dark:text-prose-dark">
+            {{ order.totalOrderPrice | currency : 'EGP' }}
+          </td>
+          <td class="px-6 py-4 text-prose-default dark:text-prose-dark">
+            {{ order.createdAt | date : 'medium' }}
+          </td>
+          <td class="px-6 py-4">
+            <button class="btn" [routerLink]="['/orderdetails', order._id]">
+              {{ 'VIEW_DETAILS' | translate }}
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  } @else if(orders.length == 0 && isData) {
+  <p class="text-center text-prose-default font-medium dark:text-prose-dark text-4xl py-5">
+    {{ 'NO_ORDERS' | translate }}
+  </p>
+  }
+</section>

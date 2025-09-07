@@ -1,1 +1,46 @@
-<p>checkout works!</p>
+<section
+  class="shadow-sm rounded-2xl lg:w-[70%] lg:mx-auto bg-surface-default mt-5 lg:mt-19 dark:bg-surface-dark"
+>
+  <div
+    class="flex justify-center flex-col rounded-2xl bg-surface-default w-full dark:bg-surface-dark shadow p-5 items-center"
+  >
+    <h1 class="text-center mb-5 text-3xl font-bold text-primary-default dark:text-prose-dark">
+      Shipping Address
+    </h1>
+    <form class="mt-5 w-full" [formGroup]="address" (ngSubmit)="submit()">
+      <app-input
+        [control]="address.get('shippingAddress')?.get('details')"
+        [idInput]="'details'"
+        [label]="'details'"
+        [typeInput]="'text'"
+      ></app-input>
+      <app-input
+        [control]="address.get('shippingAddress')?.get('phone')"
+        [idInput]="'phone'"
+        [label]="'phone'"
+        [typeInput]="'tel'"
+      ></app-input>
+      <app-input
+        [control]="address.get('shippingAddress')?.get('city')"
+        [idInput]="'city'"
+        [label]="'city'"
+        [typeInput]="'text'"
+      ></app-input>
+      <div class="flex justify-between items-end gap-5">
+        <div class="w-full mx-auto">
+          <label for="paymentMethod" class="main-label"> Payment Method </label>
+          <select
+            [formControl]="paymentMethod"
+            id="paymentMethod"
+            name="paymentMethod"
+            class="main-input"
+          >
+            <option class="rounded-2xl" value="cash" selected>Cash on Delivery</option>
+            <option class="rounded-2xl" value="card">Credit / Debit Card</option>
+          </select>
+        </div>
+        <button class="btn">Order</button>
+      </div>
+    </form>
+  </div>
+</section>

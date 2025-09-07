@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment.development';
 import { JwtPayload } from './../../../../../../node_modules/jwt-decode/build/esm/index.d';
 import { StorageService } from './../../../services/storage/storage.service';
+import { MyJwtPaylod } from '../../models/my-jwt-paylod.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,7 @@ export class AuthService {
   private readonly httpClient = inject(HttpClient);
   private readonly storageService = inject(StorageService);
   private readonly router = inject(Router);
-  login = new BehaviorSubject<JwtPayload | null>(null);
-  constructor() {
-    this.login.next(this.decodeToken());
-  }
+  constructor() {}
   signUp(data: object): Observable<any> {
     return this.httpClient.post(environment.baseUrl + `auth/signup`, data);
   }
@@ -35,7 +33,6 @@ export class AuthService {
   }
   signOut() {
     this.removeToken();
-    this.login.next(null);
     this.router.navigate(['login'], { replaceUrl: true });
   }
   setToken(tokenValue: string) {
@@ -54,8 +51,8 @@ export class AuthService {
       },
     });
   }
-  decodeToken(): JwtPayload | null {
-    let userData: JwtPayload | null = null;
+  decodeToken(): MyJwtPaylod | null {
+    let userData: MyJwtPaylod | null = null;
     try {
       userData = jwtDecode(this.storageService.getItem('token')!);
     } catch (error) {
