@@ -8,13 +8,24 @@
     "BRANDS": "العلامات التجارية",
     "SIGNOUT": "تسجيل الخروج",
     "ENGLISH": "إنجليزي",
-    "ARABIC": "عربي"
+    "ARABIC": "عربي",
+"MY_ORDERS": "طلباتي"
+  },
+   "BRANDS": {
+    "TITLE": "جميع العلامات التجارية",
+    "SEARCH": "البحث بالاسم"
+  },
+    "CATEGORIES": {
+    "TITLE": "كل الأقسام والتصنيفات الفرعية",
+    "CATEGORY": "القسم",
+    "SUBCATEGORIES": "التصنيفات الفرعية"
   },
   "HOME": {
     "ShopPopularCategories": "تسوق الفئات الشائعة",
     "ShopPopularProducts": "تسوق المنتجات الشائعة"
   },
   "MyWishliST": " المنتجات المفضلة",
+      "EMPTY": "لا يوجد أي عناصر في المفضلة",
   "PRODUCT": {
     "AddToCart": "أضف إلى العربة"
   },
@@ -38,7 +49,9 @@
   "LANGUAGE": "اللغة",
   "PRODUCTS": {
     "AllProducts": "كل المنتجات",
-    "PRODUCTDETAILS": "تفاصيل المنتج"
+    "PRODUCTDETAILS": "تفاصيل المنتج",
+    "SEARCH": "البحث بالاسم"
+
   },
   "PAGINATION": {
     "NEXT": "التالي",

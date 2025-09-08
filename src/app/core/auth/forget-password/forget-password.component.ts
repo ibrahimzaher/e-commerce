@@ -59,9 +59,7 @@ export class ForgetPasswordComponent implements OnInit {
     if (this.resetPasswordForm.valid) {
       this.authService.resetPassword(this.resetPasswordForm.value).subscribe({
         next: (res) => {
-          this.authService.setToken(res.token);
-          this.authService.decodeToken();
-          this.router.navigate(['/home']);
+          console.log(res);
         },
       });
     }

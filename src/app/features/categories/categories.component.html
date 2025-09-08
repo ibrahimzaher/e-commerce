@@ -1,1 +1,51 @@
-<p>categories works!</p>
+@if (groupedCategories.length > 0) {
+<section class="bg-prose-dark dark:bg-prose-default p-5 my-5 rounded-2xl shadow">
+  <h1
+    class="text-primary-default leading-15 dark:text-prose-dark font-bold text-4xl text-center p-5"
+  >
+    {{ 'CATEGORIES.TITLE' | translate }}
+  </h1>
+
+  @for (cat of groupedCategories; track cat._id) {
+  <div>
+    <h2 class="text-2xl font-bold text-primary-default mb-5 dark:text-prose-dark">
+      {{ 'CATEGORIES.CATEGORY' | translate }}
+    </h2>
+
+    <div
+      class="flex bg-surface-default/90 dark:bg-prose-hover/50 rounded-2xl shadow p-5 items-center gap-4 w-full mx-auto mb-4"
+    >
+      <img
+        [src]="cat.image"
+        alt="{{ cat.name }}"
+        class="w-48 h-48 rounded-lg shadow p-2 dark:bg-prose-hover/20 object-contain"
+      />
+      <h3 class="text-2xl font-bold text-primary-default dark:text-prose-dark">
+        {{ cat.name }}
+      </h3>
+    </div>
+
+    @if (cat.subcategories.length > 0) {
+    <h2 class="text-2xl font-bold text-primary-default mb-5 dark:text-prose-dark">
+      {{ 'CATEGORIES.SUBCATEGORIES' | translate }}
+    </h2>
+    }
+
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 gap-3">
+      @for (sub of cat.subcategories; track sub._id) {
+      <li
+        class="p-3 bg-prose-dark dark:bg-prose-hover rounded-lg shadow-sm hover:shadow-md transition"
+      >
+        <p class="font-medium text-surface-dark dark:text-surface-default">
+          {{ sub.name }}
+        </p>
+        <span class="text-xs text-surface-dark dark:text-surface-default">
+          {{ sub.slug }}
+        </span>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</section>
+}

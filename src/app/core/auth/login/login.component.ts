@@ -38,9 +38,7 @@ export class LoginComponent {
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe({
           next: (res) => {
-            this.authService.setToken(res.token);
-            this.authService.decodeToken();
-            this.router.navigate(['/home']);
+            console.log(res);
           },
         });
     } else {

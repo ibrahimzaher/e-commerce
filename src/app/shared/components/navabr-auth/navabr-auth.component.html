@@ -38,30 +38,24 @@
       <ul class="flex justify-end flex-1 gap-2">
         @if(isDark$ | async){
         <li (click)="setLightMode()" class="link cursor-pointer">
-          <i class="fas fa-sun text-2xl"></i>
+          <i class="fas fa-sun text-lg"></i>
         </li>
         }@else {
         <li (click)="setDarkMode()" class="link cursor-pointer">
-          <i class="fas fa-moon text-2xl"></i>
+          <i class="fas fa-moon text-lg"></i>
         </li>
         }
 
-        <li class="flex gap-2">
-          @if (lang$ |async; as lang) { @if (lang=='en') {
-          <button
-            (click)="changeLang('ar')"
-            class="btn text-primary-default dark:text-surface-default hover:bg-primary-default hover:text-surface-default font-bold bg-transparent"
-          >
-            {{ 'NAVBAR.ARABIC' | translate }}
+        <li>
+          @if (lang$ | async; as lang) { @if (lang == 'en') {
+          <button (click)="changeLang('ar')" class="link cursor-pointer" title="العربية">
+            <i class="fas fa-globe"></i> اللغة العربية
           </button>
           } @else {
-          <button
-            (click)="changeLang('en')"
-            class="btn text-primary-default dark:text-surface-default hover:bg-primary-default hover:text-surface-default font-bold bg-transparent"
-          >
-            {{ 'NAVBAR.ENGLISH' | translate }}
+          <button (click)="changeLang('en')" class="link cursor-pointer" title="English">
+            <i class="fas fa-globe"></i> EN
           </button>
-          }}
+          } }
         </li>
       </ul>
     </div>

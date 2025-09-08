@@ -62,11 +62,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (res) => {
             console.log(res);
-            if ((res.message = 'success')) {
-              this.authService.setToken(res.token);
-              console.log(this.authService.decodeToken());
-              this.router.navigate(['home'], { replaceUrl: true });
-            }
           },
         });
     } else {

@@ -1,1 +1,41 @@
-<p>brands works!</p>
+@if (brands && brands.length > 0) {
+<section class="bg-prose-dark mt-14 rounded-2xl dark:bg-prose-default">
+  <h1 class="text-4xl font-bold p-5 text-center text-primary-default dark:text-prose-dark">
+    {{ 'BRANDS.TITLE' | translate }}
+  </h1>
+
+  <div class="w-[70%] mx-auto">
+    <app-input
+      [control]="searchControl"
+      [idInput]="'BRANDS.SEARCH' | translate"
+      [label]="'BRANDS.SEARCH' | translate"
+      [typeInput]="'search'"
+    ></app-input>
+  </div>
+
+  @if (brands.length > 0) {
+  <div
+    class="grid sm:grid-cols-2 p-5 m-5 shadow md:grid-cols-3 gap-5 lg:grid-cols-5 xl:grid-cols-6"
+  >
+    @for (item of brands | search: searchControl.value; track item._id) {
+    <div
+      data-aos="zoom-in"
+      [attr.data-aos-delay]="$index * 10"
+      class="bg-prose-dark dark:bg-prose-default p-5 rounded-lg shadow-sm group hover:scale-105 transition-all duration-300 cursor-pointer"
+    >
+      <figure class="overflow-hidden rounded-2xl">
+        <img
+          [src]="item.image"
+          class="w-full h-fit object-contain rounded-lg shadow-sm group-hover:scale-110 transition-all duration-300"
+          [alt]="item.name"
+        />
+      </figure>
+      <h3 class="text-primary-default font-bold text-xl text-center dark:text-prose-dark mt-3">
+        {{ item.name }}
+      </h3>
+    </div>
+    }
+  </div>
+  }
+</section>
+}

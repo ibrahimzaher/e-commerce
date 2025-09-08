@@ -1,4 +1,3 @@
-import { finalize } from 'rxjs';
 import { Product } from './../../../core/models/product.interface';
 import { ProductsService } from './../../../core/services/products/products.service';
 import { Component, inject, OnInit } from '@angular/core';

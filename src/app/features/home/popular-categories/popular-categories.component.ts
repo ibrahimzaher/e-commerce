@@ -2,7 +2,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Component, inject, OnDestroy } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { finalize, Observable, Subscription } from 'rxjs';
-import { CategoriesService } from '../../../core/services/categories/categories.service';
+import { CategoriesService } from '../../categories/services/categories/categories.service';
 
 @Component({
   selector: 'app-popular-categories',
@@ -28,7 +28,7 @@ export class PopularCategoriesComponent implements OnDestroy {
   }
   getCategories(): void {
     this.categoriesService
-      .getCategories()
+      .getAllCategories()
 
       .subscribe({
         next: (res) => {

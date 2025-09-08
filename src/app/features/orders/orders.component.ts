@@ -16,11 +16,13 @@ import { OrdersService } from './services/orders.service';
 export class OrdersComponent {
   private readonly authService = inject(AuthService);
   private readonly ordersService = inject(OrdersService);
-  user!: MyJwtPaylod;
+  user!: MyJwtPaylod | null;
   orders: Order[] = [];
   isData = false;
   ngOnInit(): void {
-    this.user = this.authService.decodeToken()!;
+    this.user = this.authService.user.getValue();
+    console.log(this.user);
+
     this.getAllOrders();
   }
   getAllOrders() {

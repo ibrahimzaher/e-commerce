@@ -8,13 +8,20 @@
   "BRANDS":"Brands",
   "SIGNOUT":"Sign Out",
   "ENGLISH": "EN",
-  "ARABIC": "AR"
+  "ARABIC": "AR",
+"MY_ORDERS": "Orders"
+
+  },
+  "BRANDS": {
+    "TITLE": "All Brands",
+    "SEARCH": "Search by name"
   },
   "HOME":{
    "ShopPopularCategories":"Shop Popular Categories",
   "ShopPopularProducts":"Shop Popular Products"
   },
   "MyWishliST":"My WishliST",
+      "EMPTY": "Not Have Any Wishlist",
   "PRODUCT":{
 "AddToCart":"Add To Cart"
   },
@@ -39,14 +46,20 @@
 
   "PRODUCTS":{
     "AllProducts":"All Products",
-    "PRODUCTDETAILS":"ProductDetails"
+    "PRODUCTDETAILS":"ProductDetails",
+     "SEARCH": "Search by name"
+  },
+  "CATEGORIES": {
+    "TITLE": "All Categories and SubCategories",
+    "CATEGORY": "Category",
+    "SUBCATEGORIES": "Sub Categories"
   },
   "PAGINATION":{
    "NEXT":"",
   "PREVIOUS":""
   },
     "errors": {
-    "required": "is required",
+    "required": "Input is required",
     "minlength": "must be at least 3 characters",
     "maxlength": "cannot be more than 20 characters",
     "email": "Please enter a valid email address",
