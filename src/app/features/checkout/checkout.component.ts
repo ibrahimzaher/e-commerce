@@ -13,10 +13,11 @@ import {
 import { InputComponent } from '../../shared/components/input/input.component';
 import { log } from 'console';
 import { switchMap } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, InputComponent, TranslatePipe],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })

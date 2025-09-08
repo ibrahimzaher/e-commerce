@@ -136,6 +136,9 @@
   "updateEmail": "تغيير البريد الإلكتروني",
   "updatePhone": "تغيير رقم الهاتف",
   "update": "تغيير",
+   "cashOnDelivery": "الدفع عند الاستلام",
+  "creditDebitCard": "بطاقة ائتمان / خصم مباشر",
+  "order": "اطلب الآن",
     "updatePassword":"تغيير كلمة المرور"
 
 }

@@ -10,6 +10,8 @@ import { LangService } from '../../../core/services/lang/lang.service';
 import { ThemeService } from './../../../core/services/theme/theme.service';
 import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
 import { CartService } from '../../../features/cart/services/cart.service';
+import { JwtPayload } from 'jwt-decode';
+import { MyJwtPaylod } from '../../../core/auth/models/my-jwt-paylod.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +26,6 @@ export class NavbarComponent implements OnInit {
   private readonly wishlistService = inject(WishlistService);
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
-
   lang$: Observable<string> = this.langService.lang.asObservable();
   count: number | null = null;
   isDark$: Observable<boolean> = this.themeService.observable();

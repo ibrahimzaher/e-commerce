@@ -146,19 +146,22 @@
             data-dropdown-toggle="user-dropdown"
             data-dropdown-placement="bottom"
           >
-            <i class="fas fa-user text-2xl dark:text-prose-dark text-primary-default"></i>
+            <i class="fas fa-user text-2xl dark:text-prose-dark text-primary-default"> </i>
           </button>
-          <!-- Dropdown menu -->
           <div
             class="z-50 hidden my-4 text-base list-none bg-prose-dark divide-y divide-prose-dark rounded-lg shadow-sm dark:bg-prose-hover dark:divide-prose-default"
             id="user-dropdown"
           >
             <ul class="py-2" aria-labelledby="user-menu-button">
               <li>
-                <a routerLink="/changepassword" class="link cursor-pointer">Change Password</a>
+                <a routerLink="/changepassword" class="link cursor-pointer">{{
+                  'updatePassword' | translate
+                }}</a>
               </li>
               <li>
-                <a routerLink="/updateuser" class="link cursor-pointer">Update User Data</a>
+                <a routerLink="/updateuser" class="link cursor-pointer">{{
+                  'updateUser' | translate
+                }}</a>
               </li>
               <li>
                 <button (click)="signOut()" class="link cursor-pointer w-full">

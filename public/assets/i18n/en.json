@@ -135,6 +135,9 @@
   "updateEmail":"Update Email",
   "updatePhone":"Update Phone",
   "updateName":"Update Name",
+   "cashOnDelivery": "Cash on Delivery",
+  "creditDebitCard": "Credit / Debit Card",
+  "order": "Order",
   "updatePassword":"Update Password",
   "update":"Update"
 }
