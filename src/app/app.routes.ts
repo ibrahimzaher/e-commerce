@@ -19,6 +19,8 @@ import { WishlistComponent } from './features/wishlist/wishlist.component';
 import { OrdersComponent } from './features/orders/orders.component';
 import { OrderDetailsComponent } from './features/order-details/order-details.component';
 import { orderdetailsGuard } from './core/guard/orderdetails-guard';
+import { ChangePasswordComponent } from './features/change-password/change-password.component';
+import { UpdateUserComponent } from './features/update-user/update-user.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +95,16 @@ export const routes: Routes = [
         path: 'cart',
         component: CartComponent,
         title: 'Shopping Cart ',
+      },
+      {
+        path: 'changepassword',
+        component: ChangePasswordComponent,
+        title: 'Change Password ',
+      },
+      {
+        path: 'updateuser',
+        component: UpdateUserComponent,
+        title: 'Edit user Data',
       },
       {
         path: 'checkout/:cart_id',

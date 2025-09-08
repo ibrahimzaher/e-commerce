@@ -10,7 +10,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { InputComponent } from '../../../shared/components/input/input.component';
-import { log } from 'console';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 @Component({

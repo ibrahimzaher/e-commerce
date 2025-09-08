@@ -1,0 +1,76 @@
+<div class="bg-surface-default dark:bg-surface-dark p-10 my-5">
+  <div class="grid lg:grid-cols-3 gap-5">
+    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
+      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+        {{ 'updateName' | translate }}
+      </h1>
+      <form [formGroup]="nameUpdateForm" (ngSubmit)="update(nameUpdateForm)">
+        <app-input
+          [control]="nameUpdateForm.get('name')"
+          [idInput]="'name'"
+          [label]="'AUTH.USERNAME' | translate"
+          [typeInput]="'text'"
+        ></app-input>
+
+        <button class="btn">{{ 'update' | translate }}</button>
+      </form>
+    </div>
+    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
+      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+        {{ 'updateEmail' | translate }}
+      </h1>
+      <form [formGroup]="emailUpdateForm" (ngSubmit)="update(emailUpdateForm)">
+        <app-input
+          [control]="emailUpdateForm.get('email')"
+          [idInput]="'email'"
+          [label]="'AUTH.USEREMAIL' | translate"
+          [typeInput]="'email'"
+        ></app-input>
+
+        <button class="btn">{{ 'update' | translate }}</button>
+      </form>
+    </div>
+    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
+      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+        {{ 'updatePhone' | translate }}
+      </h1>
+      <form [formGroup]="phoneUpdateForm" (ngSubmit)="update(phoneUpdateForm)">
+        <app-input
+          [control]="phoneUpdateForm.get('phone')"
+          [idInput]="'phone'"
+          [label]="'AUTH.PHONE' | translate"
+          [typeInput]="'tel'"
+        ></app-input>
+
+        <button class="btn">{{ 'update' | translate }}</button>
+      </form>
+    </div>
+  </div>
+  <div class="w-full mt-5 bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
+    <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+      {{ 'updateUser' | translate }}
+    </h1>
+    <form [formGroup]="userUpdateForm" (ngSubmit)="update(userUpdateForm)">
+      <app-input
+        [control]="userUpdateForm.get('name')"
+        [idInput]="'name'"
+        [label]="'AUTH.USERNAME' | translate"
+        [typeInput]="'text'"
+      ></app-input>
+      <app-input
+        [control]="userUpdateForm.get('email')"
+        [idInput]="'email'"
+        [label]="'AUTH.USEREMAIL' | translate"
+        [typeInput]="'email'"
+      ></app-input>
+      <app-input
+        [control]="userUpdateForm.get('phone')"
+        [idInput]="'phone'"
+        [label]="'AUTH.PHONE' | translate"
+        [typeInput]="'tel'"
+      ></app-input>
+
+      <button class="btn">{{ 'update' | translate }}</button>
+    </form>
+  </div>
+</div>

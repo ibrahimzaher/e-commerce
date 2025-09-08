@@ -128,5 +128,14 @@
   "delivered": "تم التوصيل",
   "pending": "قيد الانتظار",
   "cash": "كاش",
-  "card": "بطاقة"
+  "card": "بطاقة",
+ 
+  "currentPassword": "كلمة المرور الحالية",
+  "updateUser": "تغيير بيانات المستخدم",
+    "updateName":"تغيير  المستخدم",
+  "updateEmail": "تغيير البريد الإلكتروني",
+  "updatePhone": "تغيير رقم الهاتف",
+  "update": "تغيير",
+    "updatePassword":"تغيير كلمة المرور"
+
 }

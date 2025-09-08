@@ -129,5 +129,12 @@
   "delivered": "Delivered",
   "pending": "Pending",
   "cash": "Cash",
-  "card": "Card"
+  "card": "Card",
+   "currentPassword":"Current Password",
+  "updateUser":"Update User Data",
+  "updateEmail":"Update Email",
+  "updatePhone":"Update Phone",
+  "updateName":"Update Name",
+  "updatePassword":"Update Password",
+  "update":"Update"
 }

@@ -134,12 +134,40 @@
           </button>
           } }
         </li>
-
-        <li>
-          <button (click)="signOut()" class="link cursor-pointer">
-            {{ 'NAVBAR.SIGNOUT' | translate }}
+        <!-- <li>
+          <i class="fa-solid fa-user"></i>
+        </li> -->
+        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            class="flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-prose-dark dark:focus:ring-prose-hover"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <i class="fas fa-user text-2xl dark:text-prose-dark text-primary-default"></i>
           </button>
-        </li>
+          <!-- Dropdown menu -->
+          <div
+            class="z-50 hidden my-4 text-base list-none bg-prose-dark divide-y divide-prose-dark rounded-lg shadow-sm dark:bg-prose-hover dark:divide-prose-default"
+            id="user-dropdown"
+          >
+            <ul class="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a routerLink="/changepassword" class="link cursor-pointer">Change Password</a>
+              </li>
+              <li>
+                <a routerLink="/updateuser" class="link cursor-pointer">Update User Data</a>
+              </li>
+              <li>
+                <button (click)="signOut()" class="link cursor-pointer w-full">
+                  {{ 'NAVBAR.SIGNOUT' | translate }}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </ul>
     </div>
   </div>
