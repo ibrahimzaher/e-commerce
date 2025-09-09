@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { Cart } from '../model/cart.interface';
 import { isPlatformBrowser } from '@angular/common';
