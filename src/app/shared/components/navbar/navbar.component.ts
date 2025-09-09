@@ -1,17 +1,15 @@
-import { AuthService } from './../../../core/auth/services/auth/auth.service';
-import { AsyncPipe, isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild, PLATFORM_ID } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { initFlowbite } from 'flowbite';
 import { Observable, Subscription } from 'rxjs';
 import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
 import { LangService } from '../../../core/services/lang/lang.service';
-import { ThemeService } from './../../../core/services/theme/theme.service';
-import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
 import { CartService } from '../../../features/cart/services/cart.service';
-import { JwtPayload } from 'jwt-decode';
-import { MyJwtPaylod } from '../../../core/auth/models/my-jwt-paylod.interface';
+import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
+import { AuthService } from './../../../core/auth/services/auth/auth.service';
+import { ThemeService } from './../../../core/services/theme/theme.service';
 
 @Component({
   selector: 'app-navbar',

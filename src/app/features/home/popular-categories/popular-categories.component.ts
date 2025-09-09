@@ -1,7 +1,7 @@
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Component, inject, OnDestroy } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { finalize, Observable, Subscription } from 'rxjs';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { Subscription } from 'rxjs';
 import { CategoriesService } from '../../categories/services/categories/categories.service';
 
 @Component({

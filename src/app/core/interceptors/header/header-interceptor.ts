@@ -1,6 +1,6 @@
+import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { StorageService } from './../../services/storage/storage.service';
-import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 
 export const headerInterceptor: HttpInterceptorFn = (req, next) => {
   const storageService = inject(StorageService);

@@ -1,10 +1,10 @@
-import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
-import { BrandsService } from './services/brands.service';
-import { Brand } from './models/brands-response.interface';
-import { SearchPipe } from '../../shared/pipes/search-pipe';
-import { InputComponent } from '../../shared/components/input/input.component';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { InputComponent } from '../../shared/components/input/input.component';
+import { SearchPipe } from '../../shared/pipes/search-pipe';
+import { Brand } from './models/brands-response.interface';
+import { BrandsService } from './services/brands.service';
 
 @Component({
   selector: 'app-brands',

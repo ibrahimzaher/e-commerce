@@ -1,6 +1,3 @@
-import { StorageService } from './../../services/storage/storage.service';
-import { finalize, Subscription } from 'rxjs';
-import { AuthService } from './../services/auth/auth.service';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -9,9 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputComponent } from '../../../shared/components/input/input.component';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { finalize, Subscription } from 'rxjs';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { StorageService } from './../../services/storage/storage.service';
+import { AuthService } from './../services/auth/auth.service';
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule, InputComponent, RouterLink, TranslatePipe],

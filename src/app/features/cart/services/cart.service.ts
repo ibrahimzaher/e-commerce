@@ -1,9 +1,9 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { Cart } from '../model/cart.interface';
-import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',

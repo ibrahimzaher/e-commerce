@@ -1,14 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../core/auth/services/auth/auth.service';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { InputComponent } from '../../shared/components/input/input.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AuthService } from '../../core/auth/services/auth/auth.service';
+import { InputComponent } from '../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-update-user',
@@ -46,7 +40,7 @@ export class UpdateUserComponent {
   update(fromGroup: FormGroup<any>) {
     if (fromGroup.valid) {
       this.authService.updateLoggedUserData(fromGroup.value).subscribe({
-        next: (res) => {},
+        next: () => {},
       });
     } else {
       fromGroup.markAllAsTouched();

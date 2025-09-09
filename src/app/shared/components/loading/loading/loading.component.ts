@@ -1,8 +1,8 @@
-import { Subscription, interval } from 'rxjs';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LoadingService } from './../../../../core/services/loading/loading.service';
 import { NgxSpinnerComponent } from 'ngx-spinner';
+import { interval, Subscription } from 'rxjs';
+import { LoadingService } from './../../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-loading',

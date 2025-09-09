@@ -1,10 +1,10 @@
-import { AuthService } from './../services/auth/auth.service';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputComponent } from '../../../shared/components/input/input.component';
 import { Router, RouterLink } from '@angular/router';
-import { finalize } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
+import { finalize } from 'rxjs';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { AuthService } from './../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',

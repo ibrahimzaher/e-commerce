@@ -1,11 +1,9 @@
-import { CartService } from './../cart/services/cart.service';
-import { ProductDetailsService } from './services/product-details/product-details.service';
+import { SlicePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs';
-import { Product } from '../../core/models/product.interface';
 import { TranslateModule } from '@ngx-translate/core';
-import { SlicePipe } from '@angular/common';
+import { Product } from '../../core/models/product.interface';
+import { CartService } from './../cart/services/cart.service';
 
 @Component({
   selector: 'app-product-details',

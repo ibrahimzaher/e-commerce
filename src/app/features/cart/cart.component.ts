@@ -1,10 +1,10 @@
-import { Subscription } from 'rxjs';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { CartService } from './services/cart.service';
-import { Cart } from './model/cart.interface';
-import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { Cart } from './model/cart.interface';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-cart',

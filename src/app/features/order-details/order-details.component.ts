@@ -1,9 +1,9 @@
-import { OrdersService } from './../orders/services/orders.service';
-import { Component, inject } from '@angular/core';
-import { Order } from '../orders/models/order.interface';
-import { ActivatedRoute } from '@angular/router';
 import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Order } from '../orders/models/order.interface';
+import { OrdersService } from './../orders/services/orders.service';
 
 @Component({
   selector: 'app-order-details',

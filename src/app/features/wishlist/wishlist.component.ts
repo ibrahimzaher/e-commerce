@@ -1,9 +1,9 @@
-import { Product } from '../../core/models/product.interface';
-import { WishlistService } from './servuces/wishlist.service';
 import { Component, inject } from '@angular/core';
-import { ProductComponent } from '../../shared/components/product/product.component';
-import { finalize, Observable } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { Product } from '../../core/models/product.interface';
+import { ProductComponent } from '../../shared/components/product/product.component';
+import { WishlistService } from './servuces/wishlist.service';
 
 @Component({
   selector: 'app-wishlist',

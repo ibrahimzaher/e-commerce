@@ -1,11 +1,11 @@
-import { Component, Input, inject } from '@angular/core';
-import { Product } from '../../../core/models/product.interface';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
-import { CartService } from '../../../features/cart/services/cart.service';
 import { CurrencyPipe } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Product } from '../../../core/models/product.interface';
+import { CartService } from '../../../features/cart/services/cart.service';
+import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
 
 @Component({
   selector: 'app-product',
@@ -33,10 +33,7 @@ export class ProductComponent {
     this.router.navigate(['/product', this.product._id, this.product.slug]);
   }
   addToCart() {
-    this.cartService.addProductToCart(this.product._id).subscribe({
-      next: (res) => console.log(res),
-      error: (error) => console.log(error),
-    });
+    this.cartService.addProductToCart(this.product._id).subscribe({});
   }
   toggleWishlistProduct() {
     if (this.productWishList.includes(this.product._id)) {

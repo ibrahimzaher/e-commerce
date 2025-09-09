@@ -1,19 +1,17 @@
-import { CartService } from './../cart/services/cart.service';
-import { CheckoutService } from './service/checkout.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputComponent } from '../../shared/components/input/input.component';
-import { log } from 'console';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { switchMap } from 'rxjs';
+import { InputComponent } from '../../shared/components/input/input.component';
+import { CartService } from './../cart/services/cart.service';
+import { CheckoutService } from './service/checkout.service';
 
 @Component({
   selector: 'app-checkout',

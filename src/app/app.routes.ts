@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
-import { BlankLayoutComponent } from './core/layouts/blank-layout/blank-layout.component';
-import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
+import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
 import { authGuard } from './core/guard/auth-guard';
 import { isLoginGuard } from './core/guard/is-login-guard';
 import { orderdetailsGuard } from './core/guard/orderdetails-guard';
-import { LoginComponent } from './core/auth/login/login.component';
-import { RegisterComponent } from './core/auth/register/register.component';
-import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
+import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
+import { BlankLayoutComponent } from './core/layouts/blank-layout/blank-layout.component';
 import { HomeComponent } from './features/home/home.component';
+import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
 
 export const routes: Routes = [
   {

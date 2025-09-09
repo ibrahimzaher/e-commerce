@@ -1,14 +1,13 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { initFlowbite } from 'flowbite';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/auth/services/auth/auth.service';
 import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
 import { LangService } from '../../../core/services/lang/lang.service';
 import { ThemeService } from '../../../core/services/theme/theme.service';
-import { WishlistService } from '../../../features/wishlist/servuces/wishlist.service';
-import { AsyncPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navabr-auth',

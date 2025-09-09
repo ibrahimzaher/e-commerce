@@ -1,9 +1,9 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductComponent } from '../../../shared/components/product/product.component';
 import { Product } from './../../../core/models/product.interface';
 import { ProductsService } from './../../../core/services/products/products.service';
-import { Component, inject, OnInit } from '@angular/core';
-import { ProductComponent } from '../../../shared/components/product/product.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-products',

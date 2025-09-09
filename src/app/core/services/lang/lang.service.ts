@@ -1,7 +1,7 @@
-import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { StorageService } from './../storage/storage.service';
 import { inject, Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
+import { StorageService } from './../storage/storage.service';
 
 @Injectable({
   providedIn: 'root',

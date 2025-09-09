@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Product } from '../../core/models/product.interface';
-import { ProductComponent } from '../../shared/components/product/product.component';
-import { ProductsService } from './../../core/services/products/products.service';
 import { InputComponent } from '../../shared/components/input/input.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ProductComponent } from '../../shared/components/product/product.component';
 import { SearchPipe } from '../../shared/pipes/search-pipe';
+import { ProductsService } from './../../core/services/products/products.service';
 
 @Component({
   selector: 'app-products',
@@ -43,7 +43,6 @@ export class ProductsComponent implements OnInit {
         this.total = res.results;
         this.apiPage++;
       },
-      error: (err) => console.log(err),
     });
   }
 

@@ -1,7 +1,7 @@
-import { LangService } from './../../../core/services/lang/lang.service';
-import { Component, inject, input, Input } from '@angular/core';
-import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, Input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LangService } from './../../../core/services/lang/lang.service';
 
 @Component({
   selector: 'app-input',

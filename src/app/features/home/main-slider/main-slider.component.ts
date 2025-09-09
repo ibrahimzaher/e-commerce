@@ -1,6 +1,6 @@
-import { TranslateService } from '@ngx-translate/core';
 import { Component, inject, OnDestroy } from '@angular/core';
-import { OwlOptions, CarouselModule } from 'ngx-owl-carousel-o';
+import { TranslateService } from '@ngx-translate/core';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
 
 @Component({

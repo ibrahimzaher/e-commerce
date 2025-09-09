@@ -1,7 +1,7 @@
 import { HttpEvent, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
-import { catchError, tap, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { catchError, tap, throwError } from 'rxjs';
 
 export const toasterInterceptor: HttpInterceptorFn = (req, next) => {
   const toastr = inject(ToastrService);
