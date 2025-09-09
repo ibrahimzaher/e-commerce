@@ -1,26 +1,14 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './core/layouts/blank-layout/blank-layout.component';
-import { LoginComponent } from './core/auth/login/login.component';
-import { RegisterComponent } from './core/auth/register/register.component';
-import { HomeComponent } from './features/home/home.component';
-import { BrandsComponent } from './features/brands/brands.component';
-import { CategoriesComponent } from './features/categories/categories.component';
-import { ProductDetailsComponent } from './features/product-details/product-details.component';
-import { CheckoutComponent } from './features/checkout/checkout.component';
-import { CartComponent } from './features/cart/cart.component';
-import { ProductsComponent } from './features/products/products.component';
-import { NotfoundComponent } from './features/notfound/notfound.component';
 import { productDetailsResolver } from './features/product-details/resolver/product-details.resolver';
 import { authGuard } from './core/guard/auth-guard';
 import { isLoginGuard } from './core/guard/is-login-guard';
-import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
-import { WishlistComponent } from './features/wishlist/wishlist.component';
-import { OrdersComponent } from './features/orders/orders.component';
-import { OrderDetailsComponent } from './features/order-details/order-details.component';
 import { orderdetailsGuard } from './core/guard/orderdetails-guard';
-import { ChangePasswordComponent } from './features/change-password/change-password.component';
-import { UpdateUserComponent } from './features/update-user/update-user.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { ForgetPasswordComponent } from './core/auth/forget-password/forget-password.component';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +16,7 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+
   {
     path: '',
     component: AuthLayoutComponent,
@@ -35,13 +24,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
+        title: 'Login',
         component: LoginComponent,
-        title: 'Login ',
       },
       {
         path: 'register',
+        title: 'Register',
         component: RegisterComponent,
-        title: 'Register ',
       },
       {
         path: 'forget-password',
@@ -50,89 +39,98 @@ export const routes: Routes = [
       },
     ],
   },
+
   {
     path: '',
-    canActivate: [authGuard],
     component: BlankLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'home',
+        title: 'Home',
         component: HomeComponent,
-        title: 'Home ',
       },
       {
         path: 'brands',
-        component: BrandsComponent,
-        title: 'Brands ',
+        title: 'Brands',
+        loadComponent: () =>
+          import('./features/brands/brands.component').then((c) => c.BrandsComponent),
       },
       {
         path: 'categories',
-        component: CategoriesComponent,
-        title: 'Categories ',
+        title: 'Categories',
+        loadComponent: () =>
+          import('./features/categories/categories.component').then((c) => c.CategoriesComponent),
       },
       {
         path: 'products',
-        component: ProductsComponent,
-        title: 'Products ',
+        title: 'Products',
+        loadComponent: () =>
+          import('./features/products/products.component').then((c) => c.ProductsComponent),
       },
       {
-        path: 'product/:id',
-        component: ProductDetailsComponent,
-        resolve: {
-          product: productDetailsResolver,
-        },
-        title: 'Product Details ',
-      },
-      {
-        path: 'product/:id/:slug',
-        component: ProductDetailsComponent,
-        resolve: {
-          product: productDetailsResolver,
-        },
-        title: 'Product Details ',
+        path: 'product/:id/:slug?',
+        title: 'Product Details',
+        loadComponent: () =>
+          import('./features/product-details/product-details.component').then(
+            (c) => c.ProductDetailsComponent
+          ),
+        resolve: { product: productDetailsResolver },
       },
       {
         path: 'cart',
-        component: CartComponent,
-        title: 'Shopping Cart ',
+        title: 'Shopping Cart',
+        loadComponent: () => import('./features/cart/cart.component').then((c) => c.CartComponent),
       },
       {
         path: 'changepassword',
-        component: ChangePasswordComponent,
-        title: 'Change Password ',
+        title: 'Change Password',
+        loadComponent: () =>
+          import('./features/change-password/change-password.component').then(
+            (c) => c.ChangePasswordComponent
+          ),
       },
       {
         path: 'updateuser',
-        component: UpdateUserComponent,
-        title: 'Edit user Data',
+        title: 'Edit User Data',
+        loadComponent: () =>
+          import('./features/update-user/update-user.component').then((c) => c.UpdateUserComponent),
       },
       {
         path: 'checkout/:cart_id',
-        component: CheckoutComponent,
-        title: 'Checkout ',
+        title: 'Checkout',
+        loadComponent: () =>
+          import('./features/checkout/checkout.component').then((c) => c.CheckoutComponent),
       },
       {
         path: 'wishlist',
-        component: WishlistComponent,
-        title: 'Shopping Wish List ',
+        title: 'Shopping Wish List',
+        loadComponent: () =>
+          import('./features/wishlist/wishlist.component').then((c) => c.WishlistComponent),
       },
       {
         path: 'allorders',
-        component: OrdersComponent,
-        title: 'Shopping Orders ',
+        title: 'Shopping Orders',
+        loadComponent: () =>
+          import('./features/orders/orders.component').then((c) => c.OrdersComponent),
       },
       {
         path: 'orderdetails/:id',
-        component: OrderDetailsComponent,
-        title: 'Shopping Orders ',
+        title: 'Shopping Orders',
+        loadComponent: () =>
+          import('./features/order-details/order-details.component').then(
+            (c) => c.OrderDetailsComponent
+          ),
         canActivate: [orderdetailsGuard],
       },
     ],
   },
 
+  // Not Found
   {
     path: '**',
-    component: NotfoundComponent,
-    title: 'Page Not Found ',
+    title: 'Page Not Found',
+    loadComponent: () =>
+      import('./features/notfound/notfound.component').then((c) => c.NotfoundComponent),
   },
 ];

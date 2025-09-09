@@ -62,14 +62,14 @@
 
 body {
   font-family: 'Edu NSW ACT Cursive', cursive;
-  /* font-family: Roboto, sans-serif; */
 }
-
-/* html,
-body {
-  height: 100%;
+.toast-top-right {
+  top: 70px !important;
+  position: fixed;
+  right: 5px;
 }
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-} */
+html[dir='rtl'] .toast-top-right {
+  left: 50px !important;
+  right: auto !important;
+  text-align: end;
+}

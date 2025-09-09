@@ -139,5 +139,10 @@
   "creditDebitCard": "Credit / Debit Card",
   "order": "Order",
   "updatePassword":"Update Password",
-  "update":"Update"
+  "update":"Update",
+   "404": {
+    "title": "404",
+    "message": "Page Not Found",
+    "button": "Go To Home"
+  }
 }
