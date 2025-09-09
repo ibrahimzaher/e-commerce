@@ -9,11 +9,7 @@
     <owl-carousel-o [options]="categoryOption">
       @for (slide of categories ; track slide._id) {
       <ng-template carouselSlide [id]="slide._id">
-        <div
-          data-aos="fade-right"
-          [attr.data-aos-delay]="$index * 50"
-          class="cursor-pointer overflow-hidden flex justify-center items-center flex-col"
-        >
+        <div class="cursor-pointer overflow-hidden flex justify-center items-center flex-col">
           <div class="size-[200px]">
             <img
               [src]="slide.image"
