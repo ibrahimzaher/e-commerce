@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { initFlowbite } from 'flowbite';
@@ -29,16 +29,27 @@ export class NavbarComponent implements OnInit {
   isDark$: Observable<boolean> = this.themeService.observable();
   subscription!: Subscription;
   countCart: number | undefined = undefined;
+  paltformId = inject(PLATFORM_ID);
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();
     });
-    this.wishlistService.wishlistIds$.subscribe({
-      next: (res) => (this.count = res.length),
-    });
-    this.cartService.cart$.subscribe({
-      next: (res) => (this.countCart = res?.numOfCartItems),
-    });
+    if (isPlatformBrowser(this.paltformId)) {
+      this.cartService.getUserLoggedCart().subscribe({
+        next: (res) => {
+          this.countCart = res.numOfCartItems;
+        },
+      });
+      this.cartService.cart$.subscribe({
+        next: (res) => (this.countCart = res?.numOfCartItems),
+      });
+      this.wishlistService.loadWishlist().subscribe((res) => {
+        this.count = res.data.length;
+      });
+      this.wishlistService.wishlistIds$.subscribe({
+        next: (res) => (this.count = res.length),
+      });
+    }
   }
 
   setDarkMode() {

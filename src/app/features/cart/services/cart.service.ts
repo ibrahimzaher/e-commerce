@@ -13,11 +13,7 @@ export class CartService {
   private readonly platformId = inject(PLATFORM_ID);
   cart: BehaviorSubject<Cart | null> = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cart.asObservable();
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.getUserLoggedCart().subscribe();
-    }
-  }
+  constructor() {}
   getUserLoggedCart(): Observable<Cart> {
     return this.httpClient.get<Cart>(environment.baseUrl + 'cart').pipe(
       tap((res) => {

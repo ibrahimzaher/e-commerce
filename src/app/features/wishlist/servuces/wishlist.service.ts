@@ -18,11 +18,7 @@ export class WishlistService {
   public readonly wishlistIds$ = this._wishlistIds.asObservable();
   public readonly wishlistProducts$ = this._wishlistProducts.asObservable();
 
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadWishlist().subscribe();
-    }
-  }
+  constructor() {}
 
   loadWishlist(): Observable<any> {
     return this.httpClient.get<{ data: Product[] }>(environment.baseUrl + 'wishlist').pipe(
