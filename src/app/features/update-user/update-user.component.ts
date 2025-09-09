@@ -46,9 +46,7 @@ export class UpdateUserComponent {
   update(fromGroup: FormGroup<any>) {
     if (fromGroup.valid) {
       this.authService.updateLoggedUserData(fromGroup.value).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
+        next: (res) => {},
       });
     } else {
       fromGroup.markAllAsTouched();

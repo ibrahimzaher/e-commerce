@@ -21,7 +21,6 @@ export class OrdersComponent {
   isData = false;
   ngOnInit(): void {
     this.user = this.authService.user.getValue();
-    console.log(this.user);
 
     this.getAllOrders();
   }
@@ -31,7 +30,6 @@ export class OrdersComponent {
         next: (res) => {
           this.isData = true;
           this.orders = res;
-          console.log(res[0]);
         },
       });
     }

@@ -16,7 +16,6 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     this.categoriesService.getGroupedCategories().subscribe((res) => {
       this.groupedCategories = res;
-      console.log(this.groupedCategories);
     });
   }
 }

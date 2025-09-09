@@ -59,9 +59,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         .signUp(this.registerForm.value)
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe({
-          next: (res) => {
-            console.log(res);
-          },
+          next: (res) => {},
         });
     } else {
       this.registerForm.markAllAsTouched();

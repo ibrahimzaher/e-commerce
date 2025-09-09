@@ -34,9 +34,7 @@ export class PopularCategoriesComponent implements OnDestroy {
         next: (res) => {
           this.categories = res.data;
         },
-        error: (err) => {
-          console.log(err);
-        },
+        error: (err) => {},
       });
   }
   changeOption(lang: string) {

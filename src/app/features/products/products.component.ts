@@ -38,7 +38,6 @@ export class ProductsComponent implements OnInit {
   loadMoreProducts(pageNumber: number) {
     this.ProductsService.getProductsPagination(pageNumber).subscribe({
       next: (res) => {
-        console.log(res);
         this.pageSize = res.metadata.limit;
         this.products = res.data;
         this.total = res.results;

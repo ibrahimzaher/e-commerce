@@ -32,14 +32,12 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      console.log(this.loginForm.value);
+
       this.authService
         .logIn(this.loginForm.value)
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe({
-          next: (res) => {
-            console.log(res);
-          },
+          next: (res) => {},
         });
     } else {
       this.loginForm.markAllAsTouched();

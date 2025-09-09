@@ -31,9 +31,7 @@ export class CheckoutComponent implements OnInit {
   paymentMethod!: FormControl;
   private readonly checkoutService = inject(CheckoutService);
   ngOnInit(): void {
-    console.log(this.cartid);
     this.initForm();
-    console.log(this.address);
   }
   initForm() {
     this.address = this.fb.group({
@@ -59,7 +57,6 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.checkoutService.checkoutSessionPayment(this.cartid, this.address.value).subscribe({
           next: (res) => {
-            console.log(res);
             window.open(res.session.url, '_self');
           },
         });

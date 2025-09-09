@@ -23,7 +23,6 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.cart$.subscribe({
         next: (res) => {
-          console.log(res);
           this.cart = res;
         },
       })

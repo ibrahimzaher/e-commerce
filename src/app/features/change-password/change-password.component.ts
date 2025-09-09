@@ -46,9 +46,7 @@ export class ChangePasswordComponent implements OnInit {
   submit() {
     if (this.passwordRecahngeForm.valid) {
       this.authService.updatePassword(this.passwordRecahngeForm.value).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
+        next: (res) => {},
       });
     } else {
       this.passwordRecahngeForm.markAllAsTouched();

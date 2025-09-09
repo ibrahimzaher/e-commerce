@@ -58,9 +58,7 @@ export class ForgetPasswordComponent implements OnInit {
   resetPassword() {
     if (this.resetPasswordForm.valid) {
       this.authService.resetPassword(this.resetPasswordForm.value).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
+        next: (res) => {},
       });
     }
   }
