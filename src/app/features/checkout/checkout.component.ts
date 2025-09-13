@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly casrtService = inject(CartService);
-  public cartid: string = this.activatedRoute.snapshot.paramMap.get('cart_id')!;
+  public cartid: Signal<string> = signal(this.activatedRoute.snapshot.paramMap.get('cart_id')!);
   address!: FormGroup;
   paymentMethod!: FormControl;
   private readonly checkoutService = inject(CheckoutService);
@@ -45,15 +45,15 @@ export class CheckoutComponent implements OnInit {
     if (this.address.valid) {
       if (this.paymentMethod.value == 'cash') {
         this.checkoutService
-          .creatCashOrder(this.cartid, this.address.value)
+          .creatCashOrder(this.cartid(), this.address.value)
           .pipe(switchMap(() => this.casrtService.getUserLoggedCart()))
           .subscribe({
-            next: (res) => {
+            next: () => {
               this.router.navigate(['/allorders']);
             },
           });
       } else {
-        this.checkoutService.checkoutSessionPayment(this.cartid, this.address.value).subscribe({
+        this.checkoutService.checkoutSessionPayment(this.cartid(), this.address.value).subscribe({
           next: (res) => {
             window.open(res.session.url, '_self');
           },

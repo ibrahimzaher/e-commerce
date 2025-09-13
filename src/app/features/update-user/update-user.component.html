@@ -1,7 +1,12 @@
-<div class="bg-surface-default dark:bg-surface-dark p-10 my-5">
+<section
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
+>
   <div class="grid lg:grid-cols-3 gap-5">
-    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
-      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+    <div class="w-full p-5 rounded-2xl">
+      <h1
+        class="text-3xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+      >
         {{ 'updateName' | translate }}
       </h1>
       <form [formGroup]="nameUpdateForm" (ngSubmit)="update(nameUpdateForm)">
@@ -15,8 +20,10 @@
         <button class="btn">{{ 'update' | translate }}</button>
       </form>
     </div>
-    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
-      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+    <div class="w-full p-5">
+      <h1
+        class="text-3xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+      >
         {{ 'updateEmail' | translate }}
       </h1>
       <form [formGroup]="emailUpdateForm" (ngSubmit)="update(emailUpdateForm)">
@@ -30,8 +37,10 @@
         <button class="btn">{{ 'update' | translate }}</button>
       </form>
     </div>
-    <div class="w-full bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
-      <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+    <div class="w-full p-5">
+      <h1
+        class="text-3xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+      >
         {{ 'updatePhone' | translate }}
       </h1>
       <form [formGroup]="phoneUpdateForm" (ngSubmit)="update(phoneUpdateForm)">
@@ -46,8 +55,10 @@
       </form>
     </div>
   </div>
-  <div class="w-full mt-5 bg-surface-hover p-5 rounded-2xl shadow dark:bg-surface-dark-hover">
-    <h1 class="text-3xl text-primary-default dark:text-prose-dark font-bold text-center mb-5">
+  <div class="w-full mt-5 p-5">
+    <h1
+      class="text-3xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+    >
       {{ 'updateUser' | translate }}
     </h1>
     <form [formGroup]="userUpdateForm" (ngSubmit)="update(userUpdateForm)">
@@ -73,4 +84,4 @@
       <button class="btn">{{ 'update' | translate }}</button>
     </form>
   </div>
-</div>
+</section>

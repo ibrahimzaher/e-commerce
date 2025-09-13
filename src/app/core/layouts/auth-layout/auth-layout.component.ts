@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavabrAuthComponent } from '../../../shared/components/navabr-auth/navabr-auth.component';
+import { NavabrAuthComponent } from './components/navabr-auth/navabr-auth.component';
 
 @Component({
   selector: 'app-auth-layout',

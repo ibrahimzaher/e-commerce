@@ -12,13 +12,13 @@
   >
     <h2 class="font-semibold text-lg mb-2">{{ 'userInformation' | translate }}</h2>
     <p class="mb-2">
-      <strong class="me-2">{{ 'name' | translate }}:</strong> {{ order.user.name }}
+      <strong class="me-2">{{ 'name' | translate }}:</strong> {{ order().user.name }}
     </p>
     <p class="mb-2">
-      <strong class="me-2">{{ 'email' | translate }}:</strong> {{ order.user.email }}
+      <strong class="me-2">{{ 'email' | translate }}:</strong> {{ order().user.email }}
     </p>
     <p class="mb-2">
-      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order.user.phone }}
+      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order().user.phone }}
     </p>
   </div>
 
@@ -27,13 +27,14 @@
   >
     <h2 class="font-semibold text-lg mb-2">{{ 'shippingAddress' | translate }}</h2>
     <p class="mb-2">
-      <strong class="me-2">{{ 'city' | translate }}:</strong> {{ order.shippingAddress.city }}
+      <strong class="me-2">{{ 'city' | translate }}:</strong> {{ order().shippingAddress.city }}
     </p>
     <p class="mb-2">
-      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order.shippingAddress.phone }}
+      <strong class="me-2">{{ 'phone' | translate }}:</strong> {{ order().shippingAddress.phone }}
     </p>
     <p class="mb-2">
-      <strong class="me-2">{{ 'details' | translate }}:</strong> {{ order.shippingAddress.details }}
+      <strong class="me-2">{{ 'details' | translate }}:</strong>
+      {{ order().shippingAddress.details }}
     </p>
   </div>
 
@@ -49,11 +50,12 @@
           class="px-3 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
             'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200':
-              order.paymentMethodType === 'cash',
-            'bg-primary-default text-white dark:bg-primary-dark': order.paymentMethodType === 'card'
+              order().paymentMethodType === 'cash',
+            'bg-primary-default text-white dark:bg-primary-dark':
+              order().paymentMethodType === 'card'
           }"
         >
-          {{ order.paymentMethodType === 'cash' ? ('cash' | translate) : ('card' | translate) }}
+          {{ order().paymentMethodType === 'cash' ? ('cash' | translate) : ('card' | translate) }}
         </span>
       </p>
     </div>
@@ -66,11 +68,11 @@
         <span
           class="px-3 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
-            'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200': !order.isPaid,
-            'bg-primary-default text-white dark:bg-primary-dark': order.isPaid
+            'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200': !order().isPaid,
+            'bg-primary-default text-white dark:bg-primary-dark': order().isPaid
           }"
         >
-          {{ order.isPaid ? ('paid' | translate) : ('unpaid' | translate) }}
+          {{ order().isPaid ? ('paid' | translate) : ('unpaid' | translate) }}
         </span>
       </p>
     </div>
@@ -84,11 +86,11 @@
           class="px-3 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
             'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':
-              !order.isDelivered,
-            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': order.isDelivered
+              !order().isDelivered,
+            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': order().isDelivered
           }"
         >
-          {{ order.isDelivered ? ('delivered' | translate) : ('pending' | translate) }}
+          {{ order().isDelivered ? ('delivered' | translate) : ('pending' | translate) }}
         </span>
       </p>
     </div>
@@ -99,7 +101,7 @@
       {{ 'products' | translate }}
     </h2>
     <div class="grid gap-4 md:grid-cols-2">
-      @for(item of order.cartItems;track $index){
+      @for(item of order().cartItems;track $index){
       <div
         class="flex gap-4 p-4 rounded-lg shadow-sm items-center bg-surface-hover dark:bg-surface-dark-hover text-prose-default dark:text-prose-dark"
       >
@@ -137,18 +139,19 @@
     <h2 class="font-semibold text-lg mb-2">{{ 'orderSummary' | translate }}</h2>
     <p class="my-2">
       <strong class="me-2">{{ 'shippingPrice' | translate }}:</strong>
-      {{ order.shippingPrice | currency : 'EGP' }}
+      {{ order().shippingPrice | currency : 'EGP' }}
     </p>
     <p class="my-2">
-      <strong class="me-2">{{ 'tax' | translate }}:</strong> {{ order.taxPrice | currency : 'EGP' }}
+      <strong class="me-2">{{ 'tax' | translate }}:</strong>
+      {{ order().taxPrice | currency : 'EGP' }}
     </p>
     <p class="my-2">
       <strong class="me-2">{{ 'total' | translate }}:</strong>
-      {{ order.totalOrderPrice | currency : 'EGP' }}
+      {{ order().totalOrderPrice | currency : 'EGP' }}
     </p>
     <p class="my-2">
       <strong class="me-2">{{ 'orderDate' | translate }}:</strong>
-      {{ order.createdAt | date : 'medium' }}
+      {{ order().createdAt | date : 'medium' }}
     </p>
   </div>
 </section>

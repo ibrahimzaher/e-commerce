@@ -1,10 +1,8 @@
 import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MyJwtPaylod } from '../../core/auth/models/my-jwt-paylod.interface';
-import { AuthService } from './../../core/auth/services/auth/auth.service';
-import { Order } from './models/order.interface';
+import { AuthService } from '../../core/auth/services/auth/auth.service';
 import { OrdersService } from './services/orders.service';
 
 @Component({
@@ -13,25 +11,27 @@ import { OrdersService } from './services/orders.service';
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
-export class OrdersComponent {
+export class OrdersComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly ordersService = inject(OrdersService);
-  user!: MyJwtPaylod | null;
-  orders: Order[] = [];
-  isData = false;
-  ngOnInit(): void {
-    this.user = this.authService.user.getValue();
 
+  user = this.authService.user;
+  orders = this.ordersService.orderSignal;
+  hasLoaded = signal(false);
+
+  ngOnInit(): void {
     this.getAllOrders();
   }
+
   getAllOrders() {
-    if (this.user) {
-      this.ordersService.getAllOrders(this.user.id).subscribe({
-        next: (res) => {
-          this.isData = true;
-          this.orders = res;
-        },
-      });
-    }
+    const id = this.user()?.id;
+    if (!id) return;
+
+    this.ordersService.getAllOrders(id).subscribe({
+      next: () => {
+        this.hasLoaded.set(true);
+      },
+      error: () => this.hasLoaded.set(true),
+    });
   }
 }

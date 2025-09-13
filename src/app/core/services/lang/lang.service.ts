@@ -1,6 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
 import { StorageService } from './../storage/storage.service';
 
 @Injectable({
@@ -9,10 +8,9 @@ import { StorageService } from './../storage/storage.service';
 export class LangService {
   private readonly translateService = inject(TranslateService);
   private readonly storageService = inject(StorageService);
-  lang: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  observable() {
-    return this.lang.asObservable();
-  }
+
+  private readonly _lang: WritableSignal<string> = signal('');
+  readonly lang = this._lang.asReadonly();
   init() {
     this.translateService.addLangs(['en', 'ar']);
 
@@ -23,10 +21,10 @@ export class LangService {
       this.translateService.setFallbackLang('en');
       if (lang === null) {
         this.translateService.use('en');
-        this.lang.next('en');
+        this._lang.set('en');
       } else {
         this.translateService.use(lang);
-        this.lang.next(lang);
+        this._lang.set(lang);
       }
     }
   }
@@ -35,7 +33,7 @@ export class LangService {
       this.storageService.setItem('lang', lang);
       document.documentElement.setAttribute('lang', lang);
       document.documentElement.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
-      this.lang.next(lang);
+      this._lang.set(lang);
     }
     this.translateService.setFallbackLang('en');
     this.translateService.use(lang);

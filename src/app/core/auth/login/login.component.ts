@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -12,13 +12,12 @@ import { AuthService } from './../services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   loginForm!: FormGroup;
-  isLoading: boolean = false;
-
+  isLoading: WritableSignal<boolean> = signal(false);
   ngOnInit(): void {
     this.initForm();
   }
@@ -28,16 +27,16 @@ export class LoginComponent {
       password: [null, [Validators.required, Validators.pattern(/^.{6,}$/)]],
     });
   }
-
   login() {
     if (this.loginForm.valid) {
-      this.isLoading = true;
-
+      this.isLoading.set(true);
       this.authService
         .logIn(this.loginForm.value)
-        .pipe(finalize(() => (this.isLoading = false)))
+        .pipe(finalize(() => this.isLoading.set(false)))
         .subscribe({
-          next: (res) => {},
+          next: () => {
+            this.router.navigate(['/home'], { replaceUrl: true });
+          },
         });
     } else {
       this.loginForm.markAllAsTouched();

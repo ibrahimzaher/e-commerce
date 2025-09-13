@@ -5,26 +5,19 @@
 @source "../node_modules/flowbite";
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
-  --color-primary-default: #3b82f6;
-  --color-primary-hover: #60a5fa;
-  --color-primary-dark: #1d4ed8;
-  --color-primary-dark-hover: #2563eb;
-
-  --color-secondary-default: #06b6d4;
-  --color-secondary-hover: #22d3ee;
-  --color-secondary-dark: #0e7490;
-  --color-secondary-dark-hover: #0891b2;
+  --color-primary-default: #14b8a6;
+  --color-primary-hover: #2dd4bf;
+  --color-primary-dark: #0f766e;
+  --color-primary-dark-hover: #0d9488;
 
   --color-surface-default: #ffffff;
-  --color-surface-hover: #f9fafb;
-  --color-surface-dark: #111827;
-  --color-surface-dark-hover: #1f2937;
-
+  --color-surface-hover: #f3f4f6;
+  --color-surface-dark: #1e293b;
+  --color-surface-dark-hover: #273449;
   --color-prose-default: #1f2937;
-  --color-prose-hover: #374151;
-  --color-prose-dark: #f3f4f6;
-  --color-prose-dark-hover: #d1d5db;
-
+  --color-prose-hover: #4b5563;
+  --color-prose-dark: #e2e8f0;
+  --color-prose-dark-hover: #cbd5e1;
   --color-red-100: #fee2e2;
   --color-red-200: #fecaca;
   --color-red-400: #f87171;
@@ -72,4 +65,56 @@ html[dir='rtl'] .toast-top-right {
   left: 50px !important;
   right: auto !important;
   text-align: end;
+}
+.ngx-spinner-overlay {
+  z-index: 500 !important;
+}
+.main-slider .owl-carousel .owl-stage-outer {
+  height: 30dvh;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.main-slider .owl-carousel .owl-item img {
+  border-radius: inherit;
+  height: 30dvh;
+  width: 100%;
+}
+
+.main-slider .owl-theme .owl-nav {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  transform: translateY(-50%);
+}
+.main-slider .owl-theme .owl-nav [class*='owl-'] {
+  background-color: var(--color-primary-default);
+  padding-block: 20px;
+  padding-inline: 10px;
+  transition: all 0.5s;
+  border-radius: 10px;
+}
+@media screen and (min-width: 800px) {
+  .main-slider .owl-theme .owl-nav [class*='owl-']:hover {
+    background-color: var(--color-primary-default);
+    padding-block: 25px;
+    padding-inline: 15px;
+  }
+}
+.main-slider .owl-theme .owl-dots {
+  position: relative;
+  bottom: -10px;
+}
+.main-slider .owl-theme .owl-dots .owl-dot span {
+  background-color: var(--color-primary-hover);
+}
+.main-slider .owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background-color: var(--color-primary-dark);
 }

@@ -1,4 +1,12 @@
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { finalize, tap } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputComponent } from '../../shared/components/input/input.component';
@@ -11,35 +19,41 @@ import { BrandsService } from './services/brands.service';
   imports: [SearchPipe, InputComponent, ReactiveFormsModule, TranslatePipe],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrandsComponent implements OnInit {
   private readonly brandsService = inject(BrandsService);
 
-  brands: Brand[] = [];
+  brands = signal<Brand[]>([]);
   searchControl = new FormControl('');
-
-  page = 1;
-  isLoading = false;
+  page = signal(1);
+  isLoading = signal(false);
+  hasMorePages = signal(true);
 
   ngOnInit(): void {
     this.loadBrands();
   }
 
   loadBrands() {
-    if (this.isLoading) return;
-    this.isLoading = true;
+    if (this.isLoading() || !this.hasMorePages()) return;
 
-    this.brandsService.getAllBrands(this.page).subscribe({
-      next: (res) => {
-        this.brands = [...this.brands, ...res.data];
-        if (res.metadata.numberOfPages == this.page) {
-          return;
-        }
-        this.page++;
-        this.isLoading = false;
-      },
-      error: () => (this.isLoading = false),
-    });
+    this.isLoading.set(true);
+
+    this.brandsService
+      .getAllBrands(this.page())
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (res) => {
+          this.brands.update((prev) => [...prev, ...res.data]);
+
+          // Check if we reached the last page
+          if (res.metadata.numberOfPages === this.page()) {
+            this.hasMorePages.set(false); // No more pages
+          } else {
+            this.page.update((p) => p + 1);
+          }
+        },
+      });
   }
 
   @HostListener('window:scroll', [])

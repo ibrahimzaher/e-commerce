@@ -1,17 +1,15 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { initFlowbite } from 'flowbite';
-import { Observable, Subscription } from 'rxjs';
-import { AuthService } from '../../../core/auth/services/auth/auth.service';
-import { FlowbiteService } from '../../../core/services/flowbite/flowbite.service';
-import { LangService } from '../../../core/services/lang/lang.service';
-import { ThemeService } from '../../../core/services/theme/theme.service';
+import { AuthService } from '../../../../auth/services/auth/auth.service';
+import { FlowbiteService } from '../../../../services/flowbite/flowbite.service';
+import { LangService } from '../../../../services/lang/lang.service';
+import { ThemeService } from '../../../../services/theme/theme.service';
 
 @Component({
   selector: 'app-navabr-auth',
-  imports: [RouterLink, AsyncPipe, TranslatePipe],
+  imports: [RouterLink, TranslatePipe],
   templateUrl: './navabr-auth.component.html',
   styleUrl: './navabr-auth.component.css',
 })
@@ -19,12 +17,9 @@ export class NavabrAuthComponent implements OnInit {
   constructor(private flowbiteService: FlowbiteService) {}
   private readonly themeService = inject(ThemeService);
   private readonly langService = inject(LangService);
-  private readonly PLATFORM_ID = inject(PLATFORM_ID);
   private readonly authService = inject(AuthService);
-  lang$: Observable<string> = this.langService.lang.asObservable();
-  count: number | null = null;
-  isDark$: Observable<boolean> = this.themeService.observable();
-  subscription!: Subscription;
+  lang = this.langService.lang;
+  isDark = this.themeService.isDark;
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite();

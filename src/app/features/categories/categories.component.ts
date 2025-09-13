@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CategoryWithSubs } from './models/category.interface';
 import { CategoriesService } from './services/categories/categories.service';
@@ -11,11 +11,16 @@ import { CategoriesService } from './services/categories/categories.service';
 })
 export class CategoriesComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
-  groupedCategories: CategoryWithSubs[] = [];
-
-  ngOnInit() {
-    this.categoriesService.getGroupedCategories().subscribe((res) => {
-      this.groupedCategories = res;
+  groupedCategories: WritableSignal<CategoryWithSubs[]> = signal([]);
+  constructor() {}
+  ngOnInit(): void {
+    this.getCategoriesWithSubCategories();
+  }
+  getCategoriesWithSubCategories() {
+    this.categoriesService.getGroupedCategories().subscribe({
+      next: (val) => {
+        this.groupedCategories.set(val);
+      },
     });
   }
 }

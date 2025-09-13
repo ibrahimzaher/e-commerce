@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LangService } from './../../../core/services/lang/lang.service';
@@ -10,11 +10,12 @@ import { LangService } from './../../../core/services/lang/lang.service';
   styleUrl: './input.component.css',
 })
 export class InputComponent {
-  @Input({ required: true }) control: any;
-  @Input({ required: true }) idInput!: string;
-  @Input() typeInput!: string;
-  public readonly langService = inject(LangService);
-  @Input({ required: true }) label!: string;
-  flag: boolean = true;
-  @Input() readonly: boolean = false;
+  private readonly langService = inject(LangService);
+  readonly lang = this.langService.lang;
+  control: InputSignal<any> = input.required<any>();
+  idInput: InputSignal<string> = input.required<string>();
+  label: InputSignal<string> = input.required<string>();
+  typeInput: InputSignal<string> = input<string>('');
+  readonly: InputSignal<boolean> = input<boolean>(false);
+  flag: WritableSignal<boolean> = signal<boolean>(true);
 }

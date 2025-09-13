@@ -1,49 +1,60 @@
 <div
-  class="w-full bg-surface-default dark:bg-surface-dark grid shadow-sm lg:grid-cols-2 lg:w-[70%] gap-10 p-10 rounded-2xl lg:justify-center lg:items-center mx-auto"
+  class="w-full mt-5 md:m-0 min-h-screen min-w-screen md:min-w-4xl p-3 md:p-0 flex items-center justify-center bg-surface-default dark:bg-surface-dark md:px-4"
 >
-  <div class="hidden lg:block">
-    <img src="./images/sign.png" class="w-full h-full rounded-2xl border-2" alt="sign" />
-  </div>
-  <div class="w-full">
-    <h1 class="text-3xl text-prose-default dark:text-prose-dark font-bold text-center mb-5">
-      {{ 'AUTH.SIGNIN' | translate }}
-    </h1>
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <app-input
-        [control]="loginForm.get('email')"
-        [idInput]="'email'"
-        [label]="'AUTH.USEREMAIL' | translate"
-        [typeInput]="'email'"
-      ></app-input>
-      <app-input
-        [control]="loginForm.get('password')"
-        [idInput]="'password'"
-        [label]="'AUTH.PASSWORD' | translate"
-      ></app-input>
-      <button (click)="login()" class="btn">
-        {{ 'AUTH.SIGN' | translate }} @if (isLoading) {
-        <span> <i class="fas fa-spin fa-spinner"></i></span>
-        }
-      </button>
-      <div class="md:flex justify-between items-center">
-        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
+  <div class="grid lg:grid-cols-2 shadow-sm rounded-2xl overflow-hidden max-w-5xl w-full">
+    <!-- Left Image -->
+    <div class="hidden lg:flex items-center justify-center">
+      <img src="./images/sign.png" alt="sign" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="bg-surface-default dark:bg-surface-dark p-10 flex flex-col justify-center">
+      <h1 class="text-3xl font-bold text-center text-prose-default dark:text-prose-dark mb-8">
+        {{ 'AUTH.SIGNIN' | translate }}
+      </h1>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-6">
+        <app-input
+          [control]="loginForm.get('email')"
+          [idInput]="'email'"
+          [label]="'AUTH.USEREMAIL' | translate"
+          [typeInput]="'email'"
+        ></app-input>
+
+        <app-input
+          [control]="loginForm.get('password')"
+          [idInput]="'password'"
+          [label]="'AUTH.PASSWORD' | translate"
+          [typeInput]="'password'"
+        ></app-input>
+
+        <button type="submit" class="btn">
+          {{ 'AUTH.SIGN' | translate }}
+          @if (isLoading()) {
+          <i class="fas fa-spin fa-spinner"></i>
+          }
+        </button>
+      </form>
+
+      <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-center gap-4">
+        <span
+          class="text-prose-default text-sm md:flex md:flex-col justify-center gap-1 items-center dark:text-prose-dark"
+        >
           {{ "AUTH.IFYOUDAN'THAVEANACCOUNT" | translate }}
           <a
-            class="font-bold cursor-pointer p-2 text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark"
+            class="font-bold text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark ml-1"
             routerLink="/register"
           >
             {{ 'AUTH.SIGNUP' | translate }}
           </a>
         </span>
-        <span class="mt-6 block text-center text-prose-default dark:text-prose-dark">
-          <a
-            class="font-bold cursor-pointer p-2 text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark"
-            routerLink="/forget-password"
-          >
-            {{ 'AUTH.FORGETPASSWORD' | translate }}
-          </a>
-        </span>
+
+        <a
+          class="font-bold text-sm text-primary-default hover:text-primary-hover dark:hover:text-primary-dark-hover dark:text-primary-dark"
+          routerLink="/forget-password"
+        >
+          {{ 'AUTH.FORGETPASSWORD' | translate }}
+        </a>
       </div>
-    </form>
+    </div>
   </div>
 </div>

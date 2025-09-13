@@ -1,34 +1,37 @@
 <div class="mb-3">
   <label
-    [for]="idInput"
+    [for]="idInput()"
     class="main-label"
     [class]="{
-              'text-primary-default':control?.valid,
-              'text-red-700':control?.invalid && control?.touched,
-              'dark:text-red-400':control?.invalid && control?.touched,
+              'text-primary-default':control()?.valid,
+              'text-red-700':control()?.invalid && control()?.touched,
+              'dark:text-red-400':control()?.invalid && control()?.touched,
             }"
-    >{{ label }}</label
+    >{{ label() }}</label
   >
   <div class="relative">
     <input
-      [type]="typeInput || (flag ? 'password' : 'text')"
-      [id]="idInput"
+      [type]="typeInput() || (flag() ? 'password' : 'text')"
+      [id]="idInput()"
       class="main-input"
-      [placeholder]="label"
-      [formControl]="control"
-      [readonly]="readonly"
+      [placeholder]="label()"
+      [formControl]="control()"
+      [readonly]="readonly()"
       [class]="{
-              'border-primary-default':control?.valid,
-              'border-red-700':control?.invalid && control?.touched,
-              'dark:border-red-400':control?.invalid && control?.touched,
+              'border-primary-default':control()?.valid,
+              'border-red-700':control()?.invalid && control()?.touched,
+              'dark:border-red-400':control()?.invalid && control()?.touched,
             }"
-      [dir]="langService.lang.value === 'ar' ? 'rtl' : 'ltr'"
-      [class.text-right]="langService.lang.value === 'ar'"
-      [class.text-left]="langService.lang.value !== 'ar'"
+      [dir]="lang() === 'ar' ? 'rtl' : 'ltr'"
+      [class.text-right]="lang() === 'ar'"
+      [class.text-left]="lang() !== 'ar'"
     />
-    @if (idInput==='password'||idInput==='rePassword'||idInput==='currentPassword') {
-    <span (click)="flag = !flag" class="absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer">
-      @if (flag) {
+    @if (idInput()==='password'||idInput()==='rePassword'||idInput()==='currentPassword') {
+    <span
+      (click)="flag.set(!flag())"
+      class="absolute top-1/2 -translate-y-1/2 end-4 cursor-pointer"
+    >
+      @if (flag()) {
       <i class="fas fa-eye text-prose-default dark:text-prose-dark"></i>
       }@else {
       <i class="fas fa-eye-slash text-prose-default dark:text-prose-dark"></i>
@@ -36,21 +39,21 @@
     </span>
     }
   </div>
-  @if (control?.errors && control?.touched) {
+  @if (control()?.errors && control()?.touched) {
   <ul class="bg-red-200 list-disc list-inside p-2 rounded-sm text-sm mt-1 text-res">
-    @if (control?.hasError('required')) {
+    @if (control()?.hasError('required')) {
     <li>{{ 'errors.required' | translate }}</li>
-    } @else if (control?.hasError('minlength')) {
+    } @else if (control()?.hasError('minlength')) {
     <li>{{ 'errors.minlength' | translate }}</li>
-    } @else if (control?.hasError('maxlength')) {
+    } @else if (control()?.hasError('maxlength')) {
     <li>{{ 'errors.maxlength' | translate }}</li>
-    } @else if (control?.hasError('email')) {
+    } @else if (control()?.hasError('email')) {
     <li>{{ 'errors.email' | translate }}</li>
-    } @else if (control?.hasError('pattern')) { @if (idInput==='password') {
+    } @else if (control()?.hasError('pattern')) { @if (idInput()==='password') {
     <li>{{ 'errors.pattern.password' | translate }}</li>
-    } @else if (idInput==='phone') {
+    } @else if (idInput()==='phone') {
     <li>{{ 'errors.pattern.phone' | translate }}</li>
-    } } @else if (control?.hasError('mismatch')) {
+    } } @else if (control()?.hasError('mismatch')) {
     <li>{{ 'errors.mismatch' | translate }}</li>
     } @else {
     <li>{{ 'errors.default' | translate }}</li>

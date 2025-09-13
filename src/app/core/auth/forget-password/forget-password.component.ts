@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { finalize } from 'rxjs';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -15,10 +16,12 @@ export class ForgetPasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  steps: number = 1;
+  steps: WritableSignal<number> = signal<number>(1);
+  loading: WritableSignal<boolean> = signal<boolean>(false);
   forgetPasswordForm!: FormGroup;
   resetCodeForm!: FormGroup;
   resetPasswordForm!: FormGroup;
+
   ngOnInit(): void {
     this.initForms();
   }
@@ -36,30 +39,53 @@ export class ForgetPasswordComponent implements OnInit {
   }
   forgetPassword() {
     if (this.forgetPasswordForm.valid) {
-      this.authService.forgetPassword(this.forgetPasswordForm.value).subscribe({
-        next: (res) => {
-          this.steps++;
-        },
-      });
+      this.loading.set(true);
+
+      this.authService
+        .forgetPassword(this.forgetPasswordForm.value)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.steps.update((val) => val + 1);
+          },
+        });
+    } else {
+      this.forgetPasswordForm.markAllAsTouched();
     }
   }
   resetCode() {
     if (this.resetCodeForm.valid) {
-      this.authService.resetCode(this.resetCodeForm.value).subscribe({
-        next: (res) => {
-          this.steps++;
-          this.resetPasswordForm
-            .get('email')
-            ?.patchValue(this.forgetPasswordForm.get('email')?.value);
-        },
-      });
+      this.loading.set(true);
+
+      this.authService
+        .resetCode(this.resetCodeForm.value)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.steps.update((val) => val + 1);
+            this.resetPasswordForm
+              .get('email')
+              ?.patchValue(this.forgetPasswordForm.get('email')?.value);
+          },
+        });
+    } else {
+      this.resetCodeForm.markAllAsTouched();
     }
   }
   resetPassword() {
     if (this.resetPasswordForm.valid) {
-      this.authService.resetPassword(this.resetPasswordForm.value).subscribe({
-        next: (res) => {},
-      });
+      this.loading.set(true);
+
+      this.authService
+        .resetPassword(this.resetPasswordForm.value)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/login'], { replaceUrl: true });
+          },
+        });
+    } else {
+      this.resetPasswordForm.markAllAsTouched();
     }
   }
 }

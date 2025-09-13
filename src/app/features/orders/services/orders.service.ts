@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Order } from '../models/order.interface';
 
@@ -9,10 +9,14 @@ import { Order } from '../models/order.interface';
 })
 export class OrdersService {
   private readonly httpClient = inject(HttpClient);
-  ordersSubject = new BehaviorSubject<Order[]>([]);
+  private readonly _orderSignal: WritableSignal<Order[]> = signal([]);
+  readonly orderSignal = this._orderSignal.asReadonly();
+
   getAllOrders(user_id: string): Observable<Order[]> {
-    return this.httpClient
-      .get<Order[]>(environment.baseUrl + `orders/user/${user_id}`)
-      .pipe(tap((res) => this.ordersSubject.next(res)));
+    return this.httpClient.get<Order[]>(environment.baseUrl + `orders/user/${user_id}`).pipe(
+      tap((res) => {
+        this._orderSignal.set(res);
+      })
+    );
   }
 }

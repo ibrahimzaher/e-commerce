@@ -5,7 +5,7 @@
     <img
       [src]="product.imageCover"
       [alt]="product.title"
-      class="w-full h-[200px] object-cover rounded-xl group-hover/product:scale-105 transition duration-300 mb-3 dark:rounded-full dark:size-48"
+      class="w-full h-[200px] object-contain mx-auto rounded-xl group-hover/product:scale-105 transition duration-300 mb-3 dark:rounded-full dark:size-48"
     />
 
     <div class="flex flex-col gap-2">
@@ -30,7 +30,7 @@
     (click)="toggleWishlistProduct()"
     class="fas fa-heart absolute end-3 top-3 transition-all duration-300 text-prose-hover dark:text-prose-dark-hover hover:scale-110 text-xl cursor-pointer"
     [class]="{
-      '!text-gold': productWishList.includes(product._id),
+      '!text-gold': productWishList().includes(product._id),
     }"
   ></i>
 

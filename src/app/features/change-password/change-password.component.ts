@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +9,8 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { AuthService } from './../../core/auth/services/auth/auth.service';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
@@ -19,7 +21,9 @@ import { AuthService } from './../../core/auth/services/auth/auth.service';
 export class ChangePasswordComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
   passwordRecahngeForm!: FormGroup;
+  loading: WritableSignal<boolean> = signal<boolean>(false);
   ngOnInit(): void {
     this.inintForm();
   }
@@ -45,9 +49,15 @@ export class ChangePasswordComponent implements OnInit {
   }
   submit() {
     if (this.passwordRecahngeForm.valid) {
-      this.authService.updatePassword(this.passwordRecahngeForm.value).subscribe({
-        next: (res) => {},
-      });
+      this.loading.set(true);
+      this.authService
+        .updatePassword(this.passwordRecahngeForm.value)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/home'], { replaceUrl: true });
+          },
+        });
     } else {
       this.passwordRecahngeForm.markAllAsTouched();
     }

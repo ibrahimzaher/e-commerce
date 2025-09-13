@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { ApiResponse, CategoryWithSubs, Subcategory } from '../../models/category.interface';
 
@@ -9,31 +9,38 @@ import { ApiResponse, CategoryWithSubs, Subcategory } from '../../models/categor
 })
 export class CategoriesService {
   private readonly httpClient = inject(HttpClient);
-  getAllCategories(): Observable<ApiResponse<Category>> {
-    return this.httpClient.get<ApiResponse<Category>>(environment.baseUrl + `categories`);
+  getAllCategories(): Observable<Category[]> {
+    return this.httpClient
+      .get<ApiResponse<Category>>(environment.baseUrl + `categories`)
+      .pipe(map((data) => data.data));
   }
-  getAllSubCategories(pageNumber: number = 1): Observable<ApiResponse<Subcategory>> {
-    return this.httpClient.get<ApiResponse<Subcategory>>(environment.baseUrl + `subcategories`, {
-      params: {
-        page: pageNumber,
-      },
-    });
+  getAllSubCategories(pageNumber: number = 1): Observable<Subcategory[]> {
+    return this.httpClient
+      .get<ApiResponse<Subcategory>>(environment.baseUrl + `subcategories`, {
+        params: {
+          page: pageNumber,
+        },
+      })
+      .pipe(map((data) => data.data));
   }
 
   getGroupedCategories(): Observable<CategoryWithSubs[]> {
-    return this.getAllCategories().pipe(
-      switchMap((categries) =>
-        this.getAllSubCategories().pipe(
-          map((subCategories) => {
-            const cats = categries.data;
-            const subs = subCategories.data;
-            return cats.map((cat) => {
-              const children = subs.filter((sub) => sub.category === cat._id);
-              return { ...cat, subcategories: children };
-            });
-          })
-        )
-      )
+    return forkJoin({
+      categories: this.getAllCategories(),
+      subcategories: this.getAllSubCategories(),
+    }).pipe(
+      map(({ categories, subcategories }) => {
+        const subMap = subcategories.reduce((acc, sub) => {
+          if (!acc[sub.category]) acc[sub.category] = [];
+          acc[sub.category].push(sub);
+          return acc;
+        }, {} as Record<string, Subcategory[]>);
+
+        return categories.map((cat) => ({
+          ...cat,
+          subcategories: subMap[cat._id] || [],
+        }));
+      })
     );
   }
 }

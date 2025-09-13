@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
@@ -11,27 +11,14 @@ import { Subscription } from 'rxjs';
 })
 export class MainSliderComponent implements OnDestroy {
   private readonly translateService = inject(TranslateService);
-  lang!: string;
-  subscription!: Subscription;
-  customOptions!: OwlOptions;
 
-  constructor() {
-    this.lang = this.translateService.getCurrentLang() || 'en';
-    this.changeOption(this.lang);
+  lang = signal(this.translateService.getCurrentLang() || 'en');
 
-    // subscribe to language changes
-    this.subscription = this.translateService.onLangChange.subscribe({
-      next: (res) => this.changeOption(res.lang),
-    });
-  }
+  private subscription!: Subscription;
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  changeOption(lang: string) {
-    const isArabic = lang === 'ar';
-    this.customOptions = {
+  customOptions = computed<OwlOptions>(() => {
+    const isArabic = this.lang() === 'ar';
+    return {
       loop: true,
       mouseDrag: true,
       touchDrag: true,
@@ -50,5 +37,15 @@ export class MainSliderComponent implements OnDestroy {
       rtl: isArabic,
       nav: true,
     };
+  });
+
+  constructor() {
+    this.subscription = this.translateService.onLangChange.subscribe({
+      next: (res) => this.lang.set(res.lang),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

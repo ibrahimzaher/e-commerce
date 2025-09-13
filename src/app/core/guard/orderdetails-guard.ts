@@ -5,8 +5,5 @@ import { OrdersService } from './../../features/orders/services/orders.service';
 export const orderdetailsGuard: CanActivateFn = (route, state) => {
   const ordersService = inject(OrdersService);
   const router = inject(Router);
-  if (ordersService.ordersSubject.getValue().length == 0) {
-    return router.parseUrl('/allorders');
-  }
-  return true;
+  return ordersService.orderSignal().length === 0 ? router.parseUrl('/allorders') : true;
 };

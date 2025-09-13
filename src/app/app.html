@@ -1,2 +1,13 @@
 <router-outlet></router-outlet>
-<app-loading></app-loading>
+<ngx-loading-bar
+  height="5px"
+  color="var(--color-primary-default)"
+  [includeSpinner]="false"
+></ngx-loading-bar>
+<ngx-spinner
+  bdColor="rgba(0,0,0,.2)"
+  size="medium"
+  color="var(--color-primary-dark)"
+  type="ball-scale-multiple"
+>
+</ngx-spinner>

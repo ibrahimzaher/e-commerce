@@ -1,18 +1,20 @@
-@if(cartItems.length > 0){
-<section class="bg-surface-default dark:bg-surface-dark my-5 px-4 sm:px-6 lg:px-10">
+@if (!isLoading()) { @if(cartItems().length > 0){
+<section
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
+>
   <h1
-    class="text-primary-default my-10 dark:text-prose-dark text-3xl lg:text-4xl font-semibold my-5 text-center lg:text-left flex justify-between items-center"
+    class="text-3xl md:text-4xl flex justify-between text-center text-primary-default leading-15 hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
   >
     <span>{{ 'CART.ShopCart' | translate }}</span>
-    <span> {{ 'CART.Items' | translate }}: {{ cart?.numOfCartItems }}</span>
+    <span>{{ 'CART.Items' | translate }}: {{ totalItems() }}</span>
   </h1>
-
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-    <div class="lg:col-span-8 rounded-2xl w-full bg-surface-default dark:bg-surface-dark shadow-lg">
+    <div class="lg:col-span-8 rounded-2xl w-full">
       <div class="flex flex-col gap-5">
-        @for (product of cart?.data?.products; track product._id) {
+        @for (product of cartItems(); track product._id) {
         <div
-          class="grid md:grid-cols-12 gap-5 bg-surface-hover dark:bg-surface-dark-hover rounded-2xl shadow p-4"
+          class="grid md:grid-cols-12 gap-5 bg-surface-default dark:bg-surface-dark rounded-2xl shadow p-4"
         >
           <div class="md:col-span-2 flex justify-center items-center">
             <img
@@ -30,8 +32,7 @@
                 <span class="block mb-1">{{ product.product.brand.name }}</span
                 >} @if (product.product.category) {
                 <span class="block mb-1">{{ product.product.category.name }}</span
-                >}
-                <span class="block">{{ product.product.title }}</span>
+                >} <span class="block">{{ product.product.title }}</span>
               </div>
               <i
                 (click)="deleteItem(product.product._id)"
@@ -57,7 +58,6 @@
         }
       </div>
     </div>
-
     <div
       class="lg:col-span-4 w-full h-fit rounded-2xl bg-surface-default dark:bg-surface-dark shadow-lg p-5 flex flex-col gap-5"
     >
@@ -71,9 +71,9 @@
       </div>
       <div class="flex justify-between items-center">
         <span class="text-prose-hover dark:text-prose-dark">{{ 'CART.Subtotal' | translate }}</span>
-        <span class="text-prose-default font-medium dark:text-prose-dark-hover">{{
-          cart?.data?.totalCartPrice | currency : 'EGP'
-        }}</span>
+        <span class="text-prose-default font-medium dark:text-prose-dark-hover">
+          {{ totalPrice() | currency : 'EGP' }}
+        </span>
       </div>
       <div class="flex justify-between items-center">
         <span class="text-prose-hover dark:text-prose-dark">{{ 'CART.Discount' | translate }}</span>
@@ -89,15 +89,15 @@
       </div>
       <hr class="border-surface-hover dark:border-surface-dark-hover" />
       <div class="flex justify-between items-center">
-        <span class="text-prose-default dark:text-prose-dark font-medium text-xl sm:text-2xl">{{
-          'CART.Total' | translate
-        }}</span>
-        <span class="text-prose-default font-bold dark:text-prose-dark">{{
-          cart?.data?.totalCartPrice | currency : 'EGP'
-        }}</span>
+        <span class="text-prose-default dark:text-prose-dark font-medium text-xl sm:text-2xl">
+          {{ 'CART.Total' | translate }}
+        </span>
+        <span class="text-prose-default font-bold dark:text-prose-dark">
+          {{ totalPrice() | currency : 'EGP' }}
+        </span>
       </div>
       <button
-        [routerLink]="['/checkout', cart?.cartId]"
+        [routerLink]="['/checkout', cartId()]"
         class="btn w-full py-3 mt-2 bg-primary-default hover:bg-primary-hover text-white dark:bg-primary-dark dark:hover:bg-primary-dark-hover"
       >
         {{ 'CART.GoToCheckout' | translate }}
@@ -105,7 +105,6 @@
     </div>
   </div>
 </section>
-
 }@else {
 <section class="bg-surface-default dark:bg-surface-dark my-5 px-4 sm:px-6 lg:px-10">
   <div class="flex flex-col justify-center items-center h-[70vh]">
@@ -121,4 +120,4 @@
     </button>
   </div>
 </section>
-}
+} }

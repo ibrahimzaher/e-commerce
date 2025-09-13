@@ -1,22 +1,25 @@
-<section class="py-5">
-  @if (products.length>0) {
+<section
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
+>
+  @if (products().length>0) {
   <h2
-    class="text-4xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+    class="text-3xl md:text-4xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
   >
     {{ 'HOME.ShopPopularProducts' | translate }}
   </h2>
   <div
-    class="grid grid-cols-1 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5"
   >
-    @for (product of products.slice(0,12)| paginate: { itemsPerPage: 6, currentPage: p }; track
+    @for (product of products().slice(0,12)| paginate: { itemsPerPage: 6, currentPage: p() }; track
     product._id;) {
-    <app-product [product]="product" data-aos="fade-right" [attr.data-aos-delay]="$index * 100" />
+    <app-product [product]="product" />
     }
   </div>
   <pagination-controls
     nextLabel="{{ 'PAGINATION.NEXT' | translate }}"
     previousLabel="{{ 'PAGINATION.PREVIOUS' | translate }}"
-    (pageChange)="p = $event"
+    (pageChange)="p.set($event)"
   ></pagination-controls>
 
   }

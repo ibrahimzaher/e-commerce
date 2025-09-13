@@ -1,10 +1,15 @@
-@if (brands && brands.length > 0) {
-<section class="bg-prose-dark mt-14 rounded-2xl dark:bg-prose-default">
-  <h1 class="text-4xl font-bold p-5 text-center text-primary-default dark:text-prose-dark">
+@if (brands() && brands().length > 0) {
+<section
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
+>
+  <h1
+    class="text-3xl md:text-4xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+  >
     {{ 'BRANDS.TITLE' | translate }}
   </h1>
 
-  <div class="w-[70%] mx-auto">
+  <div class="w-full md:w-[80%] mx-auto">
     <app-input
       [control]="searchControl"
       [idInput]="'BRANDS.SEARCH' | translate"
@@ -13,14 +18,10 @@
     ></app-input>
   </div>
 
-  @if (brands.length > 0) {
-  <div
-    class="grid sm:grid-cols-2 p-5 m-5 shadow md:grid-cols-3 gap-5 lg:grid-cols-5 xl:grid-cols-6"
-  >
-    @for (item of brands | search: searchControl.value; track item._id) {
+  @if (brands().length > 0) {
+  <div class="grid sm:grid-cols-2 m-5 shadow md:grid-cols-3 gap-5 lg:grid-cols-5 xl:grid-cols-6">
+    @for (item of brands() | search: searchControl.value; track item._id) {
     <div
-      data-aos="zoom-in"
-      [attr.data-aos-delay]="$index * 10"
       class="bg-prose-dark dark:bg-prose-default p-5 rounded-lg shadow-sm group hover:scale-105 transition-all duration-300 cursor-pointer"
     >
       <figure class="overflow-hidden rounded-2xl">

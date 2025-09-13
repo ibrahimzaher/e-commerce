@@ -35,27 +35,32 @@
       class="hidden w-full lg:w-auto lg:flex lg:flex-row justify-between items-center grow lg:ms-5"
       id="navbar-default"
     >
-      <ul class="flex justify-end flex-1 gap-2">
-        @if(isDark$ | async){
+      <ul class="flex w-fit lg:flex-1 lg:mt-0 lg:justify-end mt-2 mx-auto justify-between">
+        @if(isDark()){
         <li (click)="setLightMode()" class="link cursor-pointer">
-          <i class="fas fa-sun text-lg"></i>
+          @if (lang()=='en') {
+          <span>Light</span>
+          }@else {
+          <span>الوضع النهارى</span>
+          }
         </li>
         }@else {
         <li (click)="setDarkMode()" class="link cursor-pointer">
-          <i class="fas fa-moon text-lg"></i>
+          @if (lang()=='en') {
+          <span>Dark</span>
+          }@else {
+          <span>الوضع الليلى</span>
+          }
         </li>
         }
 
-        <li>
-          @if (lang$ | async; as lang) { @if (lang == 'en') {
-          <button (click)="changeLang('ar')" class="link cursor-pointer" title="العربية">
-            <i class="fas fa-globe"></i> اللغة العربية
-          </button>
+        <li></li>
+        <li class="mx-5">
+          @if (lang() == 'en') {
+          <button (click)="changeLang('ar')" class="link cursor-pointer" title="العربية">AR</button>
           } @else {
-          <button (click)="changeLang('en')" class="link cursor-pointer" title="English">
-            <i class="fas fa-globe"></i> EN
-          </button>
-          } }
+          <button (click)="changeLang('en')" class="link cursor-pointer" title="English">EN</button>
+          }
         </li>
       </ul>
     </div>

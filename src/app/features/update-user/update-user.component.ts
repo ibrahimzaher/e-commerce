@@ -1,8 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../core/auth/services/auth/auth.service';
 import { InputComponent } from '../../shared/components/input/input.component';
+import { sign } from 'crypto';
+import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-user',
@@ -13,10 +16,12 @@ import { InputComponent } from '../../shared/components/input/input.component';
 export class UpdateUserComponent {
   private readonly authService = inject(AuthService);
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
   nameUpdateForm!: FormGroup;
   emailUpdateForm!: FormGroup;
   phoneUpdateForm!: FormGroup;
   userUpdateForm!: FormGroup;
+  loading: WritableSignal<boolean> = signal<boolean>(false);
   ngOnInit(): void {
     this.inintForm();
   }
@@ -39,9 +44,13 @@ export class UpdateUserComponent {
 
   update(fromGroup: FormGroup<any>) {
     if (fromGroup.valid) {
-      this.authService.updateLoggedUserData(fromGroup.value).subscribe({
-        next: () => {},
-      });
+      this.loading.set(true);
+      this.authService
+        .updateLoggedUserData(fromGroup.value)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => this.router.navigate(['/home'], { replaceUrl: true }),
+        });
     } else {
       fromGroup.markAllAsTouched();
     }

@@ -1,29 +1,31 @@
-import { Component, inject } from '@angular/core';
+import { finalize, pipe } from 'rxjs';
+import { Component, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { Product } from '../../core/models/product.interface';
 import { ProductComponent } from '../../shared/components/product/product.component';
 import { WishlistService } from './servuces/wishlist.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-wishlist',
+  standalone: true,
   imports: [ProductComponent, TranslatePipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
 })
-export class WishlistComponent {
+export class WishlistComponent implements OnInit {
   private readonly wishlistService = inject(WishlistService);
-  public wishlistproducts: Observable<Product[]> = this.wishlistService.wishlistProducts$;
-  products: Product[] = [];
-  loading = true;
+  private readonly platformId = inject(PLATFORM_ID);
+
+  products = this.wishlistService.wishlistProducts;
+  isEmpty = this.wishlistService.isEmpty;
+  isLoaded = signal<boolean>(true);
   ngOnInit(): void {
-    this.loading = true;
-    this.wishlistproducts.subscribe({
-      next: (res) => {
-        this.products = res;
-        this.loading = false;
-      },
-      error: () => (this.loading = false),
-    });
+    this.isLoaded.set(true);
+    if (isPlatformBrowser(this.platformId)) {
+      this.wishlistService
+        .loadWishlist()
+        .pipe(finalize(() => this.isLoaded.set(false)))
+        .subscribe();
+    }
   }
 }

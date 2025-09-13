@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -24,30 +24,29 @@ import { ProductsService } from './../../core/services/products/products.service
 export class ProductsComponent implements OnInit {
   private readonly ProductsService = inject(ProductsService);
   searchControl!: FormControl;
-  products: Product[] = [];
-  p: number = 1;
-  pageSize!: number;
-  total!: number;
-  apiPage: number = 1;
-
+  products: WritableSignal<Product[]> = signal([]);
+  p: WritableSignal<number> = signal<number>(1);
+  total: WritableSignal<number> = signal<number>(0);
+  apiPage: WritableSignal<number> = signal<number>(1);
+  pageSize: WritableSignal<number> = signal<number>(0);
   ngOnInit(): void {
     this.searchControl = new FormControl('');
-    this.loadMoreProducts(this.apiPage);
+    this.loadMoreProducts(this.apiPage());
   }
 
   loadMoreProducts(pageNumber: number) {
     this.ProductsService.getProductsPagination(pageNumber).subscribe({
       next: (res) => {
-        this.pageSize = res.metadata.limit;
-        this.products = res.data;
-        this.total = res.results;
-        this.apiPage++;
+        this.pageSize.set(res.metadata.limit);
+        this.products.set(res.data);
+        this.total.set(res.results);
+        this.apiPage.update((val) => val + 1);
       },
     });
   }
 
   pageChange(pageNumber: number) {
-    this.p = pageNumber;
+    this.p.set(pageNumber);
     this.loadMoreProducts(pageNumber);
     window.scroll({
       top: 0,

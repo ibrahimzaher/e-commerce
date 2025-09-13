@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductComponent } from '../../../shared/components/product/product.component';
@@ -12,18 +12,12 @@ import { ProductsService } from './../../../core/services/products/products.serv
   styleUrl: './popular-products.component.css',
 })
 export class PopularProductsComponent implements OnInit {
-  p: number = 1;
-  ngOnInit(): void {
-    this.getProdutcs();
-  }
+  p: WritableSignal<number> = signal<number>(1);
+  products: WritableSignal<Product[]> = signal([]);
+
   private readonly productsService = inject(ProductsService);
-  products: Product[] = [];
-  getProdutcs() {
-    this.productsService.getProducts().subscribe({
-      next: (res) => {
-        this.products = res.data;
-      },
-      error: (err) => {},
-    });
+  constructor() {}
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe({ next: (val) => this.products.set(val) });
   }
 }

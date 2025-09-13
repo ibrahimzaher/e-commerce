@@ -11,18 +11,18 @@
         class="bg-surface-hover dark:bg-surface-dark-hover rounded-2xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full max-w-sm"
       >
         <img
-          [src]="productDetails.imageCover"
-          [alt]="productDetails.title"
+          [src]="productDetails().imageCover"
+          [alt]="productDetails().title"
           class="w-full h-[300px] sm:h-[400px] object-contain rounded-xl"
         />
       </div>
 
       <div class="grid grid-cols-4 sm:grid-cols-4 gap-2 py-2 w-full max-w-sm">
-        @for (img of productDetails.images |slice:0:4; track $index) {
+        @for (img of productDetails().images |slice:0:4; track $index) {
         <img
           [src]="img"
           class="w-full h-20 object-cover rounded-lg border border-prose-dark dark:border-prose-default cursor-pointer hover:scale-105 transition-transform duration-200"
-          (click)="productDetails.imageCover = img"
+          (click)="productDetails().imageCover = img"
         />
         }
       </div>
@@ -32,38 +32,40 @@
       <h2
         class="text-2xl line-clamp-1 lg:text-3xl font-semibold text-primary-hover dark:text-prose-dark transition-colors duration-300"
       >
-        {{ productDetails.title }}
+        {{ productDetails().title }}
       </h2>
       <p class="text-prose-default dark:text-prose-dark-hover sm:text-lg lg:text-xl font-medium">
-        {{ productDetails.category.name }}
+        {{ productDetails().category.name }}
       </p>
       <p
         class="text-prose-default dark:text-prose-dark-hover sm:text-base lg:text-lg leading-relaxed line-clamp-4"
       >
-        {{ productDetails.description }}
+        {{ productDetails().description }}
       </p>
 
       <div class="flex flex-wrap gap-2 mt-3">
         <span
           class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full text-xs font-semibold"
         >
-          Sold: {{ productDetails.sold }}
+          Sold: {{ productDetails().sold }}
         </span>
         <span
           class="px-3 py-1 bg-primary-default text-prose-dark dark:bg-primary-dark rounded-full text-xs font-semibold"
         >
-          Stock: {{ productDetails.quantity }}
+          Stock: {{ productDetails().quantity }}
         </span>
         <span class="px-3 py-1 bg-gold text-prose-dark rounded-full text-xs font-semibold">
-          Brand: {{ productDetails.brand.name }}
+          Brand: {{ productDetails().brand.name }}
         </span>
       </div>
 
       <div class="flex justify-between items-center pt-5">
-        <span class="font-bold text-2xl text-primary-default">{{ productDetails.price }} EGP</span>
+        <span class="font-bold text-2xl text-primary-default"
+          >{{ productDetails().price }} EGP</span
+        >
         <span class="flex items-center gap-1 text-primary-default">
-          <i class="fa fa-star text-gold"></i>{{ productDetails.ratingsAverage }} ({{
-            productDetails.ratingsQuantity
+          <i class="fa fa-star text-gold"></i>{{ productDetails().ratingsAverage }} ({{
+            productDetails().ratingsQuantity
           }}
           reviews)
         </span>

@@ -1,7 +1,6 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { inject, Injectable, signal, WritableSignal, computed } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Cart } from '../model/cart.interface';
 
@@ -10,41 +9,59 @@ import { Cart } from '../model/cart.interface';
 })
 export class CartService {
   private readonly httpClient = inject(HttpClient);
-  private readonly platformId = inject(PLATFORM_ID);
-  cart: BehaviorSubject<Cart | null> = new BehaviorSubject<Cart | null>(null);
-  cart$: Observable<Cart | null> = this.cart.asObservable();
+
+  private readonly _cart: WritableSignal<Cart | null> = signal(null);
+  readonly cart = this._cart.asReadonly();
+
+  readonly totalItems = computed(() => this._cart()?.numOfCartItems ?? 0);
+
+  readonly totalPrice = computed(() => this._cart()?.data?.totalCartPrice ?? 0);
+
   constructor() {}
+
   getUserLoggedCart(): Observable<Cart> {
     return this.httpClient.get<Cart>(environment.baseUrl + 'cart').pipe(
       tap((res) => {
         if (res.status === 'success') {
-          this.cart.next(res);
+          this._cart.set(res);
         }
       })
     );
   }
+
   addProductToCart(productId: string): Observable<Cart> {
-    return this.httpClient
-      .post<Cart>(environment.baseUrl + 'cart', {
-        productId: productId,
+    return this.httpClient.post<Cart>(environment.baseUrl + 'cart', { productId }).pipe(
+      tap((res) => {
+        if (res.status === 'success') {
+          this._cart.set(res);
+        }
       })
-      .pipe(switchMap(() => this.getUserLoggedCart()));
+    );
   }
+
   updateCartProductQuantity(productId: string, count: number): Observable<Cart> {
-    return this.httpClient
-      .put<Cart>(environment.baseUrl + `cart/${productId}`, {
-        count: count,
+    return this.httpClient.put<Cart>(`${environment.baseUrl}cart/${productId}`, { count }).pipe(
+      tap((res) => {
+        if (res.status === 'success') {
+          this._cart.set(res);
+        }
       })
-      .pipe(switchMap(() => this.getUserLoggedCart()));
+    );
   }
+
   removeProductFromCart(productId: string): Observable<Cart> {
-    return this.httpClient
-      .delete<Cart>(environment.baseUrl + `cart/${productId}`)
-      .pipe(switchMap(() => this.getUserLoggedCart()));
+    return this.httpClient.delete<Cart>(`${environment.baseUrl}cart/${productId}`).pipe(
+      tap((res) => {
+        if (res.status === 'success') {
+          this._cart.set(res);
+        }
+      })
+    );
   }
-  clearUserCart(): Observable<any> {
+
+  clearUserCart(): Observable<Cart> {
     return this.httpClient
-      .delete(environment.baseUrl + `cart`)
-      .pipe(switchMap(() => this.getUserLoggedCart()));
+      .delete<Cart>(environment.baseUrl + 'cart')
+      .pipe(tap(() => this._cart.set(null)));
   }
 }

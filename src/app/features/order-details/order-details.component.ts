@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe, DatePipe, NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Order } from '../orders/models/order.interface';
@@ -13,13 +13,11 @@ import { OrdersService } from './../orders/services/orders.service';
 })
 export class OrderDetailsComponent {
   private readonly OrdersService = inject(OrdersService);
-  order!: Order;
-  id!: string;
+  order: WritableSignal<Order> = signal({} as Order);
+  id: WritableSignal<string> = signal('');
   private readonly activatedRoute = inject(ActivatedRoute);
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.order = this.OrdersService.ordersSubject
-      .getValue()
-      .find((order) => order._id === this.id)!;
+    this.id.set(this.activatedRoute.snapshot.paramMap.get('id')!);
+    this.order.set(this.OrdersService.orderSignal().find((order) => order._id === this.id())!);
   }
 }

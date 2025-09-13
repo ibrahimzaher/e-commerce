@@ -1,12 +1,17 @@
-<section class="bg-surface-default dark:bg-surface-dark p-5 shadow my-10 rounded-2xl">
-  <h1 class="text-primary-default dark:text-prose-dark font-bold text-center text-4xl mt-5 mb-10">
+<section
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
+>
+  <h1
+    class="text-3xl md:text-4xl text-center text-primary-default leading-15 hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+  >
     {{ 'MY_ORDERS' | translate }}
   </h1>
 
-  @if (orders.length > 0 && isData) {
+  @if (orders().length > 0 && hasLoaded()) {
 
   <div class="grid gap-4 sm:grid-cols-1 lg:hidden">
-    @for (order of orders; track order._id) {
+    @for (order of orders(); track order._id) {
     <div
       class="bg-white dark:bg-prose-default rounded-xl shadow-md p-5 flex flex-col space-y-3 border border-prose-dark dark:border-prose-default"
     >
@@ -107,7 +112,7 @@
         </tr>
       </thead>
       <tbody data-aos="fade-right">
-        @for (order of orders; track order._id) {
+        @for (order of orders(); track order._id) {
         <tr
           class="odd:bg-surface-default text-center even:bg-surface-hover dark:odd:bg-surface-dark-hover dark:even:bg-surface-dark-hover/50 border-b border-prose-dark dark:border-prose-default"
         >
@@ -175,7 +180,7 @@
     </table>
   </div>
 
-  } @else if(orders.length == 0 && isData) {
+  } @else if(orders().length == 0 && hasLoaded()) {
   <p class="text-center text-prose-default font-medium dark:text-prose-dark text-4xl py-5">
     {{ 'NO_ORDERS' | translate }}
   </p>

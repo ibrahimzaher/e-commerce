@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -17,17 +17,11 @@ export class ProductComponent {
   private readonly router = inject(Router);
   private readonly spinner = inject(NgxSpinnerService);
   private readonly wishlistService = inject(WishlistService);
-  public wishlist$ = this.wishlistService.wishlistIds$;
+  public wishlistIds = this.wishlistService.wishlistIds;
   private readonly cartService = inject(CartService);
 
-  productWishList: string[] = [];
-  ngOnInit(): void {
-    this.wishlist$.subscribe({
-      next: (res) => {
-        this.productWishList = res;
-      },
-    });
-  }
+  productWishList = computed(() => this.wishlistIds());
+  ngOnInit(): void {}
   @Input({ required: true }) product: Product = {} as Product;
   navigateToDetails() {
     this.router.navigate(['/product', this.product._id, this.product.slug]);
@@ -36,10 +30,10 @@ export class ProductComponent {
     this.cartService.addProductToCart(this.product._id).subscribe({});
   }
   toggleWishlistProduct() {
-    if (this.productWishList.includes(this.product._id)) {
+    if (this.productWishList().includes(this.product._id)) {
       this.wishlistService.removeProduct(this.product._id).subscribe();
     } else {
-      this.wishlistService.addProduct(this.product._id).subscribe();
+      this.wishlistService.addProduct(this.product._id, this.product).subscribe();
     }
   }
 }

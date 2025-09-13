@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,9 +8,8 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { finalize, Subscription } from 'rxjs';
+import { finalize } from 'rxjs';
 import { InputComponent } from '../../../shared/components/input/input.component';
-import { StorageService } from './../../services/storage/storage.service';
 import { AuthService } from './../services/auth/auth.service';
 @Component({
   selector: 'app-register',
@@ -18,14 +17,12 @@ import { AuthService } from './../services/auth/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
-  private readonly storageService = inject(StorageService);
   private readonly router = inject(Router);
   registerForm!: FormGroup;
-  isLoading: boolean = false;
-  subscription: Subscription = new Subscription();
+  isLoading: WritableSignal<boolean> = signal(false);
   ngOnInit(): void {
     this.initForm();
   }
@@ -53,19 +50,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
   signUp() {
     if (this.registerForm.valid) {
-      this.subscription.unsubscribe();
-      this.isLoading = true;
-      this.subscription = this.authService
+      this.isLoading.set(true);
+      this.authService
         .signUp(this.registerForm.value)
-        .pipe(finalize(() => (this.isLoading = false)))
+        .pipe(finalize(() => this.isLoading.set(false)))
         .subscribe({
-          next: (res) => {},
+          next: () => {
+            this.router.navigate(['/home'], { replaceUrl: true });
+          },
         });
     } else {
       this.registerForm.markAllAsTouched();
     }
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

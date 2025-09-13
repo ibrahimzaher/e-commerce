@@ -1,13 +1,14 @@
 <section
-  class="shadow-sm rounded-2xl lg:w-[70%] lg:mx-auto bg-surface-default mt-5 lg:mt-19 dark:bg-surface-dark"
+  class="py-10 my-8 rounded-2xl px-5 bg-surface-hover dark:bg-surface-dark-hover"
+  data-aos="fade-right"
 >
-  <div
-    class="flex justify-center flex-col rounded-2xl bg-surface-default w-full dark:bg-surface-dark shadow p-5 items-center"
-  >
-    <h1 class="text-center mb-5 text-3xl font-bold text-primary-default dark:text-prose-dark">
+  <div class="flex justify-center flex-col rounded-2xl bg-transparent px-5 items-center">
+    <h1
+      class="text-3xl md:text-4xl text-center text-primary-default hover:text-primary-dark mb-5 dark:text-prose-dark dark:hover:text-prose-dark-hover font-semibold pb-5"
+    >
       {{ 'shippingAddress' | translate }}
     </h1>
-    <form class="mt-5 w-full" [formGroup]="address" (ngSubmit)="submit()">
+    <form class="w-full" [formGroup]="address" (ngSubmit)="submit()">
       <app-input
         [control]="address.get('shippingAddress')?.get('details')"
         [idInput]="'details'"

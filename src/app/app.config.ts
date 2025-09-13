@@ -1,4 +1,9 @@
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -16,18 +21,26 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { AuthService } from './core/auth/services/auth/auth.service';
+import { errorInterceptor } from './core/interceptors/error/error-interceptor';
 import { headerInterceptor } from './core/interceptors/header/header-interceptor';
-import { loadingInterceptor } from './core/interceptors/loading/loading-interceptor';
-import { toasterInterceptor } from './core/interceptors/toaster/toaster-interceptor';
+import { successInterceptor } from './core/interceptors/success/success-interceptor';
 import { LangService } from './core/services/lang/lang.service';
 import { ThemeService } from './core/services/theme/theme.service';
-
+import { provideLoadingBarInterceptor } from '@ngx-loading-bar/http-client';
+import { loadingInterceptor } from './core/interceptors/loading/loading-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
       withFetch(),
-      withInterceptors([loadingInterceptor, toasterInterceptor, headerInterceptor])
+      withInterceptorsFromDi(),
+      withInterceptors([
+        successInterceptor,
+        errorInterceptor,
+        headerInterceptor,
+        loadingInterceptor,
+      ])
     ),
+    provideLoadingBarInterceptor(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideTranslateService({
@@ -47,7 +60,7 @@ export const appConfig: ApplicationConfig = {
     }),
     importProvidersFrom(NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })),
     provideToastr({
-      timeOut: 1500,
+      timeOut: 1000,
       preventDuplicates: true,
       positionClass: 'toast-top-right',
       progressBar: true,

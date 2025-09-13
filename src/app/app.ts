@@ -1,22 +1,22 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgxLoadingBar } from '@ngx-loading-bar/core';
 import * as AOS from 'aos';
-import { LoadingComponent } from './shared/components/loading/loading/loading.component';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoadingComponent],
+  imports: [RouterOutlet, NgxLoadingBar, NgxSpinnerComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
-  encapsulation: ViewEncapsulation.None,
 })
 export class App implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       AOS.init({
-        duration: 1500,
+        duration: 500,
         once: false,
       });
     }
