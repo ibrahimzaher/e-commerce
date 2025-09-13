@@ -1,25 +1,25 @@
 <nav class="fixed w-full z-50 shadow bg-surface-default dark:bg-surface-dark">
   <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 px-2">
-    <a routerLink="/">
+    <a routerLink="/" class="flex-shrink-0">
       <span
-        class="text-2xl font-semibold whitespace-nowrap text-primary-default hover:text-primary-dark-hover dark:text-surface-default dark:hover:text-surface-hover"
+        class="text-xl sm:text-2xl font-semibold whitespace-nowrap truncate text-primary-default hover:text-primary-dark-hover dark:text-surface-default dark:hover:text-surface-hover"
       >
         {{ 'NAVBAR.E-COMMERCE' | translate }}
       </span>
     </a>
 
-    <div class="xl:hidden flex gap-3 items-center justify-start sm:justify-end flex-1 mx-5">
+    <div class="xl:hidden flex gap-2 items-center sm:gap-3 justify-start sm:justify-end ms-auto">
       @if(isDark()){
-      <button (click)="setLightMode()" class="link cursor-pointer block xl:hidden">
+      <button (click)="setLightMode()" class="link cursor-pointer block xl:hidden min-w-fit">
         @if (lang()=='en') { <span>Light</span> } @else { <span>الوضع النهارى</span> }
       </button>
       }@else {
-      <button (click)="setDarkMode()" class="link cursor-pointer block xl:hidden">
+      <button (click)="setDarkMode()" class="link cursor-pointer block xl:hidden min-w-fit">
         @if (lang()=='en') { <span>Dark</span> } @else { <span>الوضع الليلى</span> }
       </button>
       }
 
-      <div class="block xl:hidden">
+      <div class="xl:hidden">
         @if (lang() == 'en') {
         <button (click)="changeLang('ar')" class="link cursor-pointer" title="العربية">AR</button>
         } @else {
@@ -27,7 +27,7 @@
         }
       </div>
 
-      <div class="flex xl:hidden items-center">
+      <div class="flex xl:hidden items-center me-2">
         <button
           type="button"
           class="flex text-sm cursor-pointer rounded-full focus:ring-4 focus:ring-prose-dark dark:focus:ring-prose-hover"
@@ -88,32 +88,32 @@
       <ul
         class="font-medium flex flex-col p-2 space-y-4 xl:p-0 mt-4 rounded-xl xl:flex-row xl:space-y-0 xl:space-x-2 rtl:space-x-reverse xl:mt-0"
       >
-        <li>
+        <li class="min-w-fit">
           <a routerLink="/home" class="link" routerLinkActive="link-active">{{
             'NAVBAR.HOME' | translate
           }}</a>
         </li>
-        <li>
+        <li class="min-w-fit">
           <a routerLink="/products" class="link" routerLinkActive="link-active">{{
             'NAVBAR.PRODUCTS' | translate
           }}</a>
         </li>
-        <li>
+        <li class="min-w-fit">
           <a routerLink="/categories" class="link" routerLinkActive="link-active">{{
             'NAVBAR.CATEGORIES' | translate
           }}</a>
         </li>
-        <li>
+        <li class="min-w-fit">
           <a routerLink="/brands" class="link" routerLinkActive="link-active">{{
             'NAVBAR.BRANDS' | translate
           }}</a>
         </li>
-        <li>
+        <li class="min-w-fit">
           <a routerLink="/allorders" class="link" routerLinkActive="link-active">{{
             'NAVBAR.MY_ORDERS' | translate
           }}</a>
         </li>
-        <li class="xl:block me-5 relative w-full">
+        <li class="xl:block me-5 relative w-full min-w-fit">
           <button
             routerLink="/wishlist"
             routerLinkActive="link-active"
@@ -131,7 +131,7 @@
             }
           </button>
         </li>
-        <li class="xl:block relative w-full">
+        <li class="xl:block relative w-full min-w-fit">
           <button
             routerLink="/cart"
             routerLinkActive="link-active"
