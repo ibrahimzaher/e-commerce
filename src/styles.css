@@ -51,6 +51,9 @@
   .link-active {
     @apply text-prose-dark bg-primary-default;
   }
+  #navbar-default {
+    @apply absolute top-full left-0 w-full bg-surface-default dark:bg-surface-dark shadow-md xl:static xl:shadow-none;
+  }
 }
 
 body {
@@ -100,7 +103,7 @@ html[dir='rtl'] .toast-top-right {
   transition: all 0.5s;
   border-radius: 10px;
 }
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
   .main-slider .owl-theme .owl-nav [class*='owl-']:hover {
     background-color: var(--color-primary-default);
     padding-block: 25px;

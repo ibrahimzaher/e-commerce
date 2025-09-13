@@ -37,7 +37,7 @@ export class PopularCategoriesComponent implements OnInit, OnDestroy {
       autoplay: true,
       margin: 20,
       responsive: {
-        0: { items: 2 },
+        0: { items: 1 },
         400: { items: 2 },
         740: { items: 3 },
         940: { items: 6 },
